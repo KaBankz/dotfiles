@@ -1,0 +1,7 @@
+.git/*
+.DS_Store
+.CFUserTextEncoding
+.gitignore
+pkgs/*
+README.md
+install.sh
