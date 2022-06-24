@@ -9,15 +9,15 @@ You can either use curl or manually clone this repo and run install.sh
 ## Auto install
 
 ```bash
-  curl https://raw.github.com/KaBankz/dotfiles/install.sh | bash
+curl https://raw.github.com/KaBankz/dotfiles/install.sh | bash
 ```
 
 ## Manual install
 
 ```bash
-  git clone https://github.com/KaBankz/dotfiles ~/.dotfiles
-  cd ~/.dotfiles
-  ./install.sh
+git clone https://github.com/KaBankz/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+./install.sh
 ```
 
 You can even go one step further and manually install all the packages and stow all the folders if you don't want to use the install script.
