@@ -9,7 +9,7 @@ You can either use curl or manually clone this repo and run install.sh
 ## Auto install
 
 ```bash
-curl https://raw.github.com/KaBankz/dotfiles/install.sh | bash
+curl https://raw.githubusercontent.com/KaBankz/dotfiles/master/install.sh | bash
 ```
 
 ## Manual install
