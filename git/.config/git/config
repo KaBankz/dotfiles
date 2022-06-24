@@ -1,0 +1,8 @@
+[user]
+	email = 20971850+KaBankz@users.noreply.github.com
+	name = KaBankz
+	signingkey = 9A41B15FF6B4DEA2
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = master
