@@ -4,15 +4,15 @@ Nothing special, just my dotfiles. These should work across GNU/Linux and MacOS.
 
 ## Installation
 
-You can either use curl or manually clone this repo and run install.sh
+You can either use curl or manually clone this repo and run the install script `install.sh`
 
-## Auto install
+### Install Script
 
 ```bash
 curl https://raw.githubusercontent.com/KaBankz/dotfiles/master/install.sh | bash
 ```
 
-## Manual install
+### Manual install
 
 ```bash
 git clone https://github.com/KaBankz/dotfiles ~/.dotfiles
