@@ -35,3 +35,7 @@ These dotfiles are used by the following:
 
 - Me 🤗
 - Also me 😉
+
+## License
+
+[MIT](https://github.com/KaBankz/dotfiles/blob/master/LICENSE)
