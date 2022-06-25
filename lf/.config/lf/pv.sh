@@ -5,4 +5,5 @@ unset COLORTERM
 # -p/--plain renders plain unstyled text
 # -n/--number renders line numbers
 # --color=always renders colors
-bat --plain --number --color=always --theme=Dracula "$1"
+# --terminal-width shrink the size of bat output to fit lf preview
+bat --plain --number --color=always --theme=Dracula --terminal-width $(($2-4)) "$1"
