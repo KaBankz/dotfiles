@@ -41,6 +41,9 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}/asdf/asdfrc"
 export ASDF_DATA_DIR="${XDG_DATA_HOME}/asdf"
 
+# COCOAPODS
+export CP_HOME_DIR="$XDG_DATA_HOME/cocoapods"
+
 # Ranger
 # Disable loading default ranger config, instead load local ranger config
 export RANGER_LOAD_DEFAULT_RC=false
