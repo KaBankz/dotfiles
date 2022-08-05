@@ -1,5 +1,10 @@
 # Clear "last login" message from mac shell startup
 clear
+# Bling
+# neofetch
+# pfetch
+# pokemon shell colorscript
+# krabby random --no-title
 
 # TODO: man zshoptions and add in some options
 
@@ -25,10 +30,6 @@ zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh/zcompcache
 
 # Case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
-# Bling
-# neofetch
-pfetch
 
 # Load alias file if it exists
 [ -f $ZDOTDIR/aliases.zsh ] && source $ZDOTDIR/aliases.zsh
