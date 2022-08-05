@@ -1,17 +1,17 @@
+tap "beerpiss/tap"
 tap "d12frosted/emacs-plus"
-tap "dart-lang/dart"
-tap "eth-p/software"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "khanhas/tap"
-tap "leoafarias/fvm"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
 # Automatic configure script builder
 brew "autoconf"
+# Extendable version manager with support for Ruby, Node.js, Erlang & more
+brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # GNU compiler collection
@@ -20,6 +20,10 @@ brew "gcc"
 brew "btop"
 # Console Matrix
 brew "cmatrix"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
+# Configurable talking characters in ASCII art
+brew "cowsay"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
@@ -28,22 +32,30 @@ brew "fd"
 brew "fish"
 # Plugin manager for the Fish shell
 brew "fisher"
+# Infamous electronic fortune-cookie generator
+brew "fortune"
 # GitHub command-line tool
 brew "gh"
 # Interactive command-line tool for using emoji in commit messages
 brew "gitmoji"
+# Render markdown on the CLI
+brew "glow"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Manage your GnuPG keys with ease! 🔐
 brew "gpg-tui"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Terminal file manager
 brew "lf"
+# JIT library for the GNU compiler collection
+brew "libgccjit"
 # Rainbows and unicorns in your console!
 brew "lolcat"
 # Mac App Store command-line interface
@@ -51,13 +63,13 @@ brew "mas"
 # CLI for MySQL with auto-completion and syntax highlighting
 brew "mycli"
 # Open source relational database management system
-brew "mysql", restart_service: true
+brew "mysql"
 # Fast, highly customisable system info script
 brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Manage multiple Node.js versions
-brew "nvm"
+# Port scanning utility for large networks
+brew "nmap"
 # Git repository summary on your terminal
 brew "onefetch"
 # Swiss-army knife of markup format conversion
@@ -80,19 +92,21 @@ brew "starship"
 brew "stow"
 # Official documentation format of the GNU project
 brew "texinfo"
+# Terminal multiplexer
+brew "tmux"
 # CLI tool that moves files or folder to the trash
 brew "trash"
+# Check your $HOME for unwanted files and directories
+brew "xdg-ninja"
 # Fork of youtube-dl with additional features and fixes
 brew "yt-dlp"
-# Next-generation plugin manager for zsh
-brew "zplug"
+# Flexible and fast Zsh plugin manager
+brew "zinit"
+# Aidoku development toolkit
+brew "beerpiss/tap/aidoku-cli"
 brew "d12frosted/emacs-plus/emacs-plus@28", args: ["with-modern-doom-icon", "with-native-comp"]
-# Bash scripts that integrate bat with various command-line tools
-brew "eth-p/software/bat-extras"
 # Command-line tool to customize Spotify client
 brew "khanhas/tap/spicetify-cli"
-# Simple cli to manage Flutter SDK versions per project
-brew "leoafarias/fvm/fvm"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Application launcher and productivity software
@@ -125,16 +139,18 @@ cask "iina"
 cask "insomnia"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Menu bar calendar
+cask "itsycal"
 # Jellyfin desktop client
 cask "jellyfin-media-player"
 # JetBrains tools manager
 cask "jetbrains-toolbox"
+# File archiver
+cask "keka"
 # Open-source keystroke visualizer
 cask "keycastr"
 # Web browser
 cask "librewolf"
-# Digital logic designer and simulator
-cask "logisim-evolution"
 # Clipboard manager
 cask "maccy"
 # Provides updates to various Microsoft products
@@ -148,6 +164,8 @@ cask "obs"
 # QuickLook generator for Markdown files
 cask "qlmarkdown"
 cask "qlvideo"
+# Control your tools with a few keystrokes
+cask "raycast"
 # Music streaming service
 cask "spotify"
 # System monitor for the menu bar
