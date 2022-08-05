@@ -14,6 +14,9 @@ if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
+# Sourcing zinit before compinit
+source /opt/homebrew/opt/zinit/zinit.zsh
+
 # Enable zsh autocompletions && start and set completion dump path
 autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
@@ -47,35 +50,9 @@ bindkey -e
 # Open ranger with ctrl + o
 bindkey -s '^o' 'ranger^M'
 
-################################################################################
-# WARNING:
-#   zplug causes xcodebuild to run at startup, which causes the terminal
-#   to hang for a few seconds
-#   This is a issue with zplug, and is not a problem with zsh
-#   I have done extensive testing, and zplug just keeps on calling xcodebuild
-#   on startup, which causes the terminal to hang
-# SOLUTION:
-#   Migrate from zplug to zinit
-################################################################################
-# # zplug Plugins
-# export ZPLUG_HOME=/opt/homebrew/opt/zplug
-# source $ZPLUG_HOME/init.zsh
-
-# zplug "zsh-users/zsh-completions"
-# zplug "zsh-users/zsh-autosuggestions"
-# zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-# # Install plugins if there are plugins that have not been installed
-# if ! zplug check --verbose; then
-#   printf "Install? [y/N]: "
-#   if read -q; then
-#     echo
-#     zplug install
-#   fi
-# fi
-
-# # Then, source plugins and add commands to $PATH
-# zplug load
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma-continuum/fast-syntax-highlighting
 
 # Load starship prompt
 # Keep at end of file
