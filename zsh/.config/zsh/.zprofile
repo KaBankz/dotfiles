@@ -23,9 +23,6 @@ export LESSHISTFILE=-
 # DOOM Emacs
 export PATH="$XDG_CONFIG_HOME/emacs/bin:$PATH"
 
-# NVM
-export NVM_DIR="$XDG_DATA_HOME/nvm"
-
 # NPM
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
@@ -36,12 +33,13 @@ export PNPM_HOME="/Users/zakee/.local/share/pnpm"
 # NODE COREPACK
 export COREPACK_HOME="$XDG_DATA_HOME/node/corepack"
 
-# FVM
-export FVM_HOME="$XDG_DATA_HOME/fvm"
-
 # Rust
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
+# ASDF
+export ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}/asdf/asdfrc"
+export ASDF_DATA_DIR="${XDG_DATA_HOME}/asdf"
 
 # Ranger
 # Disable loading default ranger config, instead load local ranger config

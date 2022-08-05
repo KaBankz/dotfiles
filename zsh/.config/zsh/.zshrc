@@ -30,16 +30,14 @@ pfetch
 # Load alias file if it exists
 [ -f $ZDOTDIR/aliases.zsh ] && source $ZDOTDIR/aliases.zsh
 
-# Load nvm
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-# Load nvm bash_completion
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+# Load asdf
+source /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # No longer needed as now it is directly added to the PATH below
 # # Source rust
 # source $CARGO_HOME/env
 
-export PATH=$PATH:"$XDG_DATA_HOME/fvm/default/bin":"$(yarn global bin)":"$CARGO_HOME/bin":"$PNPM_HOME"
+export PATH=$PATH:"$HOME/.local/bin":"$(yarn global bin)":"$CARGO_HOME/bin":"$PNPM_HOME"
 
 # Keybindings
 # Use emacs mode becasue vi mode does not work with iterm2 natural text editing keybindings
