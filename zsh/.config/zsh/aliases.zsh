@@ -13,7 +13,9 @@ alias v="nvim"
 alias cls="clear"
 
 # Replace cat with bat
-alias cat="bat"
+# paging=never makes bat act like cat
+# by not piping large output's into less
+alias cat="bat --paging=never"
 
 # Replace ls with exa
 alias ls="exa --group-directories-first --icons"
