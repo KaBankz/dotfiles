@@ -2,6 +2,12 @@
 # Custom gitignore configs
 ###############################################################################
 
+# fish
+home/.config/fish/completions
+home/.config/fish/functions
+home/.config/fish/conf.d
+home/.config/fish/fish_variables
+
 # zsh
 home/.config/zsh/.zinit
 
