@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Force bat to use interpolated 8-bit colors
 unset COLORTERM
