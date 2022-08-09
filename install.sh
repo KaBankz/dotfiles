@@ -153,7 +153,7 @@ cloneDotfiles() {
 # Stow all dotfiles
 installDotfiles() {
   echo "⏳ Stowing dotfiles..."
-  # stow -Sv -d $HOME/.dotfiles -t $HOME
+  stow -Sv -d $HOME/.dotfiles/home -t $HOME
   echo "✅ Stowed dotfiles"
 }
 
