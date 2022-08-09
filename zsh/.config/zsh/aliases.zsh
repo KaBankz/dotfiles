@@ -17,6 +17,9 @@ alias cls="clear"
 # by not piping large output's into less
 alias cat="bat --paging=never"
 
+# Replace find with fd
+alias find="fd"
+
 # Replace ls with exa
 alias ls="exa --group-directories-first --icons"
 alias l="exa -lah --group-directories-first --git --icons"
