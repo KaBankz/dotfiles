@@ -1,3 +1,5 @@
+[core]
+  pager = delta
 [user]
 	email = 20971850+KaBankz@users.noreply.github.com
 	name = KaBankz
