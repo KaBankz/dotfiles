@@ -2,11 +2,14 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-$all\
+$shlvl$all\
 $sudo$character
 """
 
-add_newline = true
+[shlvl]
+disabled = false
+format = '[\[$shlvl\]]($style) '
+threshold = 2
 
 [sudo]
 format = '[$symbol]($style)'
