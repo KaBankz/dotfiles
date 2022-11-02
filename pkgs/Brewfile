@@ -1,11 +1,12 @@
 tap "beerpiss/tap"
-tap "d12frosted/emacs-plus"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "khanhas/tap"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
 # Automatic configure script builder
@@ -22,22 +23,26 @@ brew "btop"
 brew "cmatrix"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
+# Defines a standard way of committing rules and communicating it
+brew "commitizen"
 # Configurable talking characters in ASCII art
 brew "cowsay"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# Banner-like program prints strings as ASCII art
+brew "figlet"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
-# Plugin manager for the Fish shell
-brew "fisher"
 # Infamous electronic fortune-cookie generator
 brew "fortune"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Interactive command-line tool for using emoji in commit messages
 brew "gitmoji"
 # Render markdown on the CLI
@@ -48,10 +53,12 @@ brew "gnu-sed"
 brew "gnupg"
 # Manage your GnuPG keys with ease! 🔐
 brew "gpg-tui"
-# OpenType text shaping engine
-brew "harfbuzz"
+# Improved top (interactive process viewer)
+brew "htop"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Save disk space by cleaning non-essential files from software projects
+brew "kondo"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Terminal file manager
@@ -72,12 +79,14 @@ brew "neofetch"
 brew "neovim"
 # Port scanning utility for large networks
 brew "nmap"
-# Git repository summary on your terminal
+# Command-line Git information tool
 brew "onefetch"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Pretty system information tool written in POSIX sh
 brew "pfetch"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 # File browser
 brew "ranger"
 # Search tool like grep and The Silver Searcher
@@ -94,21 +103,26 @@ brew "speedtest-cli"
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Version control system designed to be a better CVS
+brew "subversion"
 # Official documentation format of the GNU project
 brew "texinfo"
 # Terminal multiplexer
 brew "tmux"
 # CLI tool that moves files or folder to the trash
 brew "trash"
+# Execute commands when watched files change
+brew "watchexec"
 # Check your $HOME for unwanted files and directories
 brew "xdg-ninja"
 # Fork of youtube-dl with additional features and fixes
 brew "yt-dlp"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
+brew "zellij"
 # Flexible and fast Zsh plugin manager
 brew "zinit"
 # Aidoku development toolkit
 brew "beerpiss/tap/aidoku-cli"
-brew "d12frosted/emacs-plus/emacs-plus@28", args: ["with-modern-doom-icon", "with-native-comp"]
 # Command-line tool to customize Spotify client
 brew "khanhas/tap/spicetify-cli"
 # Password manager that keeps all passwords secure behind one password
@@ -123,10 +137,10 @@ cask "amethyst"
 cask "bartender"
 # Installer for BetterDiscord
 cask "betterdiscord-installer"
-# Desktop password and login vault
-cask "bitwarden"
 # Web browser focusing on privacy
 cask "brave-browser"
+# Screen saver based on animations presented during Apple Special Event Brooklyn
+cask "brooklyn"
 # Voice and text chat software
 cask "discord"
 # App to build and share containerized applications and microservices
@@ -135,10 +149,13 @@ cask "docker"
 cask "dropzone"
 # Monospaced font that includes programming ligatures
 cask "font-cascadia-code"
+# Fork of the Cascadia Code typeface
 cask "font-caskaydia-cove-nerd-font"
-cask "font-fira-code-nerd-font"
 # Typeface made for developers
 cask "font-jetbrains-mono"
+# Developer targeted fonts with a high number of glyphs
+cask "font-jetbrains-mono-nerd-font"
+cask "font-open-sans"
 # Free and open-source media player
 cask "iina"
 # HTTP and GraphQL Client
@@ -155,6 +172,8 @@ cask "jetbrains-toolbox"
 cask "keka"
 # Open-source keystroke visualizer
 cask "keycastr"
+# Utility that shows the latest app updates
+cask "latest"
 # Web browser
 cask "librewolf"
 # Clipboard manager
@@ -167,11 +186,18 @@ cask "microsoft-office"
 cask "microsoft-remote-desktop"
 # Open-source software for live streaming and screen recording
 cask "obs"
+# VPN client focusing on security
+cask "protonvpn"
 # QuickLook generator for Markdown files
 cask "qlmarkdown"
+# QuickLook generator for video files
 cask "qlvideo"
 # Control your tools with a few keystrokes
 cask "raycast"
+# Move and resize windows using keyboard shortcuts or snap areas
+cask "rectangle"
+# Screenshot measurement and annotation tool
+cask "shottr"
 # Music streaming service
 cask "spotify"
 # System monitor for the menu bar
@@ -182,8 +208,7 @@ cask "syntax-highlight"
 cask "visual-studio-code"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
+mas "Bitwarden", id: 1352778147
 mas "Keynote", id: 409183694
 mas "NordVPN", id: 905953485
 mas "Numbers", id: 409203825
