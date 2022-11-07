@@ -20,6 +20,9 @@ alias dot="cd ~/.dotfiles"
 # go to development dir
 alias dev="cd ~/Dev"
 
+# vscode easy
+alias c="code"
+
 # navigation
 alias cd..="cd .."
 alias ..="cd .."
