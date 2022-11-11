@@ -162,6 +162,8 @@ setDefaults() {
   echo "⏳ Setting defaults..."
   # Enable linux like window dragging (drag windows from anywhere, not just titlebar) with CTRL+CMD+Drag
   defaults write -g NSWindowShouldDragOnGesture -bool true
+  # Show all hidden files by default in Finder
+  defaults write com.apple.finder AppleShowAllFiles -bool true
   echo "✅ Finished setting defaults"
 }
 
