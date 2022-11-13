@@ -77,8 +77,7 @@ alias dcd="docker compose down"
 alias dcp="docker compose pull"
 
 # git aliases
-# create new git repo && add gitmoji commit hooks
-alias gini="git init && gitmoji -i"
+alias gini="git init"
 alias gss="git status -s"
 alias glog="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 alias ga="git add"
