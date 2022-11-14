@@ -151,14 +151,6 @@ function mkcd -d "Create a directory and set CWD"
     end
 end
 
-# function for creating a backup file
-# ex: bak file.txt
-# result: copies file as file.txt.bak
-# TODO: add a flag that will create the backup in ~/.local/backups
-function bak --argument filename
-    cp "$filename" "$filename".bak
-end
-
 ### END OF FUNCTIONS ###
 
 ### START STARSHIP PROMPT ###
