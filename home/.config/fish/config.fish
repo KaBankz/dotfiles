@@ -2,9 +2,6 @@
 
 ### FISH VARIABLES ####
 
-# set bat as the manpager
-set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
-
 # fish colors
 set fish_color_normal brcyan
 set fish_color_autosuggestion "#7d7d7d"
@@ -16,12 +13,21 @@ set fish_color_param brcyan
 
 ### ENV ###
 
-export XDG_CONFIG_HOME="$HOME"/.config
-export XDG_CACHE_HOME="$HOME"/.cache
-export XDG_DATA_HOME="$HOME"/.local/share
-export XDG_STATE_HOME="$HOME"/.local/state
+# set bat as the manpager
+set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
-export EDITOR=nvim
+# XDG Base Directory Specification
+set -x XDG_CONFIG_HOME "$HOME"/.config
+set -x XDG_CACHE_HOME "$HOME"/.cache
+set -x XDG_DATA_HOME "$HOME"/.local/share
+set -x XDG_STATE_HOME "$HOME"/.local/state
+
+# set the default editor
+set -x EDITOR nvim
+set -x VISUAL code
+
+# set ZDOTDIR so zsh subshells will know where to store zsh_history
+set -x ZDOTDIR "$HOME"/.config/zsh
 
 ### END OF ENV ###
 
