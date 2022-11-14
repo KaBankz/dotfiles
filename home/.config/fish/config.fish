@@ -136,16 +136,6 @@ function autols --on-variable PWD
     ls
 end
 
-# get cheatsheets from cheat.sh
-function ch
-    # $argv = all passed in queries
-    # concatnate all passed in queries into one string with "+" between each query
-    # then append that to the cheat.sh url and curl it
-    set url "https://cheat.sh/$(string join "+" $argv)"
-    echo "$url"
-    curl "$url"
-end
-
 # function for creating a backup file
 # ex: bak file.txt
 # result: copies file as file.txt.bak
