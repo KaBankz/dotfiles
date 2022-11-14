@@ -4,7 +4,7 @@ local M = {}
 
 M.ui = {
   theme = "tokyonight",
-  transparency = false,
+  transparency = true,
 }
 
 M.plugins = {
