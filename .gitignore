@@ -8,6 +8,9 @@ home/.config/fish/functions
 home/.config/fish/conf.d
 home/.config/fish/fish_variables
 
+# tmux plugins git repos
+home/.config/tmux/plugins
+
 # zsh
 home/.config/zsh/.zinit
 
