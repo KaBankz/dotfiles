@@ -1,14 +1,5 @@
 #!/bin/sh
 
-# these are used by Apple in /etc/zshrc, which is sourced before .zshrc
-#
-# !warning, the $XDG_STATE_HOME/zsh dir may have to exist for this to work
-# not exactly sure, more testing required
-export SHELL_SESSION_DIR="$XDG_STATE_HOME"/zsh/sessions
-export SHELL_SESSION_FILE="$SHELL_SESSION_DIR"/"$TERM_SESSION_ID"
-# set zsh history file dir
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
-
 # disable less history file
 export LESSHISTFILE=-
 

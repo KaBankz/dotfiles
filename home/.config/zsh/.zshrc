@@ -2,6 +2,17 @@
 
 ### STARTUP ###
 
+# these are used by Apple in /etc/zshrc
+# the $XDG_STATE_HOME/zsh dir has to exist for this to work so we create it if it doesn't exist
+if [ ! -d "$XDG_STATE_HOME"/zsh ]; then
+  mkdir -p "$XDG_STATE_HOME"/zsh
+fi
+# set zsh session dir
+export SHELL_SESSION_DIR="$XDG_STATE_HOME"/zsh/sessions
+export SHELL_SESSION_FILE="$SHELL_SESSION_DIR"/"$TERM_SESSION_ID"
+# set zsh history file dir
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+
 # load homebrew
 # this is up at the top to make sure it's loaded before anything else
 # as homebrew manages the majority of the used binaries
