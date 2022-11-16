@@ -43,17 +43,6 @@ function mkcd {
   fi
 }
 
-# get cheatsheets from cheat.sh
-function ch {
-  # $@ = all passed in queries
-  queries=("$@")
-  # concatnate all passed in queries into one string with "+" between each query
-  # then append that to the cheat.sh url and curl it
-  url="https://cheat.sh/${queries// /+}"
-  echo "$url"
-  curl "$url"
-}
-
 ### END OF FUNCTIONS ###
 
 ### SOURCE BINARIES ###
