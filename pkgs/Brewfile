@@ -9,6 +9,8 @@ tap "khanhas/tap"
 brew "harfbuzz"
 # Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
+# Download with resuming and segmented downloading
+brew "aria2"
 # Automatic configure script builder
 brew "autoconf"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
@@ -55,6 +57,8 @@ brew "gnupg"
 brew "gpg-tui"
 # Improved top (interactive process viewer)
 brew "htop"
+# Curl statistics made simple
+brew "httpstat"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Save disk space by cleaning non-essential files from software projects
@@ -111,6 +115,8 @@ brew "texinfo"
 brew "tmux"
 # CLI tool that moves files or folder to the trash
 brew "trash"
+# Build, bundle & ship your Rust WASM application to the web
+brew "trunk"
 # Execute commands when watched files change
 brew "watchexec"
 # Check your $HOME for unwanted files and directories
@@ -186,6 +192,8 @@ cask "microsoft-office"
 cask "microsoft-remote-desktop"
 # Open-source software for live streaming and screen recording
 cask "obs"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # VPN client focusing on security
 cask "protonvpn"
 # QuickLook generator for Markdown files
@@ -206,6 +214,8 @@ cask "stats"
 cask "syntax-highlight"
 # Open-source code editor
 cask "visual-studio-code"
+# Rust-based terminal
+cask "warp"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "Bitwarden", id: 1352778147
