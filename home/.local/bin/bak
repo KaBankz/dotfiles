@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# bak - backup a file or directory
+# Usage: bak <file or directory>
+# Flags:
+#   -d: backup to ~/.local/backups
+
+# check if the user has provided a file or directory to backup
+if [ -z "$1" ]; then
+  echo "Enter a file or directory to backup"
+  exit 1
+elif [ ! -e "$1" ]; then
+  echo "File or directory does not exist"
+  exit 1
+# check if the user has passed the -d flag
+elif [ "$2" = "-d" ]; then
+  # remove any trailing slashes from the file or directory name
+  file=${1%/}
+  # copy the file or directory to the ~/.local/backups with a timestamp and ".bak" appended to the name
+  cp -r "$file" "$HOME/.local/backups/$file.$(date +%Y%m%d%H%M%S).bak"
+else
+  # remove any trailing slashes from the file or directory name
+  file=${1%/}
+  # copy the file or directory to the current directory with a timestamp and ".bak" appended to the name
+  cp -r "$file" "$file.$(date +%Y%m%d%H%M%S).bak"
+fi
