@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# ch - get cheatsheets from cheat.sh
+# Usage: ch <cheatsheet>
+
+queries=("$@")
+url="https://cheat.sh/${queries// /+}"
+echo "$url"
+curl "$url"
