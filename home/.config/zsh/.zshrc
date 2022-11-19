@@ -111,6 +111,7 @@ zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light marlonrichert/zsh-autocomplete
 
 ### END OF PLUGINS ###
 
