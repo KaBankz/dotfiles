@@ -49,6 +49,9 @@ if test -f "$XDG_CONFIG_HOME"/shell/aliases
     source "$XDG_CONFIG_HOME"/shell/aliases
 end
 
+# start zoxide
+zoxide init fish | source
+
 ### END OF STARTUP ###
 
 ### KEYBINDINGS ###
