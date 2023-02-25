@@ -11,13 +11,12 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 # load gpg keys
 export GPG_TTY="$(tty)"
 
-# asdf
-export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
-export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
+# # java
+# export JAVA_HOME="$(dirname "$(dirname "$(asdf which java)")")"
+# export JDK_HOME="$JAVA_HOME"
 
-# java
-export JAVA_HOME="$(dirname "$(dirname "$(asdf which java)")")"
-export JDK_HOME="$JAVA_HOME"
+# flutter
+export FLUTTER_ROOT="$(rtx where flutter)"
 
 # node corepack
 export COREPACK_HOME="$XDG_DATA_HOME"/node/corepack
@@ -40,14 +39,8 @@ export CP_HOME_DIR="$XDG_DATA_HOME"/cocoapods
 # disable loading default ranger config, instead load local ranger config
 export RANGER_LOAD_DEFAULT_RC=false
 
-# mysql
-export MYSQL_HISTFILE="$XDG_DATA_HOME"/mysql_history
-
-# myCLI - fancy msql cli
-export MYCLI_HISTFILE="$XDG_DATA_HOME"/mycli-history
-
 # docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 
 # path
-export PATH="$HOME/.local/bin":"$CARGO_HOME/bin":"$XDG_DATA_HOME/yarn/bin":"$PNPM_HOME":"$JAVA_HOME":"$PATH"
+export PATH="$HOME/.local/bin":"$CARGO_HOME/bin":"$XDG_DATA_HOME/yarn/bin":"$PNPM_HOME":"$PATH"
