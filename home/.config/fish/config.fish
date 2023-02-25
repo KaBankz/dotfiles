@@ -1,88 +1,45 @@
-#!/usr/bin/env fish
-
-### FISH VARIABLES ####
-
-# fish colors
+# fish color scheme
 set fish_color_normal brcyan
 set fish_color_autosuggestion "#7d7d7d"
 set fish_color_command brcyan
 set fish_color_error "#ff6c6b"
 set fish_color_param brcyan
 
-### END OF FISH VARIABLES ####
-
-### ENV ###
-
-# set bat as the manpager
-set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
-
-# XDG Base Directory Specification
-set -x XDG_CONFIG_HOME "$HOME"/.config
-set -x XDG_CACHE_HOME "$HOME"/.cache
-set -x XDG_DATA_HOME "$HOME"/.local/share
-set -x XDG_STATE_HOME "$HOME"/.local/state
-
-# set the default editor
-set -x EDITOR nvim
-set -x VISUAL code
-
-# set ZDOTDIR so zsh subshells will know where to store zsh_history
-set -x ZDOTDIR "$HOME"/.config/zsh
-
-### END OF ENV ###
-
-### STARTUP ###
-
-# load homebrew
-# this is up at the top to make sure it's loaded before anything else
-# as homebrew manages the majority of the used binaries
-# this also only runs if not in a nested shell to avoid duplicated PATH
-test "$SHLVL" -eq 1 && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# load environment variables if not in a nested shell to avoid duplicated PATH
-if test -f "$XDG_CONFIG_HOME"/shell/environment && test "$SHLVL" -eq 1
-    source "$XDG_CONFIG_HOME"/shell/environment
-end
-
-# load aliases
-if test -f "$XDG_CONFIG_HOME"/shell/aliases
-    source "$XDG_CONFIG_HOME"/shell/aliases
-end
-
-# start zoxide
-zoxide init fish | source
-
-### END OF STARTUP ###
-
-### KEYBINDINGS ###
+# # start tmux on iterm2 startup
+# # only run if tmux is installed
+# if test "$TERM_PROGRAM" = "iTerm.app" && type -q tmux
+#     tmux attach || tmux
+# end
 
 # launch tmux with ctrl + t
-bind \ct tmux
-
-# launch ranger with ctrl + r
-bind \cr ranger
-
-# launch lazygit with ctrl + g
-bind \cg lazygit
+# only bind if tmux is installed
+if type -q tmux
+    bind \ct tmux
+end
 
 # launch fzf with ctrl + f
-bind \cf fzf
+# only bind if fzf is installed
+if type -q fzf
+    bind \cf fzf
+end
 
 # show random pokemon with ctrl + k
 # the echo stops the name from being print in the prompt
 # the commandline -f repaint, repaints the prompt after executing the krabby command
-bind \ck 'echo; krabby random; echo; commandline -f repaint'
-
-### END OF KEYBINDINGS ###
-
-### FISH FUNCTIONS ###
+# only bind if krabby is installed
+if type -q krabby
+    bind \ck 'echo; krabby random; echo; commandline -f repaint'
+end
 
 # supresses fish's intro message
 function fish_greeting
     # clear the screen on startup to remove macos's "last login" message
     clear
-    # pokemon shell colorscripts
-    krabby random
+
+    if type -q krabby
+        # pokemon shell colorscripts cargo package
+        krabby random
+    end
 end
 
 # set keybinding mode
@@ -94,46 +51,17 @@ function fish_user_key_bindings
     # fish_vi_key_bindings
 end
 
-# function needed for !!
-function __history_previous_command
-    switch (commandline -t)
-        case "!"
-            commandline -t $history[1]
-            commandline -f repaint
-        case "*"
-            commandline -i !
-    end
+# function needed for !! used in abbr below
+function last_history_item
+    echo $history[1]
 end
-
-# function needed for !$
-function __history_previous_command_arguments
-    switch (commandline -t)
-        case "!"
-            commandline -t ""
-            commandline -f history-token-search-backward
-        case "*"
-            commandline -i '$'
-    end
-end
-
-# keybindings for !! and !$
-if [ $fish_key_bindings = fish_vi_key_bindings ]
-    bind -Minsert ! __history_previous_command
-    bind -Minsert '$' __history_previous_command_arguments
-else
-    bind ! __history_previous_command
-    bind '$' __history_previous_command_arguments
-end
-
-# load asdf
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # auto run onefetch if inside git repo
 # --on-variable is a fish builtin that changes whenever the directory changes
 # so this function will run whenever the directory changes
 function auto_onefetch --on-variable PWD
-    # check if .git/ exists
-    if test -d .git
+    # check if .git/ exists and onefetch is installed
+    if test -d .git && type -q onefetch
         onefetch
     end
 end
@@ -143,6 +71,12 @@ end
 # so this function will run whenever the directory changes
 function autols --on-variable PWD
     ls
+end
+
+# auto expand ".." and longer varients to cd .. (or more)
+# used by abbr below
+function multicd
+    echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 end
 
 # auto cd after mkdir
@@ -160,7 +94,18 @@ function mkcd -d "Create a directory and set CWD"
     end
 end
 
-### END OF FUNCTIONS ###
+# start zoxide if installed
+if type -q zoxide
+    zoxide init fish | source
+end
 
-### START STARSHIP PROMPT ###
-starship init fish | source
+# start rtx if installed
+if type -q rtx
+    rtx activate fish | source
+end
+
+# must be at the end of the file
+# start starship if installed
+if type -q starship
+    starship init fish | source
+end
