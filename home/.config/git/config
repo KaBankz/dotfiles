@@ -11,10 +11,16 @@
 [user]
 	email = 20971850+KaBankz@users.noreply.github.com
 	name = KaBankz
-	signingkey = 9A41B15FF6B4DEA2
+	# signingkey = 9A41B15FF6B4DEA2
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFSqVKFpm/W3sSz76XdzuFjToW3TDRztVNz4cGb8AfHs
+[includeIf "gitdir:~/Dev/Personal/"]
+  path = ~/Dev/Personal/.gitconfig
 [commit]
 	gpgsign = true
 [init]
 	defaultBranch = master
 [gpg]
-	program = /opt/homebrew/bin/gpg
+  # program = /opt/homebrew/bin/gpg
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
