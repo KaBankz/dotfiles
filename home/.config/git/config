@@ -1,5 +1,13 @@
 [core]
 	pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  light = false
+  conflictstyle = diff3
+[diff]
+  colorMoved = default
 [user]
 	email = 20971850+KaBankz@users.noreply.github.com
 	name = KaBankz
