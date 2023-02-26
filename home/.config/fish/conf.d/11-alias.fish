@@ -4,6 +4,9 @@ alias ls="exa -lah --group-directories-first --git --icons"
 # use exa to display dir as a tree
 alias tree="exa -T"
 
+# use bat instead of cat
+alias cat="bat"
+
 # confirm before overwriting something
 alias cp="cp -i"
 alias mv="mv -i"
