@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
+#
+# Get cheatsheets from cheat.sh
+# Usage: ch <query>
 
-# ch - get cheatsheets from cheat.sh
-# Usage: ch <cheatsheet>
+queries=("${@}")
+IFS='+'
 
-queries=("$@")
-url="https://cheat.sh/${queries// /+}"
-echo "$url"
-curl "$url"
+url="https://cheat.sh/${queries[*]}"
+unset IFS
+
+echo "${url}"
+curl "${url}"

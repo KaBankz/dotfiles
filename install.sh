@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Make sure the script is not being executed with superuser privileges
-if [ ! $(id -u) -ne 0 ]; then
+if [ ! "$(id -u)" -ne 0 ]; then
   echo "❌ Please do not run as root"
   exit
 fi
@@ -10,21 +10,21 @@ fi
 os=$(uname)
 
 # XDG dirs
-XDG_CONFIG_HOME="$HOME/.config"
-XDG_CACHE_HOME="$HOME/.cache"
-XDG_DATA_HOME="$HOME/.local/share"
-XDG_STATE_HOME="$HOME/.local/state"
+XDG_CONFIG_HOME="$HOME"/.config
+XDG_CACHE_HOME="$HOME"/.cache
+XDG_DATA_HOME="$HOME"/.local/share
+XDG_STATE_HOME="$HOME"/.local/state
 
 # Run os specific preconfiguration
 preConfig() {
   echo "⏳ Pre-configuring..."
 
   echo "⏳ Creating XDG dirs..."
-  mkdir -p $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME $XDG_STATE_HOME
+  mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_STATE_HOME"
 
   # Make zsh history dir
   # This folder is required for zsh to store history
-  mkdir -p $XDG_STATE_HOME/zsh
+  mkdir -p "$XDG_STATE_HOME"/zsh
   echo "✅ Finished creating XDG dirs"
 
   case "$os" in
@@ -76,11 +76,11 @@ updateRepos() {
 # Install packages with os specific package manager
 installPackage() {
   if [ -x "$(command -v pacman)" ]; then
-    sudo pacman -S $0
+    sudo pacman -S "$0"
   elif [ -x "$(command -v apt-get)" ]; then
-    sudo apt-get install $0
+    sudo apt-get install "$0"
   elif [ -x "$(command -v brew)" ]; then
-    brew install $0
+    brew install "$0"
   else
     echo "❌ No supported package manager found"
     exit
@@ -90,11 +90,11 @@ installPackage() {
 # Install prerequisite packages needed for the script to function
 installPrerequisitePackages() {
   echo "⏳ Installing prerequisite packages..."
-  prerequisites=(git stow zsh)
+  prerequisites=(git stow fish)
   for package in "${prerequisites[@]}"; do
-    if ! [ -x "$(command -v $package)" ]; then
+    if ! [ -x "$(command -v "$package")" ]; then
       echo "⏳ Installing $package..."
-      installPackage $package
+      installPackage "$package"
     else
       echo "✅ $package is already installed"
     fi
@@ -109,11 +109,11 @@ installPackageList() {
   "Darwin")
     {
       echo "🍎 Identified MacOS"
-      # brew bundle --file $HOME/.dotfiles/pkgs/Brewfile
+      brew bundle --file "$HOME"/.dotfiles/pkgs/Brewfile
 
       ## OUTDATED METHOD
       # ? Not sure if this method works for all package managers
-      # xargs installPackage < $HOME/.dotfiles/pkgs/brew.txt
+      # xargs installPackage < "$HOME"/.dotfiles/pkgs/brew.txt
     }
     ;;
   "Linux")
@@ -133,19 +133,19 @@ installPackageList() {
 # Clone dotfiles repo
 cloneDotfiles() {
   if [ -d "$HOME/.dotfiles" ]; then
-    if [ $(pwd) == "$HOME/.dotfiles" ]; then
+    if [ "$(pwd)" == "$HOME"/.dotfiles ]; then
       echo "✅ Dotfiles repo already exists"
     else
       echo "❌ ~/.dotfiles dir already exists"
       echo "⏳ Backuping ~/.dotfiles dir..."
-      mv $HOME/.dotfiles $HOME/.dotfiles.bak
-      git clone "https://github.com/KaBankz/dotfiles.git" $HOME/.dotfiles
+      mv "$HOME"/.dotfiles "$HOME"/.dotfiles.bak
+      git clone "https://github.com/KaBankz/dotfiles.git" "$HOME"/.dotfiles
     fi
   else
     echo "🙅‍♂️ Dotfiles repo not cloned"
 
     echo "⏳ Cloning dotfiles repo..."
-    git clone "https://github.com/KaBankz/dotfiles.git" $HOME/.dotfiles
+    git clone "https://github.com/KaBankz/dotfiles.git" "$HOME"/.dotfiles
     echo "✅ Cloned dotfiles repo"
   fi
 }
@@ -153,7 +153,7 @@ cloneDotfiles() {
 # Stow all dotfiles
 installDotfiles() {
   echo "⏳ Stowing dotfiles..."
-  stow -Sv -d $HOME/.dotfiles/home -t $HOME
+  stow -Sv -d "$HOME"/.dotfiles/home -t "$HOME"
   echo "✅ Stowed dotfiles"
 }
 
@@ -170,13 +170,21 @@ setDefaults() {
 # Post install
 postInstall() {
   echo "⏳ Post-installation..."
-  if [ ! $SHELL == "/bin/zsh" ]; then
-    echo "🙅‍♂️ Default shell is $SHELL instead of zsh"
-    echo "⏳ Changing default shell to zsh..."
-    sudo chsh -s /bin/zsh
-    echo "✅ Changed default shell to zsh"
+  if [ ! "$SHELL" == "/opt/homebrew/bin/fish" ] || [ ! "$SHELL" == "/usr/bin/fish" ]; then
+    echo "🙅‍♂️ Default shell is $SHELL instead of fish"
+    echo "⏳ Changing default shell to fish..."
+
+    if [ -f "/opt/homebrew/bin/fish" ]; then
+      sudo chsh -s /opt/homebrew/bin/fish
+    elif [ -f "/usr/bin/fish" ]; then
+      sudo chsh -s /usr/bin/fish
+    else
+      echo "❌ Fish not found"
+    fi
+
+    echo "✅ Changed default shell to fish"
   fi
-  if [ $os == "Darwin" ]; then
+  if [ "$os" == "Darwin" ]; then
     setDefaults
   fi
   echo "✅ Post-installation finished"

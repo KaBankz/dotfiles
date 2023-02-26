@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-# hello - say hi to the user
+#
+# Say hi to the user
 # Usage: hello
 
-echo 👋 Hi, "$USER"
+echo 👋 Hi, "${USER}"

@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
-
-# bak - backup a file or directory
+#
+# Backup a file or directory
 # Usage: bak <file or directory>
 # Flags:
-#   -d: backup to ~/.local/backups
+#   -g: backup to global backups directory
+#   -h: display help message
+
+# check if the user has passed the -h or --help flag
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  echo "Usage: bak <file or directory>"
+  echo "Flags:"
+  echo "  -g --global  Backup to global backups directory"
+  echo "  -h --help    Display help message"
+  exit 0
+fi
 
 # check if the user has provided a file or directory to backup
 if [ -z "$1" ]; then
@@ -12,8 +22,8 @@ if [ -z "$1" ]; then
 elif [ ! -e "$1" ]; then
   echo "File or directory does not exist"
   exit 1
-# check if the user has passed the -d flag
-elif [ "$2" = "-d" ]; then
+# check if the user has passed the -g or --global flag
+elif [ "$2" = "-g" ] || [ "$2" = "--global" ]; then
   # remove any trailing slashes from the file or directory name
   file=${1%/}
   # copy the file or directory to the ~/.local/backups with a timestamp and ".bak" appended to the name
