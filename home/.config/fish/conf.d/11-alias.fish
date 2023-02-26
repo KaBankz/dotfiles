@@ -9,6 +9,9 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 
+# replace neofetch with the superior fastfetch
+alias neofetch="fastfetch"
+
 # git
 alias glog="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 
