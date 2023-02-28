@@ -10,4 +10,5 @@ url="https://cheat.sh/${queries[*]}"
 unset IFS
 
 echo "${url}"
-curl "${url}"
+# run curl silently so no progress output is shown
+curl "${url}" -s | bat
