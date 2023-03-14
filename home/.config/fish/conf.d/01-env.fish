@@ -30,6 +30,9 @@ set -gx GPG_TTY (tty)
 # flutter
 set -gx FLUTTER_ROOT (rtx where flutter)
 
+# disable bun analytics
+set -gx DISABLE_BUN_ANALYTICS 1
+
 # node corepack
 set -gx COREPACK_HOME "$XDG_DATA_HOME"/node/corepack
 
