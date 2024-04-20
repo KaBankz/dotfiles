@@ -26,6 +26,7 @@ abbr -ag dev cd \$HOME/Dev
 
 # homebrew
 abbr -ag brw brew
+abbr -ag rbew brew
 
 # vscode easy
 abbr -ag c code
@@ -33,6 +34,7 @@ abbr -ag c. code .
 
 # nvim
 abbr -ag v nvim
+abbr -ag v. nvim .
 abbr -ag vi nvim
 abbr -ag vim nvim
 
@@ -72,3 +74,6 @@ abbr -ag yt yt-dlp
 
 # zellij
 abbr -ag zz zellij
+
+# ollama
+abbr -ag ol ollama
