@@ -48,22 +48,6 @@
 #
 # use this fish config as a reference for your own fish config
 
-# launch fzf with ctrl + f
-# only bind if fzf is installed
-type -q fzf && bind \cf fzf
-
-# show random pokemon with ctrl + k
-# the echo stops the name from being print in the prompt
-# the commandline -f repaint, repaints the prompt after executing the krabby command
-# only bind if krabby is installed
-if type -q krabby
-    bind \ck 'echo; krabby random; echo; commandline -f repaint'
-end
-
-# homebrew command not found
-set -g HB_CNF_HANDLER (brew --repository)"/Library/Taps/homebrew/homebrew-command-not-found/handler.fish"
-test -f $HB_CNF_HANDLER && source $HB_CNF_HANDLER
-
 # the following functions are here instead of in the functions directory
 # because they utilize event handlers which autoloading does not support
 
@@ -82,6 +66,23 @@ end
 # so this function will run whenever the directory changes
 function auto_ls --on-variable PWD
     ls
+end
+
+# homebrew command not found handler
+# yes this utilizes an event handler even tho not explicitly stated
+function fish_command_not_found
+    set -l cmd $argv[1]
+    set -l txt
+
+    if not contains -- "$cmd" -h --help --usage "-?"
+        set txt (brew which-formula --explain $cmd 2> /dev/null)
+    end
+
+    if test -z "$txt"
+        __fish_default_command_not_found_handler $cmd
+    else
+        string collect $txt
+    end
 end
 
 # start zoxide if installed
