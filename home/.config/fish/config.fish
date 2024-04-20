@@ -1,27 +1,6 @@
-# fish color scheme
-set fish_color_normal brcyan
-set fish_color_autosuggestion "#7d7d7d"
-set fish_color_command brcyan
-set fish_color_error "#ff6c6b"
-set fish_color_param brcyan
-
-# # start tmux on iterm2 startup
-# # only run if tmux is installed
-# if test "$TERM_PROGRAM" = "iTerm.app" && type -q tmux
-#     tmux attach || tmux
-# end
-
-# launch tmux with ctrl + t
-# only bind if tmux is installed
-if type -q tmux
-    bind \ct tmux
-end
-
 # launch fzf with ctrl + f
 # only bind if fzf is installed
-if type -q fzf
-    bind \cf fzf
-end
+type -q fzf && bind \cf fzf
 
 # show random pokemon with ctrl + k
 # the echo stops the name from being print in the prompt
@@ -32,20 +11,14 @@ if type -q krabby
 end
 
 # homebrew command not found
-set HB_CNF_HANDLER (brew --repository)"/Library/Taps/homebrew/homebrew-command-not-found/handler.fish"
-if test -f $HB_CNF_HANDLER
-   source $HB_CNF_HANDLER
-end
+set -g HB_CNF_HANDLER (brew --repository)"/Library/Taps/homebrew/homebrew-command-not-found/handler.fish"
+test -f $HB_CNF_HANDLER && source $HB_CNF_HANDLER
 
 # supresses fish's intro message
 function fish_greeting
-    # clear the screen on startup to remove macos's "last login" message
-    clear
-
-    if type -q krabby
-        # pokemon shell colorscripts cargo package
-        krabby random
-    end
+    # pokemon shell colorscripts cargo package
+    # --info flag prints the pokemon's pokedex entry
+    type -q krabby && krabby random --info
 end
 
 # set keybinding mode
@@ -57,7 +30,8 @@ function fish_user_key_bindings
     # fish_vi_key_bindings
 end
 
-# function needed for !! used in abbr below
+# function needed for `!!` history expansion.
+# used by the `!!` abbreviation in `10-abbr.fish`
 function last_history_item
     echo $history[1]
 end
@@ -66,13 +40,13 @@ end
 # --on-variable is a fish builtin that changes whenever the directory changes
 # so this function will run whenever the directory changes
 function auto_onefetch --on-variable PWD
-    # check if .git/ exists and onefetch is installed
-    if test -d .git && type -q onefetch
+    # check if .git/ exists and is a git repo and if onefetch is installed
+    if test -d .git && git rev-parse --git-dir >/dev/null 2>&1 && type -q onefetch
         onefetch
     end
 end
 
-# auto run ls (alias for exa) after cd
+# auto run ls (alias for eza) after cd
 # --on-variable is a fish builtin that changes whenever the directory changes
 # so this function will run whenever the directory changes
 function autols --on-variable PWD
@@ -80,7 +54,7 @@ function autols --on-variable PWD
 end
 
 # auto expand ".." and longer varients to cd .. (or more)
-# used by abbr below
+# used by the `dotdot` abbreviation in `10-abbr.fish`
 function multicd
     echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
 end
@@ -101,17 +75,11 @@ function mkcd -d "Create a directory and set CWD"
 end
 
 # start zoxide if installed
-if type -q zoxide
-    zoxide init fish | source
-end
+type -q zoxide && zoxide init fish | source
 
-# start rtx if installed
-if type -q rtx
-    rtx activate fish | source
-end
-
-# must be at the end of the file
+#! must be at the end of the file
 # start starship if installed
-if type -q starship
-    starship init fish | source
-end
+# --print-full-init prints the full init script directly
+# instead of printing a souce command to then print the init script
+# this approach provides a faster startup time
+type -q starship && starship init fish --print-full-init | source
