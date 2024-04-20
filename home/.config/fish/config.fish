@@ -14,27 +14,8 @@ end
 set -g HB_CNF_HANDLER (brew --repository)"/Library/Taps/homebrew/homebrew-command-not-found/handler.fish"
 test -f $HB_CNF_HANDLER && source $HB_CNF_HANDLER
 
-# supresses fish's intro message
-function fish_greeting
-    # pokemon shell colorscripts cargo package
-    # --info flag prints the pokemon's pokedex entry
-    type -q krabby && krabby random --info
-end
-
-# set keybinding mode
-function fish_user_key_bindings
-    # emacs keybindings
-    fish_default_key_bindings
-
-    # vi keybindings
-    # fish_vi_key_bindings
-end
-
-# function needed for `!!` history expansion.
-# used by the `!!` abbreviation in `10-abbr.fish`
-function last_history_item
-    echo $history[1]
-end
+# the following functions are here instead of in the functions directory
+# because they utilize event handlers which autoloading does not support
 
 # auto run onefetch if inside git repo
 # --on-variable is a fish builtin that changes whenever the directory changes
@@ -49,29 +30,8 @@ end
 # auto run ls (alias for eza) after cd
 # --on-variable is a fish builtin that changes whenever the directory changes
 # so this function will run whenever the directory changes
-function autols --on-variable PWD
+function auto_ls --on-variable PWD
     ls
-end
-
-# auto expand ".." and longer varients to cd .. (or more)
-# used by the `dotdot` abbreviation in `10-abbr.fish`
-function multicd
-    echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
-end
-
-# auto cd after mkdir
-# taken from https://fishshell.com/docs/current/cmds/function.html#example
-function mkcd -d "Create a directory and set CWD"
-    command mkdir -pv $argv
-    if test $status = 0
-        switch $argv[(count $argv)]
-            case '-*'
-
-            case '*'
-                cd $argv[(count $argv)]
-                return
-        end
-    end
 end
 
 # start zoxide if installed

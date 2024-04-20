@@ -2,7 +2,7 @@
 abbr -ag !! --position anywhere --function last_history_item
 
 # expand .. to cd .. (and so on)
-abbr -ag dotdot --regex '^\.\.+$' --function multicd
+abbr -ag dotdot --regex '^\.\.+$' --function multi_cd
 
 # add windows-like clear
 abbr -ag cls clear
