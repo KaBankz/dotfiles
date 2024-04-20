@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# This script will unarchive a file to a directory named after the file
+# Usage: uarc <file>
+
+# Check if the file exists
+if [ ! -f "$1" ]; then
+  echo "File does not exist"
+  exit 1
+fi
+
+# Get the file extension
+extension="${1##*.}"
+
+# Get the file name without the extension
+filename="${1%.*}"
+
+# Unarchive the file
+case "$extension" in
+"zip")
+  unzip "$1" -d "$filename"
+  ;;
+"tar")
+  tar -xvf "$1" -C "$filename"
+  ;;
+"gz")
+  tar -xvzf "$1" -C "$filename"
+  ;;
+"bz2")
+  tar -xvjf "$1" -C "$filename"
+  ;;
+"xz")
+  tar -xvJf "$1" -C "$filename"
+  ;;
+"7z")
+  7zz x "$1" -o"$filename"
+  ;;
+*)
+  echo "Unknown archive type"
+  exit 1
+  ;;
+esac
