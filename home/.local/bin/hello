@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 #
-# Say hi to the user
-# Usage: hello
+# Script that greets the user or provided arguments.
+# Usage: hello [arg1 [arg2 [arg3 ...]]]
+#   If no arguments are provided, it says "Hello, USER."
+#   If arguments are provided, it says "Hello, arg1, arg2, & arg3."
+#
 
-echo 👋 Hi, "${USER}"
+if [ "$#" -eq 0 ]; then
+    echo "Hello, $USER."
+else
+    args=$(printf ", %s" "$@")
+    args=${args:2}  # Remove the leading comma and space
+    echo "Hello $args."
+fi
