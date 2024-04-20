@@ -4,3 +4,4 @@
 
 lastUpdateCheck 1650249567683
 prefix "$HOME/.local/share/yarn"
+registry "https://registry.npmjs.com"
