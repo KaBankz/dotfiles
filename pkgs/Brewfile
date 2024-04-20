@@ -1,258 +1,162 @@
-tap "beerpiss/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
+tap "homebrew/command-not-found"
 tap "homebrew/services"
-tap "khanhas/tap"
-# XML-based font configuration API for X Windows
+tap "messense/macos-cross-toolchains"
 brew "fontconfig"
-# Core application library for C
 brew "glib"
-# OpenType text shaping engine
 brew "harfbuzz"
-# Development kit for the Java programming language
 brew "openjdk"
-# Tool for reverse engineering 3rd party, closed, binary Android apps
 brew "apktool"
-# Download with resuming and segmented downloading
 brew "aria2"
-# Automatic configure script builder
 brew "autoconf"
-# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# C library for multiple-precision floating-point computations
+brew "bat-extras"
 brew "mpfr"
-# GNU compiler collection
 brew "gcc"
-# Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
-# Asynchronous DNS library
 brew "c-ares"
-# Cross-platform make
 brew "cmake"
-# Console Matrix
 brew "cmatrix"
-# Dependency manager for Cocoa projects
 brew "cocoapods"
-# Configurable talking characters in ASCII art
-brew "cowsay"
-# Modern replacement for 'ls'
-brew "exa"
-# Like neofetch, but much faster because written in C
+brew "csvkit"
+brew "eza"
 brew "fastfetch"
-# Simple, fast and user-friendly alternative to find
 brew "fd"
-# Banner-like program prints strings as ASCII art
 brew "figlet"
-# User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
-# Infamous electronic fortune-cookie generator
 brew "fortune"
-# Command-line fuzzy finder written in Go
 brew "fzf"
-# GitHub command-line tool
 brew "gh"
-# Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Platform built on V8 to build network applications
-brew "node"
-# Interactive command-line tool for using emoji in commit messages
-brew "gitmoji"
-# Render markdown on the CLI
+brew "gitui"
 brew "glow"
-# GNU implementation of the famous stream editor
 brew "gnu-sed"
-# GNU Ubiquitous Intelligent Language for Extensions
-brew "guile"
-# GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
-# Manage your GnuPG keys with ease! 🔐
 brew "gpg-tui"
-# CLI client for haste-server
+brew "guile"
 brew "haste-client"
-# Improved top (interactive process viewer)
 brew "htop"
-# Curl statistics made simple
+brew "httpie"
 brew "httpstat"
-# Calculate various network masks, etc. from a given IP address
+brew "inetutils"
 brew "ipcalc"
-# Lightweight and flexible command-line JSON processor
 brew "jq"
-# Save disk space by cleaning non-essential files from software projects
 brew "kondo"
-# Simple terminal UI for git commands
+brew "latexindent"
 brew "lazygit"
-# JIT library for the GNU compiler collection
 brew "libgccjit"
-# Rainbows and unicorns in your console!
-brew "lolcat"
-# Mac App Store command-line interface
+brew "libnatpmp"
 brew "mas"
-# Ambitious Vim-fork focused on extensibility and agility
+brew "mise"
+brew "mitmproxy"
 brew "neovim"
-# Port scanning utility for large networks
 brew "nmap"
-# Command-line Git information tool
+brew "ollama", restart_service: true
 brew "onefetch"
-# Painless compression and decompression for your terminal
+brew "openssl@1.1"
 brew "ouch"
-# Swiss-army knife of markup format conversion
 brew "pandoc"
-# Pretty system information tool written in POSIX sh
 brew "pfetch"
-# Pinentry for GPG on Mac
 brew "pinentry-mac"
-# Search tool like grep and The Silver Searcher
+brew "rename"
 brew "ripgrep"
-# Polyglot runtime manager (asdf rust clone)
-brew "rtx"
-# Rust toolchain installer
 brew "rustup-init"
-# Intuitive find & replace CLI
 brew "sd"
-# 7-Zip is a file archiver with a high compression ratio
 brew "sevenzip"
-# Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
-# Terminal interface for StackOverflow
 brew "so"
-# Command-line interface for https://speedtest.net bandwidth tests
 brew "speedtest-cli"
-# Soak up standard input and write to a file
+brew "spicetify-cli"
 brew "sponge"
-# Cross-shell prompt for astronauts
 brew "starship"
-# Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
-# Version control system designed to be a better CVS
 brew "subversion"
-# Tool to enforce Swift style and conventions
 brew "swiftlint"
-# Official documentation format of the GNU project
 brew "texinfo"
-# Terminal multiplexer
+brew "tlrc"
 brew "tmux"
-# CLI tool that moves files or folder to the trash
 brew "trash"
-# Build, bundle & ship your Rust WASM application to the web
 brew "trunk"
-# Command-line interface for Vercel
-brew "vercel-cli"
-# Execute commands when watched files change
 brew "watchexec"
-# Internet file retriever
 brew "wget"
-# Check your $HOME for unwanted files and directories
-brew "xdg-ninja"
-# Fork of youtube-dl with additional features and fixes
+brew "wpscan"
+brew "xdg-ninja", args: ["HEAD"]
 brew "yt-dlp"
-# Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
-# Flexible and fast Zsh plugin manager
 brew "zinit"
-# Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Aidoku development toolkit
-brew "beerpiss/tap/aidoku-cli"
-# Command-line tool to customize Spotify client
-brew "khanhas/tap/spicetify-cli"
-# Password manager that keeps all passwords secure behind one password
+brew "messense/macos-cross-toolchains/x86_64-unknown-linux-musl"
 cask "1password"
-# Enable Windows-like alt-tab
+cask "1password-cli"
+cask "aerial"
 cask "alt-tab"
-# Menu bar icon organizer
+cask "appcleaner"
+cask "arc"
 cask "bartender"
-# Installer for BetterDiscord
-cask "betterdiscord-installer"
-# Web browser focusing on privacy
+cask "beeper"
 cask "brave-browser"
-# Screen saver based on animations presented during Apple Special Event Brooklyn
 cask "brooklyn"
-# Reclaim tens of gigabytes of your storage used for various Xcode caches
+cask "crossover"
+cask "cyberduck"
 cask "devcleaner"
-# Voice and text chat software
 cask "discord"
-# App to build and share containerized applications and microservices
 cask "docker"
-# Web browser
 cask "firefox-developer-edition"
-# Monospaced font that includes programming ligatures
 cask "font-cascadia-code"
-# Developer targeted fonts with a high number of glyphs
 cask "font-caskaydia-cove-nerd-font"
-# Typeface made for developers
+cask "font-inter"
 cask "font-jetbrains-mono"
-# Developer targeted fonts with a high number of glyphs
 cask "font-jetbrains-mono-nerd-font"
+cask "font-noto-sans"
 cask "font-open-sans"
-# Open-source video transcoder
+cask "font-source-sans-3"
 cask "handbrake"
-# Free and open-source media player
+cask "hoppscotch"
+cask "hyperkey"
 cask "iina"
-# Tool to optimize images to a smaller size
 cask "imageoptim"
-# HTTP and GraphQL Client
 cask "insomnia"
-# Terminal emulator as alternative to Apple's Terminal app
+cask "istat-menus"
 cask "iterm2"
-# Menu bar calendar
 cask "itsycal"
-# Jellyfin desktop client
-cask "jellyfin-media-player"
-# JetBrains tools manager
 cask "jetbrains-toolbox"
-# File archiver
 cask "keka"
-# Open-source keystroke visualizer
+cask "keyboardcleantool"
 cask "keycastr"
-# Utility that shows the latest app updates
 cask "latest"
-# Clipboard manager
-cask "maccy"
-# Provides updates to various Microsoft products
+cask "linear-linear"
+cask "mac-mouse-fix"
+cask "mactex"
 cask "microsoft-auto-update"
-# Office suite
 cask "microsoft-office"
-# Remote desktop client
-cask "microsoft-remote-desktop"
-# Open-source software for live streaming and screen recording
 cask "obs"
-# Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# Verify system files structure, run miscellaneous maintenance and more
-cask "onyx"
-# VPN client focusing on security
+cask "plex"
+cask "proton-drive"
+cask "protonmail-bridge"
 cask "protonvpn"
-# QuickLook generator for Markdown files
 cask "qlmarkdown"
-# Thumbnails, static previews, cover art and metadata for video files
 cask "qlvideo"
-# Control your tools with a few keystrokes
 cask "raycast"
-# Move and resize windows using keyboard shortcuts or snap areas
-cask "rectangle"
-# Tool that provides consistent, highly configurable symbols for apps
+cask "retroarch-metal"
+cask "rotato"
+cask "screen-studio"
 cask "sf-symbols"
-# Screenshot measurement and annotation tool
 cask "shottr"
-# Music streaming service
 cask "spotify"
-# System monitor for the menu bar
 cask "stats"
-# Quicklook extension for source files
+cask "stremio"
 cask "syntax-highlight"
-# Open-source code editor
+cask "tower"
+cask "transmission"
+cask "unraid-usb-creator"
+cask "upscayl"
+cask "utm"
 cask "visual-studio-code"
-# Rust-based terminal
 cask "warp"
-# Install and switch between multiple versions of Xcode
+cask "whisky"
 cask "xcodes"
-# Video communication and virtual meeting platform
+cask "zed"
 cask "zoom"
-mas "Bitwarden", id: 1352778147
-mas "Developer", id: 640199958
-mas "Keynote", id: 409183694
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "TestFlight", id: 899247664
-mas "Xcode", id: 497799835
