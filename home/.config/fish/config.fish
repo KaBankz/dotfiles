@@ -24,8 +24,18 @@
 # for advanced users or those who care about performace, don't use config.fish
 # and instead use the conf.d/ and functions/ directories as described above
 #
-# all your config (env, alias, abbr, etc) should be in conf.d/ and your functions
+# all your config (env, abbr, etc) should be in conf.d/ and your functions
 # should be in functions/ and fish will automatically load them as needed
+#
+# note: dont use `alias` in your config, as that just creates a function in the
+# background which is slow, instead use `abbr` where possible and use functions
+# for more complex aliases.
+# to convert aliases to functions just add the `-s` flag to the alias
+# ex: `alias ls="ls -lah"` becomes `alias -s ls="ls -lah"`
+# note: only run this once, as this will write a function to the functions/ directory
+# now remove all traces of `alias` from your config
+# if you want to add an alias in the future just run `alias -s <alias> <command>`
+# you can then edit and remove them from the functions/ directory as needed
 #
 # config.fish should only exist if you need to override the above configs as it
 # is loaded after the conf.d/ and functions/ directories
