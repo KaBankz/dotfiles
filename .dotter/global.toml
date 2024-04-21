@@ -8,5 +8,6 @@ depends = []
 ".zshenv" = "~/.zshenv"
 "zsh" = "~/.config/zsh"
 "yarn" = "~/.config/yarn"
+"npm" = "~/.config/npm"
 
 [default.variables]
