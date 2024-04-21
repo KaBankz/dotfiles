@@ -1,26 +1,15 @@
 # Dotfiles
 
-Nothing special, just my dotfiles. These should work across GNU/Linux and MacOS.
+Nothing special, just my dotfiles.
 
 ## Installation
 
-You can either use curl or manually clone this repo and run the install script `install.sh`
+These are managed by [Dotter](https://github.com/SuperCuber/dotter), a simple dotfile manager.
 
-### Install Script
-
-```bash
-curl https://raw.githubusercontent.com/KaBankz/dotfiles/master/install.sh | bash
-```
-
-### Manual install
-
-```bash
-git clone https://github.com/KaBankz/dotfiles ~/.dotfiles
-cd ~/.dotfiles
-./install.sh
-```
-
-You can even go one step further and manually install all the packages and stow all the folders if you don't want to use the install script.
+1. Install `dotter`
+2. Clone this repo
+3. Run `dotter deploy` inside the repo
+4. Profit!?
 
 ## Features
 
