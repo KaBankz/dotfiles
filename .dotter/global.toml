@@ -7,5 +7,6 @@ depends = []
 "starship.toml" = "~/.config/starship.toml"
 ".zshenv" = "~/.zshenv"
 "zsh" = "~/.config/zsh"
+"yarn" = "~/.config/yarn"
 
 [default.variables]
