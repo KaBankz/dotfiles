@@ -26,7 +26,7 @@ depends = []
 "npm" = "~/.config/npm"
 
 [bun.files]
-".bunfig.toml" = "~/.config/bunfig.toml"
+".bunfig.toml" = "~/.config/.bunfig.toml"
 
 [tmux.files]
 "tmux" = "~/.config/tmux"
