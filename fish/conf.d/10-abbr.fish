@@ -68,6 +68,3 @@ abbr -ag zz zellij
 
 # ollama
 abbr -ag ol ollama
-
-# chezmoi
-abbr -ag cz chezmoi
