@@ -15,6 +15,7 @@ depends = []
 "yarn" = "~/.config/yarn"
 "npm" = "~/.config/npm"
 "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
+"tmux" = "~/.config/tmux"
 
 # my scripts
 "bin" = { target = "~/.local/bin", type = "symbolic", recurse = false }
