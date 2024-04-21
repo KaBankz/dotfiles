@@ -1,0 +1,7 @@
+[tools]
+node = "20"
+bun = "1"
+flutter = "3"
+java = "openjdk-20"
+zig = "0.11.0"
+
