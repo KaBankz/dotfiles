@@ -31,6 +31,9 @@ depends = []
 [tmux.files]
 "tmux" = "~/.config/tmux"
 
+[zed.files]
+"zed" = "~/.config/zed"
+
 [bin.files]
 "bin" = { target = "~/.local/bin", type = "symbolic", recurse = false }
 
