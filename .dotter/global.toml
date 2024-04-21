@@ -11,6 +11,7 @@ depends = []
 "starship.toml" = "~/.config/starship.toml"
 ".zshenv" = "~/.zshenv"
 "zsh" = "~/.config/zsh"
+"shell" = { target = "~/.config/shell", type = "symbolic", recurse = false }
 "yarn" = "~/.config/yarn"
 "npm" = "~/.config/npm"
 "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
