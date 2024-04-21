@@ -4,6 +4,7 @@
 depends = []
 
 [default.files]
+"git" = "~/.config/git"
 "starship.toml" = "~/.config/starship.toml"
 ".zshenv" = "~/.zshenv"
 "zsh" = "~/.config/zsh"
