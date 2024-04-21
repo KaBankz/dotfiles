@@ -11,18 +11,8 @@ abbr -ag cls clear
 abbr -ag l ls
 
 # edit shell configs
-abbr -ag bedit nvim \$HOME/.bashrc
 abbr -ag zedit nvim \$ZDOTDIR/.zshrc
 abbr -ag fedit nvim \$XDG_CONFIG_HOME/fish/config.fish
-
-# reload fish config
-abbr -ag fload source \$XDG_CONFIG_HOME/fish/config.fish
-
-# go to dotfiles dir
-abbr -ag dot cd \$HOME/.dotfiles
-
-# go to development dir
-abbr -ag dev cd \$HOME/Dev
 
 # homebrew
 abbr -ag brw brew
@@ -55,7 +45,7 @@ abbr -ag dcb docker compose build
 abbr -ag dcd docker compose down
 abbr -ag dcp docker compose pull
 
-# git abbr -ages
+# git
 abbr -ag gini git init
 abbr -ag gss git status -s
 abbr -ag ga git add
@@ -68,6 +58,7 @@ abbr -ag gf git fetch
 abbr -ag gd git diff
 abbr -ag gb git branch
 abbr -ag gc git checkout
+abbr -ag gs git switch
 
 # yt-dlp
 abbr -ag yt yt-dlp
@@ -77,3 +68,6 @@ abbr -ag zz zellij
 
 # ollama
 abbr -ag ol ollama
+
+# chezmoi
+abbr -ag cz chezmoi

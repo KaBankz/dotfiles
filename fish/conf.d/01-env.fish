@@ -6,7 +6,7 @@ set -gx XDG_STATE_HOME "$HOME"/.local/state
 
 # set default editors
 set -gx EDITOR nvim
-set -gx VISUAL code
+set -gx VISUAL code --wait
 
 # set ZDOTDIR for zsh subshells
 set -gx ZDOTDIR "$HOME"/.config/zsh
@@ -23,7 +23,7 @@ set -gx LESSHISTFILE -
 set -gx HOMEBREW_NO_ANALYTICS 1
 
 # disable mise command not found (b/c it overrides my brew command not found)
-set -gx MISE_NOT_FOUND_AUTO_INSTALL true
+set -gx MISE_NOT_FOUND_AUTO_INSTALL false
 
 # # set github token
 # set -gx GITHUB_TOKEN (gh auth token)
