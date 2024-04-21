@@ -18,6 +18,9 @@ depends = []
 "zsh" = "~/.config/zsh"
 "shell" = { target = "~/.config/shell", type = "symbolic", recurse = false }
 
+[starshipalt.files]
+"starship.alt.toml" = "~/.config/starship.toml"
+
 [node.files]
 "yarn" = "~/.config/yarn"
 "npm" = "~/.config/npm"

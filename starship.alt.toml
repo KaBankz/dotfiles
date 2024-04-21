@@ -1,0 +1,44 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[\\[](bold fg:red)\
+$username\
+[@](bold fg:green)\
+$hostname\
+$directory\
+[\\]](bold fg:red)\
+$sudo$character
+"""
+
+right_format = """$cmd_duration"""
+
+add_newline = false
+
+[sudo]
+format = '[$symbol]($style)'
+style = 'bold red'
+symbol = '!'
+disabled = false
+
+[username]
+show_always = true
+style_user = 'bold fg:yellow'
+style_root = 'bold fg:red'
+format = '[$user]($style)'
+
+[hostname]
+ssh_only = false
+style = 'bold fg:bright-cyan'
+format = '[$ssh_symbol$hostname]($style) '
+
+[character]
+success_symbol = '[\$](bold)'
+error_symbol = '[\$](bold fg:red)'
+
+[directory]
+style = 'bold'
+format = '[$path]($style)'
+truncation_length = 2
+truncation_symbol = '…/'
+
