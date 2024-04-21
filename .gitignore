@@ -2,6 +2,11 @@
 # Custom gitignore configs
 ###############################################################################
 
+# dotter
+.dotter/local.toml
+.dotter/cache.toml
+.dotter/cache
+
 # fish
 home/.config/fish/completions
 home/.config/fish/fish_variables
