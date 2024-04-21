@@ -68,3 +68,6 @@ abbr -ag zz zellij
 
 # ollama
 abbr -ag ol ollama
+
+# zoxide
+abbr -ag z cd

@@ -1,5 +1,5 @@
 # start zoxide
-runx zoxide init fish | source
+runx zoxide init fish --cmd cd | source
 
 #! must be excuted last to avoid conflicts with other prompt customizations
 # start starship
