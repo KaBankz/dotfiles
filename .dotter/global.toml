@@ -15,4 +15,7 @@ depends = []
 "npm" = "~/.config/npm"
 "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
 
+# my scripts
+"bin" = { target = "~/.local/bin", type = "symbolic", recurse = false }
+
 [default.variables]
