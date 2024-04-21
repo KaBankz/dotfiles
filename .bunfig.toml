@@ -1,0 +1,12 @@
+telemetry = false
+
+[install]
+# where `bun install --global` installs packages
+globalDir = "$XDG_DATA_HOME/bun/install/global"
+
+# where globally-installed package bins are linked
+globalBinDir = "$XDG_DATA_HOME/bun/bin"
+
+[install.cache]
+# the directory to use for the cache
+dir = "$XDG_CACHE_HOME/bun"
