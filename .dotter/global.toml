@@ -3,21 +3,28 @@
 [default]
 depends = []
 
-[default.files]
 # to symlink entire dirs disable recurse, a global config is planned
 # ex: "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
-
+[default.files]
 "git" = "~/.config/git"
 "starship.toml" = "~/.config/starship.toml"
+
+[fish.files]
+"fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
+
+[zsh.files]
 ".zshenv" = "~/.zshenv"
 "zsh" = "~/.config/zsh"
 "shell" = { target = "~/.config/shell", type = "symbolic", recurse = false }
+
+[node.files]
 "yarn" = "~/.config/yarn"
 "npm" = "~/.config/npm"
-"fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
+
+[tmux.files]
 "tmux" = "~/.config/tmux"
 
-# my scripts
+[bin.files]
 "bin" = { target = "~/.local/bin", type = "symbolic", recurse = false }
 
 [default.variables]
