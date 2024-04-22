@@ -42,6 +42,6 @@ depends = []
 "zed" = "~/.config/zed"
 
 [bin.files]
-"bin" = { target = "~/.local/bin", type = "symbolic", recurse = false }
+"bin" = "~/.local/bin"
 
 [default.variables]
