@@ -11,6 +11,7 @@ depends = []
 ".hushlogin" = "~/.hushlogin"
 "bat" = { target = "~/.config/bat", type = "symbolic", recurse = false }
 "mise" = { target = "~/.config/mise", type = "symbolic", recurse = false }
+"fastfetch/presets" = { target = "~/.local/share/fastfetch/presets", type = "symbolic", recurse = false }
 
 [fish.files]
 "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
