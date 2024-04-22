@@ -7,7 +7,7 @@ depends = []
 # ex: "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
 [default.files]
 "git" = "~/.config/git"
-"starship.toml" = "~/.config/starship.toml"
+"starship/starship.toml" = "~/.config/starship.toml"
 ".hushlogin" = "~/.hushlogin"
 "bat" = { target = "~/.config/bat", type = "symbolic", recurse = false }
 "mise" = { target = "~/.config/mise", type = "symbolic", recurse = false }
@@ -22,7 +22,7 @@ depends = []
 "shell" = { target = "~/.config/shell", type = "symbolic", recurse = false }
 
 [starshipalt.files]
-"starship.alt.toml" = "~/.config/starship.toml"
+"starship/starship.alt.toml" = "~/.config/starship.toml"
 
 [node.files]
 "yarn" = "~/.config/yarn"
