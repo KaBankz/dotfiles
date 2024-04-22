@@ -6,6 +6,4 @@ type -q fzf && bind \cf fzf
 # the echo stops the name from being print in the prompt
 # the commandline -f repaint, repaints the prompt after executing the krabby command
 # only bind if krabby is installed
-if type -q krabby
-    bind \ck 'echo; krabby random; echo; commandline -f repaint'
-end
+type -q krabby && bind \ck "echo; krabby random; echo; commandline -f repaint"

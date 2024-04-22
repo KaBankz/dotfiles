@@ -12,9 +12,3 @@ set -gx MANPATH /opt/homebrew/share/man
 set -gx INFOPATH /opt/homebrew/share/info
 
 fish_add_path -P /opt/homebrew/bin /opt/homebrew/sbin
-
-# old
-# this only runs if not in a nested shell to avoid duplicated PATH
-# if test "$SHLVL" -eq 1
-#     eval (/opt/homebrew/bin/brew shellenv)
-# end

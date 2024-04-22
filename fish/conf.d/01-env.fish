@@ -25,16 +25,13 @@ set -gx HOMEBREW_NO_ANALYTICS 1
 # disable mise command not found (b/c it overrides my brew command not found)
 set -gx MISE_NOT_FOUND_AUTO_INSTALL false
 
-# # set github token
-# set -gx GITHUB_TOKEN (gh auth token)
-
 # gnupg
 set -gx GNUPGHOME "$XDG_DATA_HOME"/gnupg
 # load gpg keys
 set -gx GPG_TTY (tty)
 
 # flutter
-set -gx FLUTTER_ROOT (mise where flutter)
+set -gx FLUTTER_ROOT (runx mise where flutter)
 
 # gradle
 set -gx GRADLE_USER_HOME "$XDG_DATA_HOME"/gradle
@@ -70,16 +67,3 @@ fish_add_path -P "$PNPM_HOME"
 fish_add_path -P "$BUN_INSTALL"/bin
 fish_add_path -P "$CARGO_HOME"/bin
 fish_add_path -P "$HOME"/.local/bin
-
-# old
-# to avoid duplicates in PATH, we add items to a list and then add the list to PATH if it's not already there
-# priority is given in accending order of the list
-# set ADD_TO_PATH $XDG_DATA_HOME/yarn/bin $PNPM_HOME $CARGO_HOME/bin $HOME/.local/bin
-#
-# for item in $ADD_TO_PATH
-#     fish_add_path -P $item
-#     # if not contains $item $PATH
-#     #     # prepend to PATH
-#     #     set -p PATH $item
-#     # end
-# end

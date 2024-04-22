@@ -1,4 +1,5 @@
 # start zoxide
+# --cmd cd replaces the cd command with zoxide
 runx zoxide init fish --cmd cd | source
 
 #! must be excuted last to avoid conflicts with other prompt customizations
