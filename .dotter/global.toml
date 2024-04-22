@@ -9,6 +9,7 @@ depends = []
 "git" = "~/.config/git"
 "starship.toml" = "~/.config/starship.toml"
 ".hushlogin" = "~/.hushlogin"
+"bat" = { target = "~/.config/bat", type = "symbolic", recurse = false }
 "mise" = { target = "~/.config/mise", type = "symbolic", recurse = false }
 
 [fish.files]
