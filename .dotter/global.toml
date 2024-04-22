@@ -17,8 +17,8 @@ depends = []
 "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
 
 [zsh.files]
-".zshenv" = "~/.zshenv"
-"zsh" = "~/.config/zsh"
+"zsh/.zshenv" = "~/.zshenv"
+"zsh/.zshrc" = "~/.config/zsh/.zshrc"
 "shell" = { target = "~/.config/shell", type = "symbolic", recurse = false }
 
 [starshipalt.files]
