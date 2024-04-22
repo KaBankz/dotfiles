@@ -2,38 +2,30 @@
 
 ### STARTUP ###
 
+XDG_CONFIG_HOME="$HOME"/.config
+XDG_STATE_HOME="$HOME"/.local/state
+
 # these are used by Apple in /etc/zshrc
 # the $XDG_STATE_HOME/zsh dir has to exist for this to work so we create it if it doesn't exist
 if [ ! -d "$XDG_STATE_HOME"/zsh ]; then
   mkdir -p "$XDG_STATE_HOME"/zsh
 fi
-# set zsh session dir
+
 export SHELL_SESSION_DIR="$XDG_STATE_HOME"/zsh/sessions
 export SHELL_SESSION_FILE="$SHELL_SESSION_DIR"/"$TERM_SESSION_ID"
-# set zsh history file dir
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
-# load homebrew
-# this is up at the top to make sure it's loaded before anything else
-# as homebrew manages the majority of the used binaries
-# this also only runs if not in a nested shell to avoid duplicated PATH
-[ "$SHLVL" -eq 1 ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# start fish shell
-# exec fish
-
-# load environment variables if not in a nested shell to avoid duplicated PATH
-[ -f "$XDG_CONFIG_HOME"/shell/environment ] && [ "$SHLVL" -eq 1 ] && source "$XDG_CONFIG_HOME"/shell/environment
-
-# load aliases
-# [ -f $ZDOTDIR/aliases.zsh ] && source $ZDOTDIR/aliases.zsh
-[ -f "$XDG_CONFIG_HOME"/shell/aliases ] && source "$XDG_CONFIG_HOME"/shell/aliases
-
-# clear the screen on startup to remove macos's "last login" message
-clear
+if [ "$SHLVL" -eq 1 ]; then
+  source "$XDG_CONFIG_HOME"/shell/homebrew
+  source "$XDG_CONFIG_HOME"/shell/environment
+  source "$XDG_CONFIG_HOME"/shell/aliases
+fi
 
 # pokemon shell colorscripts
-krabby random
+# --info flag prints the pokemon's pokedex entry
+if type krabby &>/dev/null; then
+  krabby random --info
+fi
 
 ### END OF STARTUP ###
 
@@ -43,20 +35,23 @@ krabby random
 # Also because I have EDITOR defined as nvim, zsh auto uses vi mode, so this overrides that
 bindkey -e
 
-# launch tmux with ctrl + t
-bindkey -s "^t" "tmux^M"
+# launch fzf with ctrl + f
+# only bind if fzf is installed
+if type fzf &>/dev/null; then
+  bindkey -s "^f" "fzf^M"
+fi
 
-# launch ranger with ctrl + r
-bindkey -s "^r" "ranger^M"
-
-# launch lazygit with ctrl + g
-bindkey -s "^g" "lazygit^M"
+# launch krabby with ctrl + k
+# only bind if krabby is installed
+if type krabby &>/dev/null; then
+  bindkey -s "^k" "krabby random^M"
+fi
 
 ### END OF KEYBINDINGS ###
 
 ### FUNCTIONS ###
 
-# auto run ls (alias for exa) after cd
+# auto run ls (alias for eza) after cd
 # builtin uses the default cd to avoid conflicts with function name
 function cd { builtin cd "$@" && ls; }
 
@@ -78,9 +73,6 @@ function mkcd {
 
 # load zinit before compinit
 source /opt/homebrew/opt/zinit/zinit.zsh
-
-# load asdf
-source /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 ### END OF SOURCE BINARIES ###
 
@@ -111,9 +103,10 @@ zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light marlonrichert/zsh-autocomplete
 
 ### END OF PLUGINS ###
+
+eval $(zoxide init zsh --cmd cd)
 
 ### START STARSHIP PROMPT ###
 eval "$(starship init zsh)"

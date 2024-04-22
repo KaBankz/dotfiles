@@ -1,65 +1,39 @@
 #!/bin/sh
 
-# add windows-like clear
 alias cls="clear"
 
-# edit shell configs
-alias bedit="nvim ~/.bashrc"
 alias zedit="nvim \$ZDOTDIR/.zshrc"
-alias fedit="nvim \$XDG_CONFIG_HOME/fish/config.fish"
-alias sedit="nvim \$XDG_CONFIG_HOME/shell"
-
-# reload shell configs
-alias bload="source ~/.bashrc"
 alias zload="source \$ZDOTDIR/.zshrc"
-alias fload="source \$XDG_CONFIG_HOME/fish/config.fish"
 
-# go to dotfiles dir
-alias dot="cd ~/.dotfiles"
+alias l="ls"
+alias ls="eza -lah --group-directories-first --git --icons"
+alias tree="eza -Ta --git-ignore"
 
-# go to development dir
-alias dev="cd ~/Dev"
-
-# vscode easy
-alias c="code"
-
-# navigation
-alias cd..="cd .."
 alias ..="cd .."
-alias ...="cd ../.."
-alias .3="cd ../../.."
-alias .4="cd ../../../.."
-alias .5="cd ../../../../.."
 
-# replace vim and vi with neovim
-alias vim="nvim"
-alias vi="nvim"
+alias brw="brew"
+alias rbew="brew"
+
+alias c="code"
+alias c.="code ."
+
 alias v="nvim"
+alias v.="nvim ."
+alias vi="nvim"
+alias vim="nvim"
 
-# replace cat with bat
-# --paging=never makes bat act like cat
-# by not piping large output's into less
-alias cat="bat --paging=never"
+alias cat="bat"
 
-# replace find with fd
-# alias find="fd"
+alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
 
-# replace grep with ripgrep
-# alias grep="rg"
-
-# replace ls with exa
-alias l="exa -lah --group-directories-first --git --icons"
-alias ls="exa -lah --group-directories-first --git --icons"
-
-# use exa to display dir as a tree
-alias tree="exa -T"
+alias neofetch="fastfetch -c neofetch"
+alias pfetch="fastfetch -c pfetch"
 
 # confirm before overwriting something
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 
-# docker
 alias dpa="docker ps -a"
 alias dia="docker image ls -a"
 alias dva="docker volume ls"
@@ -76,37 +50,31 @@ alias dcb="docker compose build"
 alias dcd="docker compose down"
 alias dcp="docker compose pull"
 
-# git aliases
 alias gini="git init"
 alias gss="git status -s"
 alias glog="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 alias ga="git add"
-alias gaa="git add ."
+alias gaa="git add -A"
 alias gcm="git commit -m"
 alias gp="git push"
 alias gpl="git pull"
+alias gplr="git pull --rebase"
 alias gf="git fetch"
 alias gd="git diff"
 alias gb="git branch"
 alias gc="git checkout"
+alias gs="git switch"
 
-# make yarn use custom dir for .yarnrc to follow XDG spec
-alias yarn="yarn --use-yarnrc '\$XDG_CONFIG_HOME/yarn/config'"
+alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 
-# termbin
-alias tb="nc termbin.com 9999"
-
-# yt-dlp
 alias yt="yt-dlp"
 
-# zellij
 alias zz="zellij"
 
-# open vscode in current dir
-alias c="code ."
+alias ol="ollama"
+
+alias z="cd"
 
 # make a brewfile backup of all installed packages
 # --force overwrites any previous Brewfile
-# --describe adds package description comments to Brewfile
-# --file sets custom backup location. (Location must exist) (Default is current dir)
-alias brewbak="brew bundle dump --force --describe --file ~/.dotfiles/pkgs/Brewfile"
+alias brewbak="brew bundle dump --force --formula --casks --taps --file ~/.dotfiles/pkgs/Brewfile"

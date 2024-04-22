@@ -1,22 +1,49 @@
 #!/bin/sh
 
+# XDG Base Directory Specification
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_CACHE_HOME="$HOME"/.cache
+export XDG_DATA_HOME="$HOME"/.local/share
+export XDG_STATE_HOME="$HOME"/.local/state
+
+# set default editors
+export EDITOR=nvim
+export VISUAL="code --wait"
+
+# set ZDOTDIR for zsh subshells
+export ZDOTDIR="$HOME"/.config/zsh
+
+# set bat as the manpager if it exists
+if type bat >/dev/null 2>&1; then
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
+
 # disable less history file
 export LESSHISTFILE=-
 
 # disable homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1
 
+# disable mise command not found (b/c it overrides my brew command not found)
+export MISE_NOT_FOUND_AUTO_INSTALL=false
+
 # gnupg
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 # load gpg keys
-export GPG_TTY="$(tty)"
-
-# # java
-# export JAVA_HOME="$(dirname "$(dirname "$(asdf which java)")")"
-# export JDK_HOME="$JAVA_HOME"
+export GPG_TTY=$(tty)
 
 # flutter
-export FLUTTER_ROOT="$(rtx where flutter)"
+if type mise >/dev/null 2>&1; then
+  export FLUTTER_ROOT=$(mise where flutter)
+fi
+
+# gradle
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+
+# disable bun analytics
+export DISABLE_BUN_ANALYTICS=1
+# set bun install path
+export BUN_INSTALL="$XDG_DATA_HOME/bun"
 
 # node corepack
 export COREPACK_HOME="$XDG_DATA_HOME"/node/corepack
@@ -35,12 +62,8 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 # cocoapods
 export CP_HOME_DIR="$XDG_DATA_HOME"/cocoapods
 
-# ranger
-# disable loading default ranger config, instead load local ranger config
-export RANGER_LOAD_DEFAULT_RC=false
-
 # docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 
 # path
-export PATH="$HOME/.local/bin":"$CARGO_HOME/bin":"$XDG_DATA_HOME/yarn/bin":"$PNPM_HOME":"$PATH"
+export PATH="$HOME/.local/bin":"$CARGO_HOME/bin":"$BUN_INSTALL/bin":"$XDG_DATA_HOME/yarn/bin":"$PNPM_HOME":"$PATH"
