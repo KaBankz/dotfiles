@@ -33,6 +33,9 @@ depends = []
 [tmux.files]
 "tmux" = "~/.config/tmux"
 
+[nvim.files]
+"nvim" = { target = "~/.config/nvim", type = "symbolic", recurse = false }
+
 [zed.files]
 "zed" = "~/.config/zed"
 
