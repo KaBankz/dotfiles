@@ -9,17 +9,18 @@ depends = []
 "git" = "~/.config/git"
 "starship/starship.toml" = "~/.config/starship.toml"
 ".hushlogin" = "~/.hushlogin"
-"bat" = { target = "~/.config/bat", type = "symbolic", recurse = false }
-"mise" = { target = "~/.config/mise", type = "symbolic", recurse = false }
-"fastfetch/presets" = { target = "~/.local/share/fastfetch/presets", type = "symbolic", recurse = false }
+"bat" = "~/.config/bat"
+"mise" = "~/.config/mise"
+"fastfetch/presets" = "~/.local/share/fastfetch/presets"
 
 [fish.files]
-"fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
+"fish/conf.d" = { target = "~/.config/fish/conf.d", type = "symbolic", recurse = false }
+"fish/functions" = { target = "~/.config/fish/functions", type = "symbolic", recurse = false }
 
 [zsh.files]
 "zsh/.zshenv" = "~/.zshenv"
 "zsh/.zshrc" = "~/.config/zsh/.zshrc"
-"shell" = { target = "~/.config/shell", type = "symbolic", recurse = false }
+"shell" = "~/.config/shell"
 
 [starshipalt.files]
 "starship/starship.alt.toml" = "~/.config/starship.toml"
