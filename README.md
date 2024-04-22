@@ -1,15 +1,49 @@
-# Dotfiles
+# ~/.dotfiles
 
-Nothing special, just my dotfiles.
+nothing special, just my dotfiles managed with [Dotter](https://github.com/SuperCuber/dotter), a simple dotfile manager.
 
 ## Installation
 
-These are managed by [Dotter](https://github.com/SuperCuber/dotter), a simple dotfile manager.
+1. Clone this repo
 
-1. Install `dotter`
-2. Clone this repo
-3. Run `dotter deploy` inside the repo
-4. Profit!?
+    ```sh
+   git clone https://github.com/KaBankz/dotfiles.git ~/.dotfiles
+    ```
+
+2. Go to the repo and stay there until the end
+
+    ```sh
+    cd ~/.dotfiles
+    ```
+
+3. Download the `dotter` binary inside the repo
+
+    > [!NOTE]
+    > Be sure to download the appropriate binary for your os and arch from [Dotter Releases](https://github.com/SuperCuber/dotter/releases/latest#:~:text=Assets).
+
+    ```sh
+    curl -sSL -o dotter https://github.com/SuperCuber/dotter/releases/latest/download/dotter-macos-arm64.arm
+    chmod +x dotter
+    ```
+
+4. Run `dotter deploy` inside the repo
+
+    The `-v` flag is optional, it enables verbose output to see what is happening.
+
+    > [!WARNING]
+    > If you have any existing dotfiles that conflict with the ones in this repo, you will receive an error. You can either remove the conflicting dotfiles or overwrite them by running `dotter deploy -v --force`.
+
+    ```sh
+    ./dotter deploy -v
+    ```
+
+5. Remove the `dotter` binary
+
+    ```sh
+    rm dotter
+    ```
+
+6. Profit!?
 
 ## Features
 
@@ -18,13 +52,6 @@ These are managed by [Dotter](https://github.com/SuperCuber/dotter), a simple do
 - ✅ Follows ***XDG Base Directory*** specification where possible
 - 💻 Cross platform (GNU/Linux & MacOS only)
 
-## Used By
-
-These dotfiles are used by the following:
-
-- Me 🤗
-- Also me 😉
-
 ## License
 
-[MIT](https://github.com/KaBankz/dotfiles/blob/master/LICENSE)
+[MIT](LICENSE)
