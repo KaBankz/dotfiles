@@ -31,7 +31,7 @@ nothing special, just my dotfiles managed with [Dotter](https://github.com/Super
     The `-v` flag is optional, it enables verbose output to see what is happening.
 
     > **CAUTION:**
-    > If you have any existing dotfiles that conflict with the ones in this repo, you will receive an error. You can either remove the conflicting dotfiles or overwrite them by running `dotter deploy -v --force`.
+    > If you have any existing dotfiles that conflict with the ones in this repo, you will receive an error. You can either remove the conflicting dotfiles or overwrite them using `--force`.
 
     ```sh
     ./dotter deploy -v
