@@ -13,7 +13,7 @@ set -gx ZDOTDIR "$HOME"/.config/zsh
 
 # set bat as the manpager if it exists
 if type -q bat
-    set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+    set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 end
 
 # disable less history file
