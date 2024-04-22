@@ -18,7 +18,7 @@ nothing special, just my dotfiles managed with [Dotter](https://github.com/Super
 
 3. Download the `dotter` binary inside the repo
 
-    > [!NOTE]
+    > **WARNING:**
     > Be sure to download the appropriate binary for your os and arch from [Dotter Releases](https://github.com/SuperCuber/dotter/releases/latest#:~:text=Assets).
 
     ```sh
@@ -30,7 +30,7 @@ nothing special, just my dotfiles managed with [Dotter](https://github.com/Super
 
     The `-v` flag is optional, it enables verbose output to see what is happening.
 
-    > [!WARNING]
+    > **CAUTION:**
     > If you have any existing dotfiles that conflict with the ones in this repo, you will receive an error. You can either remove the conflicting dotfiles or overwrite them by running `dotter deploy -v --force`.
 
     ```sh
