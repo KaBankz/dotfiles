@@ -7,27 +7,47 @@ depends = []
 # ex: "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
 [default.files]
 "git" = "~/.config/git"
-"starship/starship.toml" = "~/.config/starship.toml"
-".hushlogin" = "~/.hushlogin"
 "bat" = "~/.config/bat"
+
+[hushlogin.files]
+".hushlogin" = "~/.hushlogin"
+
+[mise.files]
 "mise" = "~/.config/mise"
+
+[fastfetch.files]
 "fastfetch/presets" = "~/.local/share/fastfetch/presets"
+
+[fish]
+depends = ["starship"]
 
 [fish.files]
 "fish/conf.d" = { target = "~/.config/fish/conf.d", type = "symbolic", recurse = false }
 "fish/functions" = { target = "~/.config/fish/functions", type = "symbolic", recurse = false }
+
+[zsh]
+depends = ["starship"]
 
 [zsh.files]
 "zsh/.zshenv" = "~/.zshenv"
 "zsh/.zshrc" = "~/.config/zsh/.zshrc"
 "shell" = "~/.config/shell"
 
+[starship.files]
+"starship/starship.toml" = "~/.config/starship.toml"
+
 [starshipalt.files]
 "starship/starship.alt.toml" = "~/.config/starship.toml"
+
+[node]
+depends = ["mise"]
 
 [node.files]
 "yarn" = "~/.config/yarn"
 "npm" = "~/.config/npm"
+
+[bun]
+depends = ["mise"]
 
 [bun.files]
 "bun/.bunfig.toml" = "~/.config/.bunfig.toml"
@@ -43,5 +63,8 @@ depends = []
 
 [bin.files]
 "bin" = "~/.local/bin"
+
+[server.files]
+"server/fish" = "~/.config/fish"
 
 [default.variables]
