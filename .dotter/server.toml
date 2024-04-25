@@ -1,0 +1,6 @@
+includes = []
+packages = ["default", "server", "nvim", "fastfetch"]
+
+[files]
+
+[variables]
