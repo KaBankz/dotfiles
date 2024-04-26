@@ -11,6 +11,7 @@
   "inlay_hints": {
     "enabled": true
   },
+  "restore_on_startup": "none",
   "collaboration_panel": {
     "dock": "right",
     "button": false
@@ -26,7 +27,8 @@
     "dock": "right"
   },
   "project_panel": {
-    "dock": "right"
+    "dock": "right",
+    "auto_fold_dirs": true
   },
   "tab_bar": {
     "show_nav_history_buttons": false
