@@ -21,6 +21,9 @@ abbr -ag rbew brew
 abbr -ag c code
 abbr -ag c. code .
 
+# zed easy
+abbr -ag z. zed .
+
 # nvim
 abbr -ag v nvim
 abbr -ag v. nvim .
