@@ -13,3 +13,6 @@ defaults write -g NSWindowShouldDragOnGesture -bool true
 
 # Show all hidden files by default in Finder
 defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Make dock reappear faster
+defaults write com.apple.dock autohide-time-modifier -float 0.15; killall Dock
