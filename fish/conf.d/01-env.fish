@@ -21,6 +21,8 @@ set -gx LESSHISTFILE -
 
 # disable homebrew analytics
 set -gx HOMEBREW_NO_ANALYTICS 1
+set -gx HOMEBREW_BAT 1
+set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
 # disable mise command not found (b/c it overrides my brew command not found)
 set -gx MISE_NOT_FOUND_AUTO_INSTALL false
