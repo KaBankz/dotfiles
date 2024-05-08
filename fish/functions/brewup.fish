@@ -4,9 +4,9 @@ function brewup --description "Update Homebrew and all installed packages"
             if test -n "$(brew outdated)"
                 echo "The following packages are outdated:"
                 brew outdated
-                read -lP "Do you want to upgrade packages? [y/N] " upgrade_choice
+                read -lP "Do you want to upgrade packages? [Y/n] " upgrade_choice
                 switch $upgrade_choice
-                    case Y y
+                    case Y y ''
                         echo "Upgrading packages..."
                         brew upgrade
                     case N n
