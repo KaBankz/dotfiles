@@ -19,6 +19,8 @@ end
 # disable less history file
 set -gx LESSHISTFILE -
 
+set -gx MANPATH $MANPATH /usr/share/man
+
 # disable homebrew analytics
 set -gx HOMEBREW_NO_ANALYTICS 1
 set -gx HOMEBREW_BAT 1
