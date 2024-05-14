@@ -1,3 +1,3 @@
 function cat --wraps=bat --description 'alias cat=bat'
-    bat $argv
+    runx bat $argv || command cat $argv
 end
