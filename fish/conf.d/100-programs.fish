@@ -1,3 +1,6 @@
+# fzf shell integration
+runx fzf --fish | source
+
 # start zoxide
 # --cmd cd replaces the cd command with zoxide
 runx zoxide init fish --cmd cd | source
