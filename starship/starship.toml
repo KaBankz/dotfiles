@@ -4,15 +4,8 @@ palette = "catppuccin_mocha"
 
 format = """
 ($shlvl )$all\
-(${custom.iterm2_marker}$character$sudo )
+($character$sudo )
 """
-
-# Moved to fish config
-# but i'll keep it here for reference
-[custom.iterm2_marker]
-when = '[ "$TERM_PROGRAM" = "iTerm.app" ]'
-format = "$symbol"
-symbol = "\u001b\\]133;A\u0007"
 
 [shlvl]
 disabled = false
