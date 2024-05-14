@@ -3,7 +3,7 @@ function fish_command_not_found
     set -l txt
 
     if not contains -- "$cmd" -h --help --usage "-?"
-        set txt (brew which-formula --explain $cmd 2> /dev/null)
+        set txt (runx brew which-formula --explain $cmd 2> /dev/null)
     end
 
     if test -z "$txt"
