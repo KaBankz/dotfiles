@@ -19,6 +19,10 @@ end
 # disable less history file
 set -gx LESSHISTFILE -
 
+# set bash history file
+# dir must exist else bash will not save history
+set -gx HISTFILE "$XDG_STATE_HOME"/bash/history
+
 set -gx MANPATH $MANPATH (path_helper -m)
 
 # disable homebrew analytics
