@@ -11,3 +11,10 @@ runx zoxide init fish --cmd cd | source
 # instead of printing a souce command to then print the init script
 # this approach provides a faster startup time
 runx starship init fish --print-full-init | source
+
+# update fish completions on the first of the month
+if test (date +%d) -eq 01
+    echo "Updating fish completions"
+    # this updates fish completions based on manpages
+    fish_update_completions
+end
