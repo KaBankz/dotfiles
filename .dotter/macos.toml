@@ -1,0 +1,18 @@
+includes = []
+packages = [
+  "default",
+  "hushlogin",
+  "fish",
+  "mise",
+  "node",
+  "bin",
+  "bun",
+  "zed",
+  "nvim",
+  "zsh",
+  "fastfetch",
+]
+
+[files]
+
+[variables]
