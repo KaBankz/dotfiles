@@ -33,8 +33,17 @@ echo " Configuration:                               "
 echo " Set DOTFILES_DIR to use a custom directory   "
 echo "                                              "
 echo " DOTFILES_DIR=$DOTFILES_DIR                   "
+echo "                                              "
+echo " Only run this script once, running it again  "
+echo " will cause errors.                           "
 echo " ============================================ "
-echo ""
+echo "                                              "
+
+# TODO:
+# - Break down the script into functions
+# - Add ability to update the dotfiles (needs git)
+# - Check for dotter before downloading it
+# - Check for local.toml before copying it
 
 read -rp "Do you agree and wish to continue? (y/N): " choice
 case "$choice" in
@@ -57,20 +66,27 @@ for util in "${REQUIRED_UTILS[@]}"; do
   command -v "$util" >/dev/null 2>&1 || error_exit $LINENO "$util is not installed. Please install it and try again."
 done
 
-echo "Checking for existing dotfiles..."
-[ -d "$DOTFILES_DIR" ] && error_exit $LINENO "$DOTFILES_DIR already exists. Please remove it or set DOTFILES_DIR to a different location."
+# If run from inside dotfiles directory, skip downloading the dotfiles
+if [ ! -d "$DOTFILES_DIR/.dotter" ]; then
 
-# Create a temporary directory for downloading dotfiles
-temp_dir=$(mktemp -d) || error_exit $LINENO "Failed to create temporary directory"
-temp_tar="$temp_dir/dotfiles.tar.gz"
+  echo "Checking for existing dotfiles..."
+  [ -d "$DOTFILES_DIR" ] && error_exit $LINENO "$DOTFILES_DIR already exists. Please remove it or set DOTFILES_DIR to a different location."
 
-echo "Downloading dotfiles..."
-curl -fsSL "$DOTFILES_DOWNLOAD_URL" --output "$temp_tar" || error_exit $LINENO "Failed to download dotfiles repository"
-mkdir -p "$DOTFILES_DIR" || error_exit $LINENO "Failed to create dotfiles directory"
-tar -xz -C "$DOTFILES_DIR" --strip-components=1 -f "$temp_tar" || error_exit $LINENO "Failed to extract dotfiles archive"
-rm "$temp_tar"
+  # Create a temporary directory for downloading dotfiles
+  temp_dir=$(mktemp -d) || error_exit $LINENO "Failed to create temporary directory"
+  temp_tar="$temp_dir/dotfiles.tar.gz"
 
-cd "$DOTFILES_DIR" || error_exit $LINENO "Failed to change directory to $DOTFILES_DIR"
+  echo "Downloading dotfiles..."
+  curl -fsSL "$DOTFILES_DOWNLOAD_URL" --output "$temp_tar" || error_exit $LINENO "Failed to download dotfiles repository"
+  mkdir -p "$DOTFILES_DIR" || error_exit $LINENO "Failed to create dotfiles directory"
+  tar -xz -C "$DOTFILES_DIR" --strip-components=1 -f "$temp_tar" || error_exit $LINENO "Failed to extract dotfiles archive"
+  rm "$temp_tar"
+
+  cd "$DOTFILES_DIR" || error_exit $LINENO "Failed to change directory to $DOTFILES_DIR"
+
+else
+  echo "Running from inside dotfiles directory. Skipping download."
+fi
 
 echo "Downloading Dotter..."
 
