@@ -16,6 +16,17 @@ nothing special, just my dotfiles managed with [Dotter](https://github.com/Super
     cd ~/.dotfiles
     ```
 
+    > **IMPORTANT:**
+    > You must create a `local.toml` file inside the `~/.dotfiles/.dotter` directory.
+    >
+    > This file is used to store your local configurations.
+    >
+    > You can copy the `macos.toml` or any host config file from `~/.dotfiles/.dotter` and modify it to your needs.
+
+    ```sh
+    cp .dotter/macos.toml .dotter/local.toml
+    ```
+
 3. Download the `dotter` binary inside the repo
 
     > **WARNING:**
