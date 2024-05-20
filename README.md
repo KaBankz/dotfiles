@@ -4,6 +4,14 @@ nothing special, just my dotfiles managed with [Dotter](https://github.com/Super
 
 ## Installation
 
+### One-liner
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/KaBankz/dotfiles/dotter/setup.sh)"
+```
+
+### Manual
+
 1. Clone this repo
 
     ```sh
