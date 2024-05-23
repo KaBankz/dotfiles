@@ -11,8 +11,8 @@ abbr -ag cls clear
 abbr -ag l ls
 
 # edit shell configs
-abbr -ag zedit nvim "$ZDOTDIR"
-abbr -ag fedit nvim "$XDG_CONFIG_HOME"/fish
+abbr -ag zedit $EDITOR $ZDOTDIR
+abbr -ag fedit $EDITOR $XDG_CONFIG_HOME/fish
 
 # homebrew
 abbr -ag brw brew
