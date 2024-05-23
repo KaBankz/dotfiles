@@ -9,7 +9,7 @@ set -gx EDITOR nvim
 set -gx VISUAL code --wait
 
 # set ZDOTDIR for zsh subshells
-set -gx ZDOTDIR $HOME/.config/zsh
+set -gx ZDOTDIR $XDG_CONFIG_HOME/zsh
 
 # set bat as the manpager if it exists
 if type -q bat
@@ -25,7 +25,6 @@ set -gx HISTFILE $XDG_STATE_HOME/bash/history
 
 set -gx MANPATH $MANPATH (path_helper -m)
 
-# disable homebrew analytics
 set -gx HOMEBREW_NO_ANALYTICS 1
 set -gx HOMEBREW_BAT 1
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
@@ -33,43 +32,32 @@ set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 # disable mise command not found (b/c it overrides my brew command not found)
 set -gx MISE_NOT_FOUND_AUTO_INSTALL false
 
-# gnupg
 set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
 # load gpg keys
 set -gx GPG_TTY (tty)
 
-# android
 set -gx ANDROID_HOME $HOME/Library/Android/sdk
 
-# flutter
 set -gx FLUTTER_ROOT (runx mise where flutter)
 
-# gradle
 set -gx GRADLE_USER_HOME $XDG_DATA_HOME/gradle
 
-# disable bun analytics
 set -gx DISABLE_BUN_ANALYTICS 1
-# set bun install path
 set -gx BUN_INSTALL $XDG_DATA_HOME/bun
 set -gx BUN_INSTALL_GLOBAL_DIR $BUN_INSTALL/install/global
 set -gx BUN_INSTALL_BIN $BUN_INSTALL/bin
 set -gx BUN_INSTALL_CACHE_DIR $XDG_CACHE_HOME/bun
 
-# npm
 set -gx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
 set -gx NODE_REPL_HISTORY $XDG_DATA_HOME/node_repl_history
 
-# pnpm
 set -gx PNPM_HOME $XDG_DATA_HOME/pnpm
 
-# rust
 set -gx RUSTUP_HOME $XDG_DATA_HOME/rustup
 set -gx CARGO_HOME $XDG_DATA_HOME/cargo
 
-# cocoapods
 set -gx CP_HOME_DIR $XDG_DATA_HOME/cocoapods
 
-# docker
 set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 
 # path
