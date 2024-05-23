@@ -49,9 +49,6 @@ set -gx DISABLE_BUN_ANALYTICS 1
 # set bun install path
 set -gx BUN_INSTALL "$XDG_DATA_HOME/bun"
 
-# node corepack
-set -gx COREPACK_HOME "$XDG_DATA_HOME"/node/corepack
-
 # npm
 set -gx NPM_CONFIG_USERCONFIG "$XDG_CONFIG_HOME"/npm/npmrc
 set -gx NODE_REPL_HISTORY "$XDG_DATA_HOME"/node_repl_history
