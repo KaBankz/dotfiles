@@ -38,6 +38,9 @@ set -gx GNUPGHOME "$XDG_DATA_HOME"/gnupg
 # load gpg keys
 set -gx GPG_TTY (tty)
 
+# android
+set -gx ANDROID_HOME $HOME/Library/Android/sdk
+
 # flutter
 set -gx FLUTTER_ROOT (runx mise where flutter)
 
@@ -67,6 +70,8 @@ set -gx CP_HOME_DIR "$XDG_DATA_HOME"/cocoapods
 set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME"/docker
 
 # path
+fish_add_path -P $ANDROID_HOME/cmdline-tools/latest/bin # $ANDROID_HOME/tools is deprecated in favor of cmdline-tools
+fish_add_path -P "$ANDROID_HOME"/platform-tools
 fish_add_path -P "$XDG_DATA_HOME"/yarn/bin
 fish_add_path -P "$PNPM_HOME"
 fish_add_path -P "$BUN_INSTALL"/bin
