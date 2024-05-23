@@ -51,6 +51,9 @@ set -gx GRADLE_USER_HOME $XDG_DATA_HOME/gradle
 set -gx DISABLE_BUN_ANALYTICS 1
 # set bun install path
 set -gx BUN_INSTALL $XDG_DATA_HOME/bun
+set -gx BUN_INSTALL_GLOBAL_DIR $BUN_INSTALL/install/global
+set -gx BUN_INSTALL_BIN $BUN_INSTALL/bin
+set -gx BUN_INSTALL_CACHE_DIR $XDG_CACHE_HOME/bun
 
 # npm
 set -gx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc

@@ -1,12 +1,16 @@
 telemetry = false
 
+# Commented out these options becasue bun does not respect them
+# ref: https://github.com/oven-sh/bun/issues/5636
+# Using env vars instead
+
 [install]
 # where `bun install --global` installs packages
-globalDir = "$XDG_DATA_HOME/bun/install/global"
+# globalDir = "$XDG_DATA_HOME/bun/install/global"
 
 # where globally-installed package bins are linked
-globalBinDir = "$XDG_DATA_HOME/bun/bin"
+# globalBinDir = "$XDG_DATA_HOME/bun/bin"
 
 [install.cache]
 # the directory to use for the cache
-dir = "$XDG_CACHE_HOME/bun"
+# dir = "$XDG_CACHE_HOME/bun"
