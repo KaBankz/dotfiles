@@ -67,4 +67,7 @@ depends = ["mise"]
 [server.files]
 "server/fish" = "~/.config/fish"
 
+[warp.files]
+"warp" = "~/.warp"
+
 [default.variables]
