@@ -30,7 +30,9 @@ set -gx HOMEBREW_BAT 1
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
 # disable mise command not found (b/c it overrides my brew command not found)
-set -gx MISE_NOT_FOUND_AUTO_INSTALL false
+set -gx MISE_NOT_FOUND_AUTO_INSTALL 0
+# disable auto activation in favor of using shims i.e adding shims dir to path
+set -gx MISE_FISH_AUTO_ACTIVATE 0
 
 set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
 # load gpg keys
@@ -68,3 +70,4 @@ fish_add_path -P $PNPM_HOME
 fish_add_path -P $BUN_INSTALL/bin
 fish_add_path -P $CARGO_HOME/bin
 fish_add_path -P $HOME/.local/bin
+fish_add_path -P $XDG_DATA_HOME/mise/shims
