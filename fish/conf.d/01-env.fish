@@ -4,6 +4,18 @@ set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_STATE_HOME $HOME/.local/state
 
+set -gx HOMEBREW_PREFIX /opt/homebrew
+set -gx HOMEBREW_CELLAR /opt/homebrew/Cellar
+set -gx HOMEBREW_REPOSITORY /opt/homebrew
+set -gx HOMEBREW_NO_ANALYTICS 1
+set -gx HOMEBREW_BAT 1
+set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
+
+set -gx MANPATH /opt/homebrew/share/man (path_helper -m)
+set -gx INFOPATH /opt/homebrew/share/info
+
+fish_add_path -P /opt/homebrew/bin /opt/homebrew/sbin
+
 # set default editors
 set -gx EDITOR nvim
 set -gx VISUAL code --wait
@@ -22,12 +34,6 @@ set -gx LESSHISTFILE -
 # set bash history file
 # dir must exist else bash will not save history
 set -gx HISTFILE $XDG_STATE_HOME/bash/history
-
-set -gx MANPATH $MANPATH (path_helper -m)
-
-set -gx HOMEBREW_NO_ANALYTICS 1
-set -gx HOMEBREW_BAT 1
-set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
 # disable mise command not found (b/c it overrides my brew command not found)
 set -gx MISE_NOT_FOUND_AUTO_INSTALL 0
