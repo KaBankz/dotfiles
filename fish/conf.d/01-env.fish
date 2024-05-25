@@ -40,7 +40,7 @@ set -gx GPG_TTY (tty)
 
 set -gx ANDROID_HOME $HOME/Library/Android/sdk
 
-set -gx FLUTTER_ROOT (runx mise where flutter)
+# set -gx FLUTTER_ROOT (runx mise where flutter)
 
 set -gx GRADLE_USER_HOME $XDG_DATA_HOME/gradle
 
