@@ -1,4 +1,3 @@
-# XDG Base Directory Specification
 set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_DATA_HOME $HOME/.local/share
@@ -16,7 +15,6 @@ set -gx INFOPATH /opt/homebrew/share/info
 
 fish_add_path -P /opt/homebrew/bin /opt/homebrew/sbin
 
-# set default editors
 set -gx EDITOR nvim
 set -gx VISUAL code --wait
 
@@ -68,12 +66,8 @@ set -gx CP_HOME_DIR $XDG_DATA_HOME/cocoapods
 
 set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 
-# path
-fish_add_path -P $ANDROID_HOME/cmdline-tools/latest/bin # $ANDROID_HOME/tools is deprecated in favor of cmdline-tools
-fish_add_path -P $ANDROID_HOME/platform-tools
-fish_add_path -P $XDG_DATA_HOME/yarn/bin
-fish_add_path -P $PNPM_HOME
-fish_add_path -P $BUN_INSTALL/bin
+fish_add_path -P $ANDROID_HOME/cmdline-tools/latest/bin $ANDROID_HOME/platform-tools
+fish_add_path -P $XDG_DATA_HOME/yarn/bin $PNPM_HOME $BUN_INSTALL/bin
 fish_add_path -P $CARGO_HOME/bin
 fish_add_path -P $HOME/.local/bin
 fish_add_path -P $XDG_DATA_HOME/mise/shims
