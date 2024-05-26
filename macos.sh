@@ -17,5 +17,6 @@ defaults write com.apple.finder AppleShowAllFiles -bool true
 # Make dock reappear faster
 defaults write com.apple.dock autohide-time-modifier -float 0.15; killall Dock
 
-# Disable the creation of .DS_Store files on network volumes
+# Disable the creation of .DS_Store files on network volumes and removable media
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
