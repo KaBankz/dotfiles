@@ -33,6 +33,8 @@ set -gx LESSHISTFILE -
 # dir must exist else bash will not save history
 set -gx HISTFILE $XDG_STATE_HOME/bash/history
 
+set -gx ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX 1
+
 # disable mise command not found (b/c it overrides my brew command not found)
 set -gx MISE_NOT_FOUND_AUTO_INSTALL 0
 # disable auto activation in favor of using shims i.e adding shims dir to path
