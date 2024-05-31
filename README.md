@@ -5,7 +5,7 @@
 ## Get Started :rocket:
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/KaBankz/dotfiles/dotter/setup.sh)"
+bash -c "$(curl -fsSL https://github.com/KaBankz/dotfiles/raw/dotter/setup.sh)"
 ```
 
 ## Key Features :key:
