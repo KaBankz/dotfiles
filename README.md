@@ -8,6 +8,8 @@
 bash -c "$(curl -fsSL https://github.com/KaBankz/dotfiles/raw/dotter/setup.sh)"
 ```
 
+> Script Source Code: [setup.sh](./setup.sh)
+
 ## Key Features :key:
 
 :tropical_fish: **Fish Shell** — I use the [Fish Shell](https://fishshell.com/) as my default shell, with a heavily customized config following fish best practices.
