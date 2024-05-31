@@ -2,8 +2,6 @@
 
 <h1 align="center"><img src="./banner.png" alt="~./dotfiles"/></h1>
 
-just my dotfiles
-
 ## Get Started :rocket:
 
 ```sh
