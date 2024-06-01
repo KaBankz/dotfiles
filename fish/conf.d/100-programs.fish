@@ -12,9 +12,16 @@ runx zoxide init fish --cmd cd | source
 # this approach provides a faster startup time
 runx starship init fish --print-full-init | source
 
-# update fish completions on the first of the month
-if test (date +%d) -eq 01
-    echo "Updating fish completions"
-    # this updates fish completions based on manpages
-    fish_update_completions
+# update fish completions every 30 days
+set -l last_completion_update_file $HOME/.local/share/fish/.last_completion_update
+
+if test -f $last_completion_update_file
+    if test (math (date +%s) - (cat $last_completion_update_file)) -ge 2592000
+        echo "Updating fish completions"
+        # this updates fish completions based on manpages
+        fish_update_completions
+        date +%s >$last_completion_update_file
+    end
+else
+    date +%s >$last_completion_update_file
 end
