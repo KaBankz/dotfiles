@@ -52,10 +52,10 @@ bash -c "$(curl -fsSL https://github.com/KaBankz/dotfiles/raw/dotter/setup.sh)"
     >
     > This file is used to store your local configurations.
     >
-    > You can copy the `macos.toml` or any host config file from `.dotter` and modify it to your needs.
+    > You can copy the `local.toml.example` or any host config file from `.dotter` and modify it to your needs.
 
     ```sh
-    cp .dotter/macos.toml .dotter/local.toml
+    cp .dotter/local.toml.example .dotter/local.toml
     ```
 
 3. Download the `dotter` binary inside the repo
