@@ -27,7 +27,6 @@
     "dock": "right"
   },
   "project_panel": {
-    "dock": "right",
     "auto_fold_dirs": true
   },
   "tab_bar": {
