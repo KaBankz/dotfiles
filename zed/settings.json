@@ -34,7 +34,7 @@
   },
   "wrap_guides": [80],
   "soft_wrap": "editor_width",
-  "theme": "GitHub Dark Default",
+  "theme": "One Dark",
   // "ui_font_size": 16,
   "buffer_font_size": 16,
   "buffer_font_family": "JetBrainsMono Nerd Font",
