@@ -1,6 +1,6 @@
 <!-- markdownlint-configure-file { "no-inline-html": { "allowed_elements": [h1, img, details, summary] } } -->
 
-<h1 align="center"><img src="./banner.png" alt="~./dotfiles"/></h1>
+<h1 align="center"><img src="./banner.webp" alt="~./dotfiles"/></h1>
 
 ## Get Started :rocket:
 
