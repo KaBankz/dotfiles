@@ -23,7 +23,7 @@ abbr -ag c code
 abbr -ag c. code .
 
 # zed easy
-abbr -ag z. zed .
+abbr -ag z. zed-preview .
 
 # nvim
 abbr -ag v nvim
