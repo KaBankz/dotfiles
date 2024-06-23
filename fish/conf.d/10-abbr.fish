@@ -22,6 +22,9 @@ abbr -ag rbew brew
 abbr -ag c code
 abbr -ag c. code .
 
+# diff easy
+abbr -ag d code --diff
+
 # zed easy
 abbr -ag z. zed-preview .
 
