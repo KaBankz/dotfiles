@@ -41,4 +41,3 @@ style = 'bold'
 format = '[$path]($style)'
 truncation_length = 2
 truncation_symbol = '…/'
-
