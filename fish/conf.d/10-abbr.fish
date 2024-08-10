@@ -69,6 +69,8 @@ abbr -ag gs git switch
 abbr -ag gsc git switch -c
 abbr -ag gri git rebase -i
 abbr -ag gw git worktree
+abbr -ag gwl git worktree list
+abbr -ag gwr git worktree remove
 
 # yt-dlp
 abbr -ag yt yt-dlp
