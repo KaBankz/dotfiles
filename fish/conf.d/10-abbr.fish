@@ -52,12 +52,13 @@ abbr -ag dcd docker compose down
 abbr -ag dcp docker compose pull
 
 # git
-abbr -ag gini git init
+abbr -ag ginit git init
 abbr -ag gss git status -s
 abbr -ag ga git add
 abbr -ag gaa git add -A
 abbr -ag gcm git commit -m
 abbr -ag gp git push
+abbr -ag gpf git push --force-with-lease
 abbr -ag gpl git pull
 abbr -ag gplr git pull --rebase
 abbr -ag gf git fetch
@@ -65,6 +66,8 @@ abbr -ag gd git diff
 abbr -ag gb git branch
 abbr -ag gc git checkout
 abbr -ag gs git switch
+abbr -ag gsc git switch -c
+abbr -ag gri git rebase -i
 
 # yt-dlp
 abbr -ag yt yt-dlp
