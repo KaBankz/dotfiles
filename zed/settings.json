@@ -20,7 +20,7 @@
   "assistant": {
     "enabled": false,
     "button": false,
-    "version": "1"
+    "version": "2"
   },
   "chat_panel": {
     "button": false,
@@ -32,9 +32,14 @@
   "tab_bar": {
     "show_nav_history_buttons": false
   },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "auto_signature_help": true,
   "wrap_guides": [80],
   "soft_wrap": "editor_width",
-  "theme": "One Dark",
+  "theme": "GitHub Dark Default",
   "buffer_font_size": 16,
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "show_whitespaces": "boundary",
