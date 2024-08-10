@@ -68,6 +68,7 @@ abbr -ag gc git checkout
 abbr -ag gs git switch
 abbr -ag gsc git switch -c
 abbr -ag gri git rebase -i
+abbr -ag gw git worktree
 
 # yt-dlp
 abbr -ag yt yt-dlp
