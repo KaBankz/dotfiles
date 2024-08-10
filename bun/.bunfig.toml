@@ -15,5 +15,7 @@ telemetry = false
 # the directory to use for the cache
 # dir = "$XDG_CACHE_HOME/bun"
 
-[install.lockfile]
-print = "yarn"
+# Disabled because I don't need the yarn lockfile
+# Bun will soon transition to a new json lockfile format
+# [install.lockfile]
+# print = "yarn"
