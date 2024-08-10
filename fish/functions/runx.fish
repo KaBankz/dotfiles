@@ -1,4 +1,4 @@
-function runx --description 'Run a command only if it exists'
+function runx --description "Run a command only if it exists"
     # handle `command` prefix
     if test $argv[1] = command
         if type -q $argv[2]

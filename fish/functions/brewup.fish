@@ -5,13 +5,13 @@ function brewup --description "Update Homebrew and all installed packages"
             brew outdated
             read -lP "Do you want to upgrade packages? [Y/n] " upgrade_choice
             switch $upgrade_choice
-                case Y y ''
+                case Y y ""
                     echo "Upgrading packages..."
                     brew upgrade
                 case N n
                     echo "Exiting without upgrading."
                     return 0
-                case '*'
+                case "*"
                     echo "Invalid choice. Exiting."
                     return 1
             end

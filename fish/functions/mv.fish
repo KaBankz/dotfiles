@@ -1,4 +1,3 @@
-# confirm before overwriting something
-function mv --description 'alias mv=mv -i'
+function mv --wraps mv --description "Move with confirmation"
     command mv -i $argv
 end

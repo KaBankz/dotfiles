@@ -1,5 +1,5 @@
-# name: 'Catppuccin mocha'
-# url: 'https://github.com/catppuccin/fish'
+# name: Catppuccin Mocha
+# url: https://github.com/catppuccin/fish
 # preferred_background: 1e1e2e
 
 set fish_color_normal cdd6f4

@@ -20,22 +20,22 @@ fish_add_path -P $HOME/.local/bin
 ### FUNCTIONS
 function fish_prompt # [user@hostname pwd]$
     set_color red -o
-    printf '['
+    printf "["
 
     set_color yellow -o
-    printf '%s' $USER
+    printf "%s" $USER
 
     set_color green -o
-    printf '@'
+    printf "@"
 
     set_color blue -o
-    printf '%s ' $hostname
+    printf "%s " $hostname
 
     set_color magenta -o
-    printf '%s' (prompt_pwd)
+    printf "%s" (prompt_pwd)
 
     set_color red -o
-    printf ']'
+    printf "]"
 
     if fish_is_root_user
         set_color cyan -o
@@ -50,9 +50,9 @@ function mkcd -d "Create a directory and set CWD"
     command mkdir -pv $argv
     if test $status = 0
         switch $argv[(count $argv)]
-            case '-*'
+            case "-*"
 
-            case '*'
+            case "*"
                 cd $argv[(count $argv)]
                 return
         end

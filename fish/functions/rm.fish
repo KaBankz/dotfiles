@@ -1,4 +1,3 @@
-# confirm before overwriting something
-function rm --description 'alias rm=rm -i'
+function rm --wraps rm --description "Remove with confirmation"
     command rm -i $argv
 end

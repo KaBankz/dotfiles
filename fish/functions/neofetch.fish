@@ -1,4 +1,3 @@
-# replace neofetch with the superior fastfetch
-function neofetch --wraps='fastfetch -c neofetch' --description 'alias neofetch=fastfetch -c neofetch'
+function neofetch --wraps fastfetch --description fastfetch
     runx fastfetch -c neofetch $argv
 end

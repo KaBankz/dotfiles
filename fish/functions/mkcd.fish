@@ -1,12 +1,11 @@
-# auto cd after mkdir
 # taken from https://fishshell.com/docs/current/cmds/function.html#example
-function mkcd -d "Create a directory and set CWD"
+function mkcd --description "Create a directory and set it to CWD"
     command mkdir -pv $argv
     if test $status = 0
         switch $argv[(count $argv)]
-            case '-*'
+            case "-*"
 
-            case '*'
+            case "*"
                 cd $argv[(count $argv)]
                 return
         end

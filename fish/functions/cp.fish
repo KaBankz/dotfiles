@@ -1,4 +1,3 @@
-# confirm before overwriting something
-function cp --description 'alias cp=cp -i'
+function cp --wraps cp --description "Copy with confirmation"
     command cp -i $argv
 end
