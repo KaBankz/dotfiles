@@ -1,31 +1,37 @@
 [core]
-  pager = delta
+    pager = delta
 [interactive]
-  diffFilter = delta --color-only
+    diffFilter = delta --color-only
 [delta]
-  navigate = true
-  light = false
-  conflictstyle = diff3
-  side-by-side = true
-  syntax-theme = Catppuccin Mocha
-  hyperlinks = true
+    navigate = true
+    light = false
+    conflictstyle = diff3
+    side-by-side = true
+    syntax-theme = Catppuccin Mocha
+    hyperlinks = true
 [merge]
-  conflictstyle = diff3
+    conflictstyle = diff3
 [diff]
-  colorMoved = default
+    colorMoved = default
 [push]
-  autoSetupRemote = true
+    autoSetupRemote = true
 [user]
-  email = 20971850+KaBankz@users.noreply.github.com
-  name = KaBankz
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFSqVKFpm/W3sSz76XdzuFjToW3TDRztVNz4cGb8AfHs
-  # signingkey = 9A41B15FF6B4DEA2
+    email = 20971850+KaBankz@users.noreply.github.com
+    name = KaBankz
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFSqVKFpm/W3sSz76XdzuFjToW3TDRztVNz4cGb8AfHs
+    # signingkey = 9A41B15FF6B4DEA2
 [commit]
-  gpgsign = true
+    gpgsign = true
 [init]
-  defaultBranch = master
+    defaultBranch = master
 [gpg]
-  format = ssh
-  # program = /opt/homebrew/bin/gpg
+    format = ssh
+    # program = /opt/homebrew/bin/gpg
 [gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[rerere]
+    enabled = true
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
