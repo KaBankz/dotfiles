@@ -69,6 +69,7 @@ abbr -ag gs git switch
 abbr -ag gsc git switch -c
 abbr -ag gri git rebase -i
 abbr -ag gw git worktree
+abbr -ag gwa git worktree add
 abbr -ag gwl git worktree list
 abbr -ag gwr git worktree remove
 
