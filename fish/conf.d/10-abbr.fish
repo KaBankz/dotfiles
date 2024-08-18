@@ -73,6 +73,9 @@ abbr -ag gwa git worktree add
 abbr -ag gwl git worktree list
 abbr -ag gwr git worktree remove
 
+# lazygit
+abbr -ag lg lazygit
+
 # yt-dlp
 abbr -ag yt yt-dlp
 
