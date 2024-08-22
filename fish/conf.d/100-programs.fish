@@ -5,6 +5,8 @@ runx fzf --fish | source
 # --cmd cd replaces the cd command with zoxide
 runx zoxide init fish --cmd cd | source
 
+runx atuin init fish --disable-up-arrow | source
+
 #! must be executed last to avoid conflicts with other prompt customizations
 # start starship
 # --print-full-init prints the full init script directly
