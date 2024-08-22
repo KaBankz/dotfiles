@@ -57,6 +57,7 @@ abbr -ag gss git status -s
 abbr -ag ga git add
 abbr -ag gaa git add -A
 abbr -ag gcm git commit -m
+abbr -ag gca git commit --amend
 abbr -ag gp git push
 abbr -ag gpf git push --force-with-lease
 abbr -ag gpl git pull
