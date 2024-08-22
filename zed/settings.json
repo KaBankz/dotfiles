@@ -18,9 +18,14 @@
   },
   "redact_private_values": true,
   "assistant": {
-    "enabled": false,
-    "button": false,
+    "enabled": true,
+    "button": true,
     "version": "2"
+  },
+  "language_models": {
+    "ollama": {
+      "low_speed_timeout_in_seconds": 10
+    }
   },
   "chat_panel": {
     "button": false,
