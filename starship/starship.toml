@@ -14,7 +14,7 @@ add_newline = false
 disabled = false
 
 [os.symbols]
-Macos = " "
+Macos = " "
 Windows = " "
 Linux = " "
 
