@@ -10,9 +10,6 @@ set -gx HOMEBREW_NO_ANALYTICS 1
 set -gx HOMEBREW_BAT 1
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
-set -gx MANPATH /opt/homebrew/share/man (path_helper -m)
-set -gx INFOPATH /opt/homebrew/share/info
-
 fish_add_path -P /opt/homebrew/bin /opt/homebrew/sbin
 
 set -gx EDITOR nvim
