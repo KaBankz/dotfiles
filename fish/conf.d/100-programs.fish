@@ -5,6 +5,7 @@ runx fzf --fish | source
 # --cmd cd replaces the cd command with zoxide
 runx zoxide init fish --cmd cd | source
 
+# start atuin without up arrow history
 runx atuin init fish --disable-up-arrow | source
 
 #! must be executed last to avoid conflicts with other prompt customizations
