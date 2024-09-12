@@ -28,6 +28,7 @@ return {
     options = {
       opt = {                  -- vim.opt.<key>
         relativenumber = true, -- sets vim.opt.relativenumber
+        scrolloff = 10,        -- sets vim.opt.scrolloff
         number = true,         -- sets vim.opt.number
         spell = true,          -- sets vim.opt.spell
         signcolumn = "auto",   -- sets vim.opt.signcolumn to auto
