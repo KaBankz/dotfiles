@@ -36,7 +36,7 @@ set -gx ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX 1
 
 # disable mise command not found (b/c it overrides my brew command not found)
 set -gx MISE_NOT_FOUND_AUTO_INSTALL 0
-set -gx MISE_FISH_AUTO_ACTIVATE 0
+set -gx MISE_FISH_AUTO_ACTIVATE 1
 
 set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
 # load gpg keys
