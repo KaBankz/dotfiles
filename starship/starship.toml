@@ -9,6 +9,7 @@ $sudo$character\
 # $UDO ❯❯❯
 
 add_newline = false
+command_timeout = 5000
 
 [os]
 disabled = false
