@@ -41,6 +41,9 @@
     "file_icons": true,
     "git_status": true
   },
+  "indent_guides": {
+    "coloring": "indent_aware"
+  },
   "auto_signature_help": true,
   "wrap_guides": [80],
   "soft_wrap": "editor_width",
