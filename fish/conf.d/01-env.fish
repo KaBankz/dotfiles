@@ -12,6 +12,9 @@ set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
 fish_add_path -P /opt/homebrew/bin /opt/homebrew/sbin
 
+# set 1Password ssh-agent socket
+set -gx SSH_AUTH_SOCK $HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
 set -gx EDITOR nvim
 set -gx VISUAL code --wait
 
