@@ -11,13 +11,17 @@
   "inlay_hints": {
     "enabled": true
   },
-  "restore_on_startup": "none",
+  "restore_on_startup": "last_session",
   "collaboration_panel": {
     "dock": "right",
     "button": false
   },
   "redact_private_values": true,
   "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-3-5-sonnet"
+    },
     "enabled": true,
     "button": true,
     "version": "2"
@@ -32,7 +36,8 @@
     "dock": "right"
   },
   "project_panel": {
-    "auto_fold_dirs": true
+    "auto_fold_dirs": true,
+    "dock": "right"
   },
   "tab_bar": {
     "show_nav_history_buttons": false
@@ -42,16 +47,20 @@
     "git_status": true
   },
   "indent_guides": {
+    "active_line_width": 2,
+    "line_width": 2,
     "coloring": "indent_aware"
+    // "background_coloring": "indent_aware"
   },
+  "cursor_shape": "block",
   "auto_signature_help": true,
   "wrap_guides": [80],
   "soft_wrap": "editor_width",
-  "theme": "One Dark",
+  "theme": "Github Dark",
   "buffer_font_size": 16,
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_fallbacks": ["Symbols Nerd Font"],
-  "show_whitespaces": "boundary",
+  "show_whitespaces": "selection",
   "terminal": {
     "blinking": "on",
     "line_height": "standard"
@@ -59,5 +68,19 @@
   "telemetry": {
     "diagnostics": true,
     "metrics": true
+  },
+  "experimental.theme_overrides": {
+    "predictive": "#7d8590",
+    "syntax": {
+      // "hint": {
+      //   "color": "#79c0ffff"
+      // },
+      // "type": {
+      //   "color": "#79c0ffff"
+      // },
+      // "variable": {
+      //   "color": "#e1e4e8ff"
+      // }
+    }
   }
 }
