@@ -10,10 +10,7 @@ runx atuin init fish --disable-up-arrow | source
 
 #! must be executed last to avoid conflicts with other prompt customizations
 # start starship
-# --print-full-init prints the full init script directly
-# instead of printing a source command to then print the init script
-# this approach provides a faster startup time
-runx starship init fish --print-full-init | source
+runx starship init fish | source
 
 # update fish completions every 30 days
 set -l last_completion_update_file $HOME/.local/share/fish/.last_completion_update
