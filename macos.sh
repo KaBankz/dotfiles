@@ -18,6 +18,13 @@ defaults write com.apple.TextEdit "RichText" -bool "false"
 
 killall TextEdit
 
+# --------------------------------- KEYBOARD --------------------------------- #
+# Disable long press for special characters
+defaults write -g ApplePressAndHoldEnabled -bool "false"
+# Make key repeat faster
+defaults write -g InitialKeyRepeat -int "15"
+defaults write -g KeyRepeat -int "2"
+
 # ------------------------------ MOUSE/TRACKPAD ------------------------------ #
 # Enable linux like window dragging (drag windows from anywhere, not just titlebar)
 # with CTRL+CMD+Drag
