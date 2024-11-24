@@ -22,6 +22,10 @@ abbr -ag rbew brew
 abbr -ag c code
 abbr -ag c. code .
 
+# cursor easy
+abbr -ag cu cursor
+abbr -ag cu. cursor .
+
 # diff easy
 abbr -ag d code --diff
 
