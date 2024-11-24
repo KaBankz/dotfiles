@@ -56,6 +56,7 @@ abbr -ag ginit git init
 abbr -ag gss git status -s
 abbr -ag ga git add
 abbr -ag gaa git add -A
+abbr -ag gap git add -p
 abbr -ag gcm git commit -m
 abbr -ag gca git commit --amend
 abbr -ag gp git push
