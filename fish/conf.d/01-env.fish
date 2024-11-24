@@ -16,7 +16,7 @@ fish_add_path -P /opt/homebrew/bin /opt/homebrew/sbin
 set -gx SSH_AUTH_SOCK $HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
 set -gx EDITOR nvim
-set -gx VISUAL code --wait
+set -gx VISUAL cursor --wait
 
 # set ZDOTDIR for zsh subshells
 set -gx ZDOTDIR $XDG_CONFIG_HOME/zsh
