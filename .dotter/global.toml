@@ -43,7 +43,7 @@ depends = ["starship"]
 depends = ["mise"]
 
 [node.files]
-"yarn" = "~/.config/yarn"
+"yarn/.yarnrc" = "~/.yarnrc"
 "npm" = "~/.config/npm"
 
 [bun]
