@@ -1,14 +1,14 @@
 '$schema' = 'https://starship.rs/config-schema.json'
 
 format = """\
-$os$all$fill $time$line_break\
+$os$all\
 $sudo$character\
 """
 # Example prompt
-#  [2] ~ -------------------------------------------------------- 󱑍 12:00:00 AM
-# $UDO ❯❯❯
+#  [2] home on  master [?⇡] via 🥟 v1.1.36 via  v20.18.1
+# $UDO❯❯❯
 
-add_newline = false
+add_newline = true
 command_timeout = 5000
 
 [os]
@@ -19,14 +19,6 @@ Macos = " "
 Windows = " "
 Linux = " "
 
-[fill]
-symbol = '󰜥'
-
-[time]
-disabled = false
-format = '[ 󱑍 $time]($style)'
-use_12hr = true
-
 [shlvl]
 disabled = false
 format = '[\[$shlvl\] ]($style)'
@@ -34,7 +26,7 @@ style = 'bold fg:purple'
 threshold = 2
 
 [sudo]
-format = '[$symbol ]($style)'
+format = '[$symbol]($style)'
 style = 'bold fg:yellow'
 symbol = '\$UDO'
 disabled = false
