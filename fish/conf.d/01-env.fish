@@ -71,4 +71,3 @@ fish_add_path -P $XDG_DATA_HOME/yarn/bin $PNPM_HOME $BUN_INSTALL/bin
 fish_add_path -P $CARGO_HOME/bin
 fish_add_path -P $HOME/.local/bin
 fish_add_path -P $HOME/.local/bin/iterm2
-fish_add_path -P $XDG_DATA_HOME/mise/shims
