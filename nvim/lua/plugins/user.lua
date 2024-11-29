@@ -8,7 +8,28 @@ return {
 
   -- == Examples of Adding Plugins ==
 
-  "andweeb/presence.nvim",
+  {
+    "andweeb/presence.nvim",
+    config = function()
+      require("presence").setup {
+        -- Redact file names and repo names
+        editing_text = function(filename)
+          local file_extension = filename:match("^.+%.(.+)$")
+          return "Editing a " .. file_extension .. " file"
+        end,
+        reading_text = function(filename)
+          local file_extension = filename:match("^.+%.(.+)$")
+          return "Reading a " .. file_extension .. " file"
+        end,
+        workspace_text = function(_, filename)
+          return nil
+          -- local file_extension = filename:match("^.+%.(.+)$")
+          -- return "Working on a " .. file_extension .. " file"
+        end,
+      }
+    end,
+  },
+
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
