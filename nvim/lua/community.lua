@@ -11,5 +11,9 @@ return {
   { import = "astrocommunity.completion.copilot-lua" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.rust" },
+  { import = "astrocommunity.pack.tailwindcss" },
+  { import = "astrocommunity.diagnostics.trouble-nvim" },
+  { import = "astrocommunity.utility.hover-nvim" },
+  { import = "astrocommunity.scrolling.mini-animate" },
   -- import/override with your plugins folder
 }
