@@ -6,7 +6,6 @@ zig = "latest"
 deno = "latest"
 "cargo:krabby" = "latest"
 "npm:eas-cli" = "latest"
-"npm:@antfu/ni" = "latest"
 "ubi:dotenvx/dotenvx" = "latest"
 "ubi:simulot/immich-go" = "latest"
 "ubi:aidoku/aidoku-cli" = { version = "latest", exe = "aidoku" }
