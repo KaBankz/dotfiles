@@ -10,3 +10,10 @@ deno = "latest"
 "ubi:dotenvx/dotenvx" = "latest"
 "ubi:simulot/immich-go" = "latest"
 "ubi:aidoku/aidoku-cli" = { version = "latest", exe = "aidoku" }
+
+[settings]
+experimental = true
+not_found_auto_install = false
+
+[settings.npm]
+bun = true
