@@ -9,6 +9,19 @@ return {
   -- == Examples of Adding Plugins ==
 
   {
+    "nvim-neo-tree/neo-tree.nvim",
+    config = function()
+      require("neo-tree").setup {
+        filesystem = {
+          filtered_items = {
+            visible = true,
+          },
+        },
+      }
+    end,
+  },
+
+  {
     "andweeb/presence.nvim",
     config = function()
       require("presence").setup {
