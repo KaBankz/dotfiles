@@ -15,5 +15,6 @@ return {
   { import = "astrocommunity.diagnostics.trouble-nvim" },
   { import = "astrocommunity.utility.hover-nvim" },
   { import = "astrocommunity.scrolling.mini-animate" },
+  { import = "astrocommunity.color.transparent-nvim" },
   -- import/override with your plugins folder
 }
