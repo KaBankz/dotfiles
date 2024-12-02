@@ -1,7 +1,7 @@
 [tools]
 node = "lts"
 bun = "latest"
-java = "openjdk-20"
+java = "zulu-21"
 zig = "latest"
 deno = "latest"
 "cargo:krabby" = "latest"
