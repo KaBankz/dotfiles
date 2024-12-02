@@ -14,11 +14,11 @@ return {
       require("presence").setup {
         -- Redact file names and repo names
         editing_text = function(filename)
-          local file_extension = filename:match("^.+%.(.+)$")
+          local file_extension = filename:match "^.+%.(.+)$" or "unknown"
           return "Editing a " .. file_extension .. " file"
         end,
         reading_text = function(filename)
-          local file_extension = filename:match("^.+%.(.+)$")
+          local file_extension = filename:match "^.+%.(.+)$" or "unknown"
           return "Reading a " .. file_extension .. " file"
         end,
         workspace_text = function(_, filename)
