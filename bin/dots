@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Store the dotfiles path
+DOTFILES="$HOME/.dotfiles"
+
+# Check if dotfiles directory exists
+if [ ! -d "$DOTFILES" ]; then
+  echo "[dotter] Error: $DOTFILES directory not found"
+  exit 1
+fi
+
+# Change to dotfiles directory and run dotter with all arguments
+cd "$DOTFILES" || exit 1
+runx dotter "$@"
