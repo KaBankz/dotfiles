@@ -34,6 +34,8 @@ set -gx HISTFILE $XDG_STATE_HOME/bash/history
 
 set -gx ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX 1
 
+set -gx MISE_NODE_COREPACK 1
+
 set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
 # load gpg keys
 set -gx GPG_TTY (tty)
