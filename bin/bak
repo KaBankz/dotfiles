@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-#
+
 # Backup a file or directory
 # Usage: bak <file or directory>
 # Flags:
 #   -g: backup to global backups directory
 #   -h: display help message
 
-# check if the user has passed the -h or --help flag
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   echo "Usage: bak <file or directory>"
   echo "Flags:"
@@ -15,14 +14,12 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   exit 0
 fi
 
-# check if the user has provided a file or directory to backup
 if [ -z "$1" ]; then
   echo "Enter a file or directory to backup"
   exit 1
 elif [ ! -e "$1" ]; then
   echo "File or directory does not exist"
   exit 1
-# check if the user has passed the -g or --global flag
 elif [ "$2" = "-g" ] || [ "$2" = "--global" ]; then
   # remove any trailing slashes from the file or directory name
   file=${1%/}
