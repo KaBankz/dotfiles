@@ -18,14 +18,14 @@ depends = []
 "fastfetch/presets" = "~/.local/share/fastfetch/presets"
 
 [fish]
-depends = ["starship"]
+depends = ["starship", "bin"]
 
 [fish.files]
 "fish/conf.d" = { target = "~/.config/fish/conf.d", type = "symbolic", recurse = false }
 "fish/functions" = { target = "~/.config/fish/functions", type = "symbolic", recurse = false }
 
 [zsh]
-depends = ["starship"]
+depends = ["starship", "bin"]
 
 [zsh.files]
 "zsh/.zshenv" = "~/.zshenv"
