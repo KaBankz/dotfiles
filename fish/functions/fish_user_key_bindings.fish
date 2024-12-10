@@ -7,6 +7,6 @@
 # only bind if krabby is installed
 type -q krabby && bind \ck "echo; krabby random; echo; commandline -f repaint"
 
-# launch zoxide interactive mode with ctrl + f
+# launch zoxide interactive mode with ctrl + d
 # only bind if zoxide is installed
-type -q zoxide && bind \cf "cdi; commandline -f repaint"
+type -q zoxide && bind \cd "cdi; commandline -f repaint"
