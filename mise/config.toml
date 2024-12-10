@@ -9,6 +9,7 @@ deno = "latest"
 "aqua:dotenvx/dotenvx" = "latest"
 "ubi:simulot/immich-go" = "latest"
 "ubi:aidoku/aidoku-cli" = { version = "latest", exe = "aidoku" }
+"ubi:Enter-tainer/typstyle" = "latest"
 
 [settings]
 experimental = true
