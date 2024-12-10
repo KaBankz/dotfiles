@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Update Homebrew and all installed packages
+if brew update >/dev/null; then
+  if [ -n "$(brew outdated)" ]; then
+    echo "The following packages are outdated:"
+    brew outdated
+
+    read -rp "Do you want to upgrade packages? [Y/n] " upgrade_choice
+    case "${upgrade_choice,,}" in
+    "y" | "" | "yes")
+      echo "Upgrading packages..."
+      brew upgrade
+      ;;
+    "n" | "no")
+      echo "Exiting without upgrading."
+      exit 0
+      ;;
+    *)
+      echo "Invalid choice. Exiting."
+      exit 1
+      ;;
+    esac
+  else
+    echo "All packages are up to date."
+    exit 0
+  fi
+else
+  echo "Error: Failed to update Homebrew. Exiting."
+  exit 1
+fi

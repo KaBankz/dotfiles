@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Need at least one argument
+if [ $# -eq 0 ]; then
+  echo "[runx] Error: No command specified"
+  exit 1
+fi
+
+# Get the command to check - handle both 'command cmd' and 'cmd' cases
+cmd="$1"
+if [ "$1" = "command" ]; then
+  # Need at least one more argument after 'command'
+  if [ $# -lt 2 ]; then
+    echo "[runx] Error: No command specified after 'command'"
+    exit 1
+  fi
+  cmd="$2"
+fi
+
+# Check if command exists
+if ! command -v "$cmd" >/dev/null 2>&1; then
+  echo "[runx] Command not found: $cmd"
+  exit 1
+fi
+
+# Command exists, run it with all original arguments
+"$@"

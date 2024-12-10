@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Make a Brewfile backup of all installed packages
+brew bundle dump --force --formula --casks --taps --file ~/.dotfiles/pkgs/Brewfile "$@"
+
+# Add and commit the changes to dotfiles repo
+git -C ~/.dotfiles add ~/.dotfiles/pkgs/Brewfile
+git -C ~/.dotfiles commit -m "chore(pkgs): update Brewfile"
