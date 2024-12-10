@@ -16,3 +16,6 @@ not_found_auto_install = false
 
 [settings.npm]
 bun = true
+
+[settings.pipx]
+uvx = true
