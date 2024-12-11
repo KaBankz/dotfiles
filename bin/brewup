@@ -7,9 +7,8 @@ if brew update >/dev/null; then
     brew outdated
 
     read -rp "Do you want to upgrade packages? [Y/n] " upgrade_choice
-    case "${upgrade_choice,,}" in
+    case "${upgrade_choice}" in
     "y" | "" | "yes")
-      echo "Upgrading packages..."
       brew upgrade
       ;;
     "n" | "no")
