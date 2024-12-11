@@ -1,9 +1,11 @@
 [tools]
 node = "lts"
 bun = "latest"
+deno = "latest"
+python = "latest"
+uv = "latest"
 java = "zulu-21"
 zig = "latest"
-deno = "latest"
 "cargo:krabby" = "latest"
 "npm:eas-cli" = "latest"
 "aqua:dotenvx/dotenvx" = "latest"
