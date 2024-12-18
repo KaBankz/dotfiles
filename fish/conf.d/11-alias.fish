@@ -4,9 +4,9 @@
 # creating the functions manually since you're going through a middleman.
 # But, the slowdown is negligible and the convenience is worth it.
 
-alias cp="cp -i"
-alias mv="mv -i"
-alias rm="rm -i"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -iv"
 alias glog="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 alias gsp="gs"
 alias tree="eza -Ta --git-ignore"
