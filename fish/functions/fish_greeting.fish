@@ -5,6 +5,6 @@ function fish_greeting
         # --info flag prints the pokemon's pokedex entry
         runx mise x -q krabby -- krabby random --info || runx krabby random --info
     else
-        runx neofetch
+        fastfetch -c neofetch
     end
 end
