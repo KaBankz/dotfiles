@@ -69,4 +69,7 @@ depends = ["mise"]
 [warp.files]
 "warp" = "~/.warp"
 
+[ghostty.files]
+"ghostty" = "~/.config/ghostty"
+
 [default.variables]

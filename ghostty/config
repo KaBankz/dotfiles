@@ -1,0 +1,12 @@
+font-size = 19
+theme = GitHub Dark ++
+cursor-invert-fg-bg = true
+mouse-scroll-multiplier = 3
+background-opacity = 0.8
+background-blur-radius = 20
+unfocused-split-opacity = 1
+copy-on-select = true
+shell-integration-features = no-cursor
+macos-titlebar-style = tabs
+bold-is-bright = true
+auto-update-channel = tip
