@@ -52,7 +52,6 @@
     "coloring": "indent_aware"
     // "background_coloring": "indent_aware"
   },
-  "cursor_shape": "block",
   "auto_signature_help": true,
   "wrap_guides": [80],
   "soft_wrap": "editor_width",
@@ -62,6 +61,9 @@
   "buffer_font_fallbacks": ["Symbols Nerd Font"],
   "show_whitespaces": "selection",
   "terminal": {
+    "toolbar": { "breadcrumbs": false },
+    "option_as_meta": true,
+    "cursor_shape": "block",
     "blinking": "on",
     "line_height": "standard"
   },
