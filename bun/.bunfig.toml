@@ -1,10 +1,13 @@
 telemetry = false
 
-# Commented out these options becasue bun does not respect them
+# Commented out these options because bun does not respect them
 # ref: https://github.com/oven-sh/bun/issues/5636
 # Using env vars instead
 
 [install]
+# use bun's new json lockfile instead of the previous binary format
+saveTextLockfile = true
+
 # where `bun install --global` installs packages
 # globalDir = "$XDG_DATA_HOME/bun/install/global"
 
