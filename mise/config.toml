@@ -22,3 +22,6 @@ bun = true
 
 [settings.pipx]
 uvx = true
+
+[settings.python]
+uv_venv_auto = true
