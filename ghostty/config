@@ -9,4 +9,5 @@ copy-on-select = clipboard
 shell-integration-features = no-cursor
 macos-titlebar-style = tabs
 bold-is-bright = true
+auto-update = download
 auto-update-channel = tip
