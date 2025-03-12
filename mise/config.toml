@@ -9,9 +9,8 @@ zig = "latest"
 "cargo:krabby" = "latest"
 "npm:eas-cli" = "latest"
 "aqua:dotenvx/dotenvx" = "latest"
-"ubi:simulot/immich-go" = "latest"
 "ubi:aidoku/aidoku-cli" = { version = "latest", exe = "aidoku" }
-"ubi:Enter-tainer/typstyle" = "latest"
+go = "latest"
 
 [settings]
 experimental = true
