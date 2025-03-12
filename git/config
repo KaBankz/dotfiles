@@ -7,7 +7,6 @@
     light = false
     conflictstyle = diff3
     side-by-side = true
-    syntax-theme = Catppuccin Mocha
     hyperlinks = true
 [merge]
     conflictstyle = diff3
