@@ -11,7 +11,9 @@
 [merge]
     conflictstyle = diff3
 [diff]
-    colorMoved = default
+    colorMoved = plain
+    algorithm = histogram
+    renames = true
 [push]
     autoSetupRemote = true
 [user]
@@ -34,3 +36,7 @@
     ui = auto
 [branch]
     sort = -committerdate
+[tag]
+    sort = version:refname
+[help]
+    autocorrect = prompt
