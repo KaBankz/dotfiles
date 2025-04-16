@@ -27,7 +27,7 @@ abbr -ag c cursor
 abbr -ag c. cursor .
 
 # diff easy
-abbr -ag d code --diff
+abbr -ag d cursor --diff
 
 # bun install easy
 abbr -ag buni bun install
