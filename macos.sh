@@ -70,3 +70,16 @@ killall Dock
 defaults write com.apple.screencapture "location" -string "~/Pictures/Screenshots"
 
 killall SystemUIServer
+
+# NOTE:
+# Touch ID for sudo is enabled along with pam_reattach (fixes Touch ID for sudo in tmux)
+# pam_reattach ref: https://github.com/fabianishere/pam_reattach
+# contents of /etc/pam.d/sudo_local:
+#
+# sudo_local: local config file which survives system update and is included for sudo
+
+# fix Touch ID for sudo in tmux
+# auth       optional       /opt/homebrew/lib/pam/pam_reattach.so
+
+# uncomment following line to enable Touch ID for sudo
+# auth       sufficient     pam_tid.so
