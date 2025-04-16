@@ -97,5 +97,3 @@ abbr -ag zz zellij
 # ollama
 abbr -ag ol ollama
 
-# trash with finder
-abbr -ag trash trash -F

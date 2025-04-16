@@ -70,7 +70,6 @@ brew "subfinder"
 brew "swiftlint"
 brew "tlrc"
 brew "tmux"
-brew "trash", link: true
 brew "typst"
 brew "typstyle"
 brew "uutils-coreutils"
