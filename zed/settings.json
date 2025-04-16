@@ -35,6 +35,12 @@
       "low_speed_timeout_in_seconds": 10
     }
   },
+  "notification_panel": {
+    "button": false
+  },
+  "git_panel": {
+    "dock": "right"
+  },
   "chat_panel": {
     "button": "never",
     "dock": "right"
