@@ -29,6 +29,12 @@ abbr -ag c. cursor .
 # diff easy
 abbr -ag d code --diff
 
+# bun install easy
+abbr -ag buni bun install
+
+# mise easy
+abbr -ag mr mise run
+
 # zed easy
 abbr -ag z. zed-preview .
 
