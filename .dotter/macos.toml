@@ -3,14 +3,15 @@ packages = [
   "default",
   "hushlogin",
   "fish",
+  "tmux",
   "mise",
   "node",
   "bin",
   "bun",
   "zed",
   "nvim",
-  "zsh",
   "fastfetch",
+  "ghostty",
 ]
 
 [files]
