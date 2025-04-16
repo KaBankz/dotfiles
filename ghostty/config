@@ -8,4 +8,3 @@ shell-integration-features = no-cursor
 bold-is-bright = true
 auto-update = download
 auto-update-channel = tip
-command = /bin/bash -c "/opt/homebrew/bin/tmux attach -t main || /opt/homebrew/bin/tmux new -s main"

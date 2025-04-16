@@ -25,3 +25,8 @@ if test -f $last_completion_update_file
 else
     date +%s >$last_completion_update_file
 end
+
+# Start tmux in ghostty if installed and not already in a session
+if test "$TERM_PROGRAM" = ghostty; and command -q tmux; and not set -q TMUX
+    command tmux attach-session -t main 2>/dev/null; or command tmux new-session -s main
+end
