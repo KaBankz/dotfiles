@@ -1,5 +1,5 @@
 includes = []
-packages = ["default", "server", "nvim", "fastfetch"]
+packages = ["default", "tmux"]
 
 [files]
 

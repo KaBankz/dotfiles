@@ -63,9 +63,6 @@ depends = ["mise"]
 [bin.files]
 "bin" = "~/.local/bin"
 
-[server.files]
-"server/fish" = "~/.config/fish"
-
 [warp.files]
 "warp" = "~/.warp"
 
