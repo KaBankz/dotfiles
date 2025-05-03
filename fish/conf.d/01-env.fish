@@ -12,16 +12,22 @@ set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
 fish_add_path -P /opt/homebrew/bin /opt/homebrew/sbin
 
-# set 1Password ssh-agent socket
-set -gx SSH_AUTH_SOCK $HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
-
-set -gx EDITOR nvim
-set -gx VISUAL cursor --wait
-
 # set ZDOTDIR for zsh subshells
 set -gx ZDOTDIR $XDG_CONFIG_HOME/zsh
 
-# set bat as the manpager if it exists
+# set 1Password ssh-agent socket
+if uname -a | grep -q Darwin
+    set -gx SSH_AUTH_SOCK $HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
+end
+
+if type -q nvim
+    set -gx EDITOR nvim
+end
+
+if type -q cursor
+    set -gx VISUAL cursor --wait
+end
+
 if type -q bat
     set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 end
