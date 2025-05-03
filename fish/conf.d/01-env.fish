@@ -40,6 +40,8 @@ set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
 # load gpg keys
 set -gx GPG_TTY (tty)
 
+set -gx JJ_CONFIG $XDG_CONFIG_HOME/jj/config.toml
+
 set -gx ANDROID_HOME $HOME/Library/Android/sdk
 
 # set -gx FLUTTER_ROOT (runx mise where flutter)
