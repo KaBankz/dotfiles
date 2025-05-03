@@ -1,11 +1,5 @@
-# history expansion
-abbr -ag !! --position anywhere --function last_history_item
-
 # expand .. to cd .. (and so on)
 abbr -ag dotdot --regex '^\.\.+$' --function multi_cd
-
-# add windows-like clear
-abbr -ag cls clear
 
 # l -> ls
 abbr -ag l ls
@@ -18,16 +12,12 @@ abbr -ag fedit $EDITOR $XDG_CONFIG_HOME/fish
 abbr -ag brw brew
 abbr -ag rbew brew
 
-# vscode easy
-# abbr -ag c code
-# abbr -ag c. code .
-
 # cursor easy
 abbr -ag c cursor
 abbr -ag c. cursor .
 
-# diff easy
-abbr -ag d cursor --diff
+# lazygit
+abbr -ag lg lazygit
 
 # bun install easy
 abbr -ag buni bun install
@@ -60,9 +50,9 @@ abbr -ag dcu docker compose up -d
 abbr -ag dcb docker compose build
 abbr -ag dcd docker compose down
 abbr -ag dcp docker compose pull
+abbr -ag dcl docker compose logs -f
 
 # git
-abbr -ag ginit git init
 abbr -ag gss git status -s
 abbr -ag ga git add
 abbr -ag gaa git add -A
@@ -84,16 +74,3 @@ abbr -ag gw git worktree
 abbr -ag gwa git worktree add
 abbr -ag gwl git worktree list
 abbr -ag gwr git worktree remove
-
-# lazygit
-abbr -ag lg lazygit
-
-# yt-dlp
-abbr -ag yt yt-dlp
-
-# zellij
-abbr -ag zz zellij
-
-# ollama
-abbr -ag ol ollama
-
