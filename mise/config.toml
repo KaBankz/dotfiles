@@ -15,6 +15,7 @@ go = "latest"
 [settings]
 experimental = true
 not_found_auto_install = false
+idiomatic_version_file_enable_tools = ["node"]
 
 [settings.npm]
 bun = true
