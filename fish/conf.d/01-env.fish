@@ -10,14 +10,21 @@ set -gx HOMEBREW_NO_ANALYTICS 1
 set -gx HOMEBREW_BAT 1
 set -gx HOMEBREW_DISPLAY_INSTALL_TIMES 1
 
-fish_add_path -P /opt/homebrew/bin /opt/homebrew/sbin
+fish_add_path -P $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
 
-# set ZDOTDIR for zsh subshells
+# zsh
 set -gx ZDOTDIR $XDG_CONFIG_HOME/zsh
+# these dirs must exist else zsh will not honor the session dir
+set -gx SHELL_SESSION_DIR $XDG_STATE_HOME/zsh/sessions
+set -gx SHELL_SESSION_FILE $SHELL_SESSION_DIR/$TERM_SESSION_ID
+
+# set bash history file
+# dir must exist else bash will not save history
+set -gx HISTFILE $XDG_STATE_HOME/bash/history
 
 # set 1Password ssh-agent socket
 if uname -a | grep -q Darwin
-    set -gx SSH_AUTH_SOCK $HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock
+    set -gx SSH_AUTH_SOCK $HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 end
 
 if type -q nvim
@@ -33,10 +40,6 @@ if type -q bat
 end
 
 set -gx LESSHISTFILE -
-
-# set bash history file
-# dir must exist else bash will not save history
-set -gx HISTFILE $XDG_STATE_HOME/bash/history
 
 set -gx ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX 1
 
