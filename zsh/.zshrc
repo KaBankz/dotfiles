@@ -1,86 +1,50 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
-### STARTUP ###
+# MARK: STARTUP
 
-XDG_CONFIG_HOME="$HOME"/.config
-XDG_STATE_HOME="$HOME"/.local/state
+# this is duplicated in .zshenv, since .zshenv won't load in subshells from
+# other shells that override the ZDOTDIR variable
+source "$HOME/.config/shell/environment"
+source "$HOME/.config/shell/aliases"
 
-# these are used by Apple in /etc/zshrc
-# the $XDG_STATE_HOME/zsh dir has to exist for this to work so we create it if it doesn't exist
-if [ ! -d "$XDG_STATE_HOME"/zsh ]; then
-  mkdir -p "$XDG_STATE_HOME"/zsh
-fi
+tmux-autostart
 
-export SHELL_SESSION_DIR="$XDG_STATE_HOME"/zsh/sessions
-export SHELL_SESSION_FILE="$SHELL_SESSION_DIR"/"$TERM_SESSION_ID"
+mkdir -p "$XDG_STATE_HOME"/zsh/sessions
+
+# bash also uses this env var that's why we override it here for zsh
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
-
-if [ "$SHLVL" -eq 1 ]; then
-  source "$XDG_CONFIG_HOME"/shell/homebrew
-  source "$XDG_CONFIG_HOME"/shell/environment
-  source "$XDG_CONFIG_HOME"/shell/aliases
-fi
 
 # pokemon shell colorscripts
 # --info flag prints the pokemon's pokedex entry
-if type krabby &>/dev/null; then
+if command -v krabby &>/dev/null; then
   krabby random --info
 fi
 
-### END OF STARTUP ###
-
-### KEYBINDINGS ###
+# MARK: KEYBINDINGS
 
 # Use emacs mode becasue vi mode does not work with iterm2 natural text editing keybindings
 # Also because I have EDITOR defined as nvim, zsh auto uses vi mode, so this overrides that
 bindkey -e
 
-# launch fzf with ctrl + f
-# only bind if fzf is installed
-if type fzf &>/dev/null; then
-  bindkey -s "^f" "fzf^M"
-fi
-
 # launch krabby with ctrl + k
 # only bind if krabby is installed
-if type krabby &>/dev/null; then
+if command -v krabby &>/dev/null; then
   bindkey -s "^k" "krabby random^M"
 fi
-
-### END OF KEYBINDINGS ###
-
-### FUNCTIONS ###
 
 # auto run ls (alias for eza) after cd
 # builtin uses the default cd to avoid conflicts with function name
 function cd { builtin cd "$@" && ls; }
 
-# auto cd after mkdir
-function mkcd {
-  last=$(eval "echo \$$#")
-  if [ -z "$last" ]; then
-    echo "Enter a directory name"
-  elif [ -d "$last" ]; then
-    echo "$last already exists"
-  else
-    mkdir "$@" && cd "$last" || return
-  fi
-}
-
-### END OF FUNCTIONS ###
-
-### SOURCE BINARIES ###
+# MARK: SOURCE BINARIES
 
 # load zinit before compinit
 source /opt/homebrew/opt/zinit/zinit.zsh
 
-### END OF SOURCE BINARIES ###
+# MARK: COMPLETIONS
 
-### COMPLETIONS ###
-
-# homebrew completions
-# must be before compinit
-if type brew &>/dev/null; then
+# homebrew completions must be before compinit
+if command -v brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
@@ -96,17 +60,15 @@ zstyle ":completion:*" cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 # case insensitive completion
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 
-### END OF COMPLETIONS ###
-
-### PLUGINS ###
+# MARK: PLUGINS
 
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 
-### END OF PLUGINS ###
+# MARK: PROGRAMS
 
-eval $(zoxide init zsh --cmd cd)
-
-### START STARSHIP PROMPT ###
+eval "$(fzf --zsh)"
+eval "$(zoxide init zsh --cmd cd)"
+eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(starship init zsh)"
