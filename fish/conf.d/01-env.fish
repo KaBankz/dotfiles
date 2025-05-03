@@ -50,8 +50,6 @@ set -gx JJ_CONFIG $XDG_CONFIG_HOME/jj/config.toml
 
 set -gx ANDROID_HOME $HOME/Library/Android/sdk
 
-# set -gx FLUTTER_ROOT (runx mise where flutter)
-
 set -gx GRADLE_USER_HOME $XDG_DATA_HOME/gradle
 
 set -gx DISABLE_BUN_ANALYTICS 1
@@ -76,4 +74,3 @@ fish_add_path -P $ANDROID_HOME/cmdline-tools/latest/bin $ANDROID_HOME/platform-t
 fish_add_path -P $XDG_DATA_HOME/yarn/bin $PNPM_HOME $BUN_INSTALL/bin
 fish_add_path -P $CARGO_HOME/bin
 fish_add_path -P $HOME/.local/bin
-fish_add_path -P $HOME/.local/bin/iterm2
