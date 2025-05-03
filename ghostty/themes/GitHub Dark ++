@@ -1,6 +1,13 @@
 # Modification of the GitHub Dark theme to make the colors
 # look better on a transparent background
 
+# the current contrast adjusting algorithm is not as good as iTerm2's
+# so after some trial and error, this is the best compromise
+minimum-contrast = 1.2
+
+background-opacity = 0.90
+background-blur-radius = 25
+
 palette = 0=#494e57
 palette = 1=#ee8277
 palette = 2=#63b65c
@@ -9,6 +16,7 @@ palette = 4=#6ba4f8
 palette = 5=#b48df7
 palette = 6=#65c2cc
 palette = 7=#b2b9c2
+
 palette = 8=#6f757f
 palette = 9=#f1a59b
 palette = 10=#79d070
@@ -17,7 +25,9 @@ palette = 12=#89bef9
 palette = 13=#cba9f9
 palette = 14=#79d1da
 palette = 15=#feffff
+
 background = #010308
 foreground = #e7ecf2
+
 selection-background = #304e74
 selection-foreground = #e7ecf2
