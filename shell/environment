@@ -1,69 +1,78 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# XDG Base Directory Specification
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_CACHE_HOME="$HOME"/.cache
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_STATE_HOME="$HOME"/.local/state
 
-# set default editors
-export EDITOR=nvim
-export VISUAL="code --wait"
+export HOMEBREW_PREFIX=/opt/homebrew
+export HOMEBREW_CELLAR=/opt/homebrew/Cellar
+export HOMEBREW_REPOSITORY=/opt/homebrew
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_BAT=1
+export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 
-# set ZDOTDIR for zsh subshells
-export ZDOTDIR="$HOME"/.config/zsh
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
 
-# set bat as the manpager if it exists
-if type bat >/dev/null 2>&1; then
+# zsh
+export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
+# these dirs must exist else zsh will not honor the session dir
+export SHELL_SESSION_DIR="$XDG_STATE_HOME"/zsh/sessions
+export SHELL_SESSION_FILE="$SHELL_SESSION_DIR"/"$TERM_SESSION_ID"
+
+# set bash history file
+# dir must exist else bash will not save history
+export HISTFILE="$XDG_STATE_HOME"/bash/history
+
+# set 1Password ssh-agent socket
+if [[ $(uname -a) =~ Darwin ]]; then
+  export SSH_AUTH_SOCK="$HOME"/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+fi
+
+if command -v nvim &>/dev/null; then
+  export EDITOR=nvim
+fi
+
+if command -v cursor &>/dev/null; then
+  export VISUAL="cursor --wait"
+fi
+
+if command -v bat &>/dev/null; then
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-# disable less history file
 export LESSHISTFILE=-
 
-# disable homebrew analytics
-export HOMEBREW_NO_ANALYTICS=1
+export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=1
 
-# disable mise command not found (b/c it overrides my brew command not found)
-export MISE_NOT_FOUND_AUTO_INSTALL=false
+export MISE_NODE_COREPACK=1
 
-# gnupg
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 # load gpg keys
 export GPG_TTY=$(tty)
 
-# flutter
-if type mise >/dev/null 2>&1; then
-  export FLUTTER_ROOT=$(mise where flutter)
-fi
+export JJ_CONFIG="$XDG_CONFIG_HOME"/jj/config.toml
 
-# gradle
+export ANDROID_HOME="$HOME"/Library/Android/sdk
+
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 
-# disable bun analytics
 export DISABLE_BUN_ANALYTICS=1
-# set bun install path
-export BUN_INSTALL="$XDG_DATA_HOME/bun"
+export BUN_INSTALL="$XDG_DATA_HOME"/bun
+export BUN_INSTALL_GLOBAL_DIR="$BUN_INSTALL"/install/global
+export BUN_INSTALL_BIN="$BUN_INSTALL"/bin
+export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME"/bun
 
-# node corepack
-export COREPACK_HOME="$XDG_DATA_HOME"/node/corepack
-
-# npm
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
 
-# pnpm
 export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 
-# rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
-# cocoapods
 export CP_HOME_DIR="$XDG_DATA_HOME"/cocoapods
 
-# docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 
-# path
-export PATH="$HOME/.local/bin":"$CARGO_HOME/bin":"$BUN_INSTALL/bin":"$XDG_DATA_HOME/yarn/bin":"$PNPM_HOME":"$PATH"
+export PATH="$HOME/.local/bin":"$CARGO_HOME/bin":"$BUN_INSTALL/bin":"$XDG_DATA_HOME/yarn/bin":"$PNPM_HOME":"$ANDROID_HOME/cmdline-tools/latest/bin":"$ANDROID_HOME/platform-tools":"$PATH"

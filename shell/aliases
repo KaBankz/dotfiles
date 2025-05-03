@@ -1,39 +1,55 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-alias cls="clear"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -iv"
 
-alias zedit="nvim \$ZDOTDIR/.zshrc"
-alias zload="source \$ZDOTDIR/.zshrc"
+alias tree="runx eza -Ta"
+alias pfetch="runx fastfetch -c pfetch"
+alias neofetch="runx fastfetch -c neofetch"
+alias wget="runx wget --hsts-file=\$XDG_DATA_HOME/wget-hsts"
 
+# l -> ls
 alias l="ls"
-alias ls="eza -lah --group-directories-first --git --icons"
-alias tree="eza -Ta --git-ignore"
-
-alias ..="cd .."
-
-alias brw="brew"
-alias rbew="brew"
-
-alias c="code"
-alias c.="code ."
-
-alias v="nvim"
-alias v.="nvim ."
-alias vi="nvim"
-alias vim="nvim"
+alias ls="eza -laagH \
+  --group-directories-first \
+  --git \
+  --icons \
+  --time-style '+%h %e  %Y'$'\n''%h %e %H:%M'"
 
 alias cat="bat"
 
-alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+# edit shell configs
+alias zedit="\$EDITOR \$ZDOTDIR"
+alias fedit="\$EDITOR \$XDG_CONFIG_HOME/fish"
 
-alias neofetch="fastfetch -c neofetch"
-alias pfetch="fastfetch -c pfetch"
+# homebrew
+alias brw="brew"
+alias rbew="brew"
 
-# confirm before overwriting something
-alias cp="cp -i"
-alias mv="mv -i"
-alias rm="rm -i"
+# cursor easy
+alias c="cursor"
+alias c="cursor ."
 
+# lazygit
+alias lg="lazygit"
+
+# bun install easy
+alias buni="bun install"
+
+# mise easy
+alias mr="mise run"
+
+# zed easy
+alias z="zed-preview ."
+
+# nvim
+alias v="nvim"
+alias v="nvim ."
+alias vi="nvim"
+alias vim="nvim"
+
+# docker
 alias dpa="docker ps -a"
 alias dia="docker image ls -a"
 alias dva="docker volume ls"
@@ -49,14 +65,19 @@ alias dcu="docker compose up -d"
 alias dcb="docker compose build"
 alias dcd="docker compose down"
 alias dcp="docker compose pull"
+alias dcl="docker compose logs -f"
 
-alias gini="git init"
+alias gsp="gs"
+
+# git
 alias gss="git status -s"
-alias glog="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 alias ga="git add"
 alias gaa="git add -A"
+alias gap="git add -p"
 alias gcm="git commit -m"
+alias gca="git commit --amend"
 alias gp="git push"
+alias gpf="git push --force-with-lease"
 alias gpl="git pull"
 alias gplr="git pull --rebase"
 alias gf="git fetch"
@@ -64,17 +85,12 @@ alias gd="git diff"
 alias gb="git branch"
 alias gc="git checkout"
 alias gs="git switch"
-
-alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
-
-alias yt="yt-dlp"
-
-alias zz="zellij"
-
-alias ol="ollama"
-
-alias z="cd"
-
-# make a brewfile backup of all installed packages
-# --force overwrites any previous Brewfile
-alias brewbak="brew bundle dump --force --formula --casks --taps --file ~/.dotfiles/pkgs/Brewfile"
+alias gsc="git switch -c"
+alias gri="git rebase -i"
+alias gw="git worktree"
+alias gwa="git worktree add"
+alias gwl="git worktree list"
+alias gwr="git worktree remove"
+alias glog="git log \
+  --graph \
+  --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
