@@ -23,4 +23,4 @@ bun = true
 uvx = true
 
 [settings.python]
-uv_venv_auto = true
+# uv_venv_auto = true
