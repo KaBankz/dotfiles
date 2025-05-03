@@ -7,9 +7,13 @@
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -iv"
-alias glog="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
+
+alias glog="git log \
+  --graph \
+  --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
+
 alias gsp="gs"
-alias tree="eza -Ta"
-alias pfetch="fastfetch -c pfetch"
-alias neofetch="fastfetch -c neofetch"
-alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
+alias tree="runx eza -Ta"
+alias pfetch="runx fastfetch -c pfetch"
+alias neofetch="runx fastfetch -c neofetch"
+alias wget="runx wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
