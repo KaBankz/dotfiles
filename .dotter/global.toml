@@ -25,11 +25,13 @@ depends = ["starship", "bin"]
 "fish/functions" = { target = "~/.config/fish/functions", type = "symbolic", recurse = false }
 
 [zsh]
-depends = ["starship", "bin"]
+depends = ["starship", "bin", "shell"]
 
 [zsh.files]
 "zsh/.zshenv" = "~/.zshenv"
 "zsh/.zshrc" = "~/.config/zsh/.zshrc"
+
+[shell.files]
 "shell" = "~/.config/shell"
 
 [starship.files]
