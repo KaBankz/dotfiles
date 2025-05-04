@@ -1,7 +1,7 @@
 [helpers]
 
 [default]
-depends = []
+depends = ["bash"]
 
 # to symlink entire dirs disable recurse, a global config is planned
 # ex: "fish" = { target = "~/.config/fish", type = "symbolic", recurse = false }
