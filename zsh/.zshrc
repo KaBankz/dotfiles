@@ -22,8 +22,7 @@ fi
 
 # MARK: KEYBINDINGS
 
-# Use emacs mode becasue vi mode does not work with iterm2 natural text editing keybindings
-# Also because I have EDITOR defined as nvim, zsh auto uses vi mode, so this overrides that
+# Use emacs mode; I have EDITOR set to nvim, which causes zsh to use vi mode
 bindkey -e
 
 # launch krabby with ctrl + k
