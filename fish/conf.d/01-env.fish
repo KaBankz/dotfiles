@@ -76,4 +76,5 @@ set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 fish_add_path -P $ANDROID_HOME/cmdline-tools/latest/bin $ANDROID_HOME/platform-tools
 fish_add_path -P $XDG_DATA_HOME/yarn/bin $PNPM_HOME $BUN_INSTALL/bin
 fish_add_path -P $CARGO_HOME/bin
+fish_add_path -P $HOME/.orbstack/bin
 fish_add_path -P $HOME/.local/bin
