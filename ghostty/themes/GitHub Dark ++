@@ -3,7 +3,7 @@
 
 # the current contrast adjusting algorithm is not as good as iTerm2's
 # so after some trial and error, this is the best compromise
-minimum-contrast = 1.2
+minimum-contrast = 1.0
 
 background-opacity = 0.90
 background-blur-radius = 25
