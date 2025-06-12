@@ -3,13 +3,13 @@
 # Allow the user to override the default dotfiles directory
 DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 
-DOTFILES_REPO="https://github.com/KaBankz/dotfiles"
-DOTFILES_DOWNLOAD_URL="$DOTFILES_REPO/archive/dotter.tar.gz"
+DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
+DOTFILES_BRANCH="dotter"
 DOTTER_REPO="https://github.com/SuperCuber/dotter"
 DOTTER_DOWNLOAD_URL="$DOTTER_REPO/releases/latest/download"
 DOTTER_BIN="$DOTFILES_DIR/dotter"
 
-REQUIRED_UTILS=("curl")
+REQUIRED_UTILS=("curl" "git")
 
 echo " ============================================ "
 echo "        __ _       _    __ _ _                "
@@ -61,6 +61,71 @@ error_exit() {
   exit "$exit_code"
 }
 
+clone_or_update_dotfiles() {
+  if [ -d "$DOTFILES_DIR" ]; then
+    echo "Dotfiles directory exists. Checking if it's a valid git repository..."
+
+    if [ ! -d "$DOTFILES_DIR/.git" ]; then
+      error_exit $LINENO "$DOTFILES_DIR exists but is not a git repository. Please remove it or set DOTFILES_DIR to a different location."
+    fi
+
+    cd "$DOTFILES_DIR" || error_exit $LINENO "Failed to change directory to $DOTFILES_DIR"
+
+    # Check if the remote origin matches our expected repository
+    local current_remote
+    current_remote=$(git remote get-url origin 2>/dev/null) || error_exit $LINENO "Failed to get remote origin URL"
+
+    # Normalize URLs for comparison (handle both HTTPS and SSH formats)
+    normalize_git_url() {
+      local url="$1"
+      # Remove .git suffix
+      url="${url%.git}"
+      # Convert SSH format to HTTPS-like format for comparison
+      if [[ "$url" =~ ^git@github\.com: ]]; then
+        url="${url#git@github.com:}"
+        url="github.com/$url"
+      elif [[ "$url" =~ ^https://github\.com/ ]]; then
+        url="${url#https://}"
+      fi
+      echo "$url"
+    }
+
+    local normalized_current
+    local normalized_expected
+    normalized_current=$(normalize_git_url "$current_remote")
+    normalized_expected=$(normalize_git_url "$DOTFILES_REPO")
+
+    if [ "$normalized_current" != "$normalized_expected" ]; then
+      error_exit $LINENO "Existing repository points to '$current_remote' but expected '$DOTFILES_REPO'. Please remove the directory or set DOTFILES_DIR to a different location."
+    fi
+
+    echo "Valid dotfiles repository found. Pulling latest changes..."
+
+    # Fetch latest changes and checkout the correct branch
+    git fetch origin || error_exit $LINENO "Failed to fetch latest changes"
+
+    # Check if we're on the correct branch, if not switch to it
+    local current_branch
+    current_branch=$(git branch --show-current)
+    if [ "$current_branch" != "$DOTFILES_BRANCH" ]; then
+      echo "Switching to branch '$DOTFILES_BRANCH'..."
+      git checkout "$DOTFILES_BRANCH" || error_exit $LINENO "Failed to checkout branch '$DOTFILES_BRANCH'"
+    fi
+
+    # Pull latest changes
+    git pull origin "$DOTFILES_BRANCH" || error_exit $LINENO "Failed to pull latest changes"
+
+    echo "Dotfiles updated successfully."
+  else
+    echo "Cloning dotfiles repository..."
+    git clone --branch "$DOTFILES_BRANCH" "$DOTFILES_REPO" "$DOTFILES_DIR" || error_exit $LINENO "Failed to clone dotfiles repository"
+
+    cd "$DOTFILES_DIR" || error_exit $LINENO "Failed to change directory to $DOTFILES_DIR"
+
+    echo "Dotfiles cloned successfully."
+  fi
+}
+
 # Check if we're on macOS and install Homebrew if needed
 if [[ "$(uname)" == "Darwin" ]]; then
   echo "Checking for Homebrew..."
@@ -85,27 +150,8 @@ for util in "${REQUIRED_UTILS[@]}"; do
   command -v "$util" >/dev/null 2>&1 || error_exit $LINENO "$util is not installed. Please install it and try again."
 done
 
-# If run from inside dotfiles directory, skip downloading the dotfiles
-if [ ! -d "$DOTFILES_DIR/.dotter" ]; then
-
-  echo "Checking for existing dotfiles..."
-  [ -d "$DOTFILES_DIR" ] && error_exit $LINENO "$DOTFILES_DIR already exists. Please remove it or set DOTFILES_DIR to a different location."
-
-  # Create a temporary directory for downloading dotfiles
-  temp_dir=$(mktemp -d) || error_exit $LINENO "Failed to create temporary directory"
-  temp_tar="$temp_dir/dotfiles.tar.gz"
-
-  echo "Downloading dotfiles..."
-  curl -fsSL "$DOTFILES_DOWNLOAD_URL" --output "$temp_tar" || error_exit $LINENO "Failed to download dotfiles repository"
-  mkdir -p "$DOTFILES_DIR" || error_exit $LINENO "Failed to create dotfiles directory"
-  tar -xz -C "$DOTFILES_DIR" --strip-components=1 -f "$temp_tar" || error_exit $LINENO "Failed to extract dotfiles archive"
-  rm "$temp_tar"
-
-  cd "$DOTFILES_DIR" || error_exit $LINENO "Failed to change directory to $DOTFILES_DIR"
-
-else
-  echo "Running from inside dotfiles directory. Skipping download."
-fi
+# Clone or update dotfiles repository
+clone_or_update_dotfiles
 
 echo "Downloading Dotter..."
 
