@@ -45,3 +45,6 @@ vimcmd_visual_symbol = '[❮❮❮](bold fg:yellow)'
 
 [nodejs]
 detect_files = ['package.json', '.node-version', '.nvmrc']
+
+[aws]
+symbol = "☁️ "
