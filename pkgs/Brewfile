@@ -1,6 +1,4 @@
-tap "homebrew/bundle"
 tap "homebrew/command-not-found"
-tap "homebrew/services"
 tap "libsql/sqld"
 brew "act"
 brew "age"
