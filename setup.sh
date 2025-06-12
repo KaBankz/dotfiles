@@ -108,13 +108,10 @@ show_banner() {
 
  https://github.com/KaBankz/dotfiles
 
- KaBankz' Dotfiles bootstrapper
+ KaBankz' Dotfiles Bootstrapper
 
  KABANKZ IS NOT RESPONSIBLE FOR ANY DAMAGE
  CAUSED BY THIS SCRIPT. USE AT YOUR OWN RISK.
-
- Audit the script at:
- https://github.com/KaBankz/dotfiles/blob/dotter/setup.sh
 
  Configuration:
  Set DOTFILES_DIR to use a custom directory
@@ -239,7 +236,7 @@ clone_fresh_dotfiles() {
 }
 
 download_dotter() {
-  log_info "Setting up Dotter..."
+  log_info "Downloading Dotter..."
 
   local os_arch dotter_url
   os_arch="$(get_os_arch)"
@@ -266,7 +263,7 @@ download_dotter() {
   curl -fsSL "$dotter_url" -o "$DOTTER_BIN"
   chmod +x "$DOTTER_BIN"
 
-  log_success "Dotter ready"
+  log_success "Dotter downloaded successfully"
 }
 
 deploy_dotfiles() {
