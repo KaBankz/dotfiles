@@ -198,4 +198,15 @@ chmod +x "$DOTTER_BIN" || error_exit $LINENO "Failed to make Dotter executable"
 echo "Deploying dotfiles..."
 "$DOTTER_BIN" deploy -v || error_exit $LINENO "Dotter deploy failed"
 
+# Run macOS-specific configuration if on macOS
+if [[ "$(uname)" == "Darwin" ]]; then
+  if [[ -f "macos.sh" ]]; then
+    echo "Running macOS configuration..."
+    bash macos.sh || error_exit $LINENO "macOS configuration script failed"
+    echo "macOS configuration completed."
+  else
+    echo "Warning: macos.sh not found, skipping macOS configuration."
+  fi
+fi
+
 echo "Dotfiles bootstrapped successfully."
