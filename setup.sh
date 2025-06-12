@@ -61,6 +61,25 @@ error_exit() {
   exit "$exit_code"
 }
 
+# Check if we're on macOS and install Homebrew if needed
+if [[ "$(uname)" == "Darwin" ]]; then
+  echo "Checking for Homebrew..."
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Homebrew not found. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit $LINENO "Failed to install Homebrew"
+
+    # Add Homebrew to PATH for the current session
+    if [[ -f "/opt/homebrew/bin/brew" ]]; then
+      # Apple Silicon Mac
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+
+    echo "Homebrew installed successfully."
+  else
+    echo "Homebrew is already installed."
+  fi
+fi
+
 echo "Checking prerequisites..."
 for util in "${REQUIRED_UTILS[@]}"; do
   command -v "$util" >/dev/null 2>&1 || error_exit $LINENO "$util is not installed. Please install it and try again."
