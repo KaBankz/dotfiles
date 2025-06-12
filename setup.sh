@@ -155,13 +155,9 @@ install_homebrew() {
   log_info "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  # Add Homebrew to PATH for the current session
+  # Add Homebrew to PATH for the current session (Apple Silicon Mac)
   if [[ -f "/opt/homebrew/bin/brew" ]]; then
-    # Apple Silicon Mac
     eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [[ -f "/usr/local/bin/brew" ]]; then
-    # Intel Mac
-    eval "$(/usr/local/bin/brew shellenv)"
   fi
 
   log_success "Homebrew installed successfully"
