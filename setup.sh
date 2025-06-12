@@ -318,7 +318,4 @@ main() {
   log_info "You may need to restart your terminal or source your shell configuration"
 }
 
-# Only run main if script is executed directly (not sourced)
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  main "$@"
-fi
+main "$@"
