@@ -300,6 +300,42 @@ install_packages() {
   fi
 }
 
+set_default_shell() {
+  log_info "Setting fish as the default shell..."
+
+  local fish_path
+  if is_macos; then
+    fish_path="/opt/homebrew/bin/fish"
+  else
+    fish_path="/usr/bin/fish"
+  fi
+
+  # Check if fish is installed
+  if [[ ! -x "$fish_path" ]]; then
+    log_warning "Fish shell not found at $fish_path, skipping shell configuration"
+    return 0
+  fi
+
+  # Check if fish is already in /etc/shells
+  if ! grep -q "^$fish_path$" /etc/shells 2>/dev/null; then
+    log_info "Adding fish to /etc/shells..."
+    echo "$fish_path" | sudo tee -a /etc/shells >/dev/null
+  fi
+
+  # Check if fish is already the default shell
+  if [[ "$SHELL" == "$fish_path" ]]; then
+    log_success "Fish is already the default shell"
+    return 0
+  fi
+
+  # Set fish as the default shell
+  log_info "Changing default shell to fish..."
+  chsh -s "$fish_path"
+
+  log_success "Default shell set to fish"
+  log_info "You'll need to restart your terminal or log out and back in for the change to take effect"
+}
+
 # ================================== MAIN SCRIPT ================================ #
 
 main() {
@@ -313,6 +349,7 @@ main() {
   deploy_dotfiles
   configure_macos
   install_packages
+  set_default_shell
 
   log_success "Dotfiles setup completed successfully!"
   log_info "You may need to restart your terminal or source your shell configuration"
