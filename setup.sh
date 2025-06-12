@@ -207,6 +207,15 @@ if [[ "$(uname)" == "Darwin" ]]; then
   else
     echo "Warning: macos.sh not found, skipping macOS configuration."
   fi
+
+  # Install packages from Brewfile
+  if [[ -f "pkgs/Brewfile" ]]; then
+    echo "Installing packages from Brewfile..."
+    brew bundle install --file="pkgs/Brewfile" || error_exit $LINENO "Homebrew bundle installation failed"
+    echo "Package installation completed."
+  else
+    echo "Warning: pkgs/Brewfile not found, skipping package installation."
+  fi
 fi
 
 echo "Dotfiles bootstrapped successfully."
