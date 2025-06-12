@@ -11,6 +11,9 @@ zig = "latest"
 "aqua:dotenvx/dotenvx" = "latest"
 "ubi:aidoku/aidoku-cli" = { version = "latest", exe = "aidoku" }
 go = "latest"
+"npm:typescript-language-server" = "latest"
+"npm:@antfu/ni" = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
 
 [settings]
 experimental = true
@@ -24,4 +27,4 @@ bun = true
 uvx = true
 
 [settings.python]
-# uv_venv_auto = true
+uv_venv_auto = true
