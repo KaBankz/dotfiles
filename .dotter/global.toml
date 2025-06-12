@@ -63,6 +63,10 @@ depends = ["mise"]
 [tmux.files]
 "tmux" = "~/.config/tmux"
 
+[zellij.files]
+"zellij/config.kdl" = "~/.config/zellij/config.kdl"
+"zellij/zellij-autostart" = "~/.local/bin/zellij-autostart"
+
 [nvim.files]
 "nvim" = { target = "~/.config/nvim", type = "symbolic", recurse = false }
 

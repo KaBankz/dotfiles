@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+SUPPORTED_TERMINALS=("ghostty")
+
+if [ -n "$TMUX" ] || [ -n "$ZELLIJ" ]; then
+  exit 0
+fi
+
+# Only continue if the current terminal is in the list of supported terminals
+if [[ ! ${SUPPORTED_TERMINALS[*]} =~ ${TERM_PROGRAM} ]]; then
+  exit 0
+fi
+
+if ! command -v zellij >/dev/null 2>&1; then
+  echo "zellij is not installed" >&2
+  exit 1
+fi
+
+zellij attach -c main

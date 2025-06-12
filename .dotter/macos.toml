@@ -4,6 +4,7 @@ packages = [
   "hushlogin",
   "fish",
   "tmux",
+  "zellij",
   "mise",
   "node",
   "bin",
