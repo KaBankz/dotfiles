@@ -1,221 +1,331 @@
 #!/usr/bin/env bash
 
-# Allow the user to override the default dotfiles directory
-DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
+# KaBankz' Dotfiles Bootstrapper
 
-DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
-DOTFILES_BRANCH="dotter"
-DOTTER_REPO="https://github.com/SuperCuber/dotter"
-DOTTER_DOWNLOAD_URL="$DOTTER_REPO/releases/latest/download"
-DOTTER_BIN="$DOTFILES_DIR/dotter"
+set -euo pipefail # Exit on error, undefined vars, pipe failures
+IFS=$'\n\t'       # Secure Internal Field Separator
 
-REQUIRED_UTILS=("curl" "git")
+# ================================ CONFIGURATION ================================ #
 
-echo " ============================================ "
-echo "        __ _       _    __ _ _                "
-echo "       / /| |     | |  / _(_) |               "
-echo "      / /_| | ___ | |_| |_ _| | ___  ___      "
-echo "     / / _\` |/ _ \| __|  _| | |/ _ \/ __|    "
-echo "  _ / / (_| | (_) | |_| | | | |  __/\__ \     "
-echo " (_)_/ \__,_|\___/ \__|_| |_|_|\___||___/     "
-echo "                                              "
-echo " https://github.com/KaBankz/dotfiles          "
-echo "                                              "
-echo " KaBankz' Dotfiles bootstrapper               "
-echo "                                              "
-echo " KABANKZ IS NOT RESPONSIBLE FOR ANY DAMAGE    "
-echo " CAUSED BY THIS SCRIPT. USE AT YOUR OWN RISK. "
-echo "                                              "
-echo " Audit the script at:                         "
-echo " https://github.com/KaBankz/dotfiles/blob/dotter/setup.sh "
-echo "                                              "
-echo " Configuration:                               "
-echo " Set DOTFILES_DIR to use a custom directory   "
-echo "                                              "
-echo " DOTFILES_DIR=$DOTFILES_DIR                   "
-echo "                                              "
-echo " Only run this script once, running it again  "
-echo " will cause errors.                           "
-echo " ============================================ "
-echo "                                              "
+readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
+readonly DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
+readonly DOTFILES_BRANCH="dotter"
+readonly DOTTER_REPO="https://github.com/SuperCuber/dotter"
+readonly DOTTER_DOWNLOAD_URL="$DOTTER_REPO/releases/latest/download"
+readonly DOTTER_BIN="$DOTFILES_DIR/dotter"
 
-# TODO:
-# - Break down the script into functions
-# - Add ability to update the dotfiles (needs git)
-# - Check for dotter before downloading it
-# - Check for local.toml before copying it
+readonly -a REQUIRED_UTILS=("curl" "git")
 
-read -rp "Do you agree and wish to continue? (y/N): " choice
-case "$choice" in
-y | Y) ;;
-*)
-  exit 0
-  ;;
-esac
+# ================================== LOGGING =================================== #
 
-error_exit() {
-  local line_number=$1
-  local error_message=$2
-  local exit_code=${3:-1}
-  echo "[Line $line_number] Error: $error_message" >&2
-  exit "$exit_code"
+# Color codes for output
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[1;33m'
+readonly BLUE='\033[0;34m'
+readonly NC='\033[0m' # No Color
+
+log_info() {
+  printf "${BLUE}[INFO]${NC} %s\n" "$*" >&2
+}
+
+log_success() {
+  printf "${GREEN}[SUCCESS]${NC} %s\n" "$*" >&2
+}
+
+log_warning() {
+  printf "${YELLOW}[WARNING]${NC} %s\n" "$*" >&2
+}
+
+log_error() {
+  printf "${RED}[ERROR]${NC} %s\n" "$*" >&2
+}
+
+# ================================ ERROR HANDLING =============================== #
+
+cleanup() {
+  local exit_code=$?
+  if [[ $exit_code -ne 0 ]]; then
+    log_error "Script failed with exit code $exit_code"
+    log_error "Check the output above for details"
+  fi
+  exit $exit_code
+}
+
+trap cleanup EXIT
+
+# ================================== UTILITIES ================================== #
+
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+is_macos() {
+  [[ "$(uname -s)" == "Darwin" ]]
+}
+
+get_os_arch() {
+  local os arch
+  os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+  arch="$(uname -m)"
+
+  case "$arch" in
+  x86_64) arch="x64" ;;
+  aarch64) arch="arm64" ;;
+  esac
+
+  printf "%s-%s" "$os" "$arch"
+}
+
+normalize_git_url() {
+  local url="$1"
+
+  # Remove .git suffix
+  url="${url%.git}"
+
+  # Convert SSH format to HTTPS-like format for comparison
+  if [[ "$url" =~ ^git@github\.com: ]]; then
+    url="${url#git@github.com:}"
+    url="github.com/$url"
+  elif [[ "$url" =~ ^https://github\.com/ ]]; then
+    url="${url#https://}"
+  fi
+
+  printf "%s" "$url"
+}
+
+# ================================= MAIN FUNCTIONS ============================== #
+
+show_banner() {
+  cat <<'EOF'
+ ============================================
+        __ _       _    __ _ _
+       / /| |     | |  / _(_) |
+      / /_| | ___ | |_| |_ _| | ___  ___
+     / / _` |/ _ \| __|  _| | |/ _ \/ __|
+  _ / / (_| | (_) | |_| | | | |  __/\__ \
+ (_)_/ \__,_|\___/ \__|_| |_|_|\___||___/
+
+ https://github.com/KaBankz/dotfiles
+
+ KaBankz' Dotfiles bootstrapper
+
+ KABANKZ IS NOT RESPONSIBLE FOR ANY DAMAGE
+ CAUSED BY THIS SCRIPT. USE AT YOUR OWN RISK.
+
+ Audit the script at:
+ https://github.com/KaBankz/dotfiles/blob/dotter/setup.sh
+
+ Configuration:
+ Set DOTFILES_DIR to use a custom directory
+
+EOF
+  printf " DOTFILES_DIR=%s\n" "$DOTFILES_DIR"
+  cat <<'EOF'
+
+ ============================================
+
+EOF
+}
+
+get_user_consent() {
+  local choice
+  read -rp "Do you agree and wish to continue? (Y/n): " choice
+  case "$choice" in
+  [Nn] | [Nn][Oo])
+    log_info "Setup cancelled by user"
+    exit 0
+    ;;
+  *) return 0 ;;
+  esac
+}
+
+install_homebrew() {
+  if ! is_macos; then
+    return 0
+  fi
+
+  log_info "Checking for Homebrew..."
+
+  if command_exists brew; then
+    log_success "Homebrew is already installed"
+    return 0
+  fi
+
+  log_info "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # Add Homebrew to PATH for the current session
+  if [[ -f "/opt/homebrew/bin/brew" ]]; then
+    # Apple Silicon Mac
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -f "/usr/local/bin/brew" ]]; then
+    # Intel Mac
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+
+  log_success "Homebrew installed successfully"
+}
+
+check_prerequisites() {
+  log_info "Checking prerequisites..."
+
+  local missing_utils=()
+  for util in "${REQUIRED_UTILS[@]}"; do
+    if ! command_exists "$util"; then
+      missing_utils+=("$util")
+    fi
+  done
+
+  if [[ ${#missing_utils[@]} -gt 0 ]]; then
+    log_error "Missing required utilities: ${missing_utils[*]}"
+    log_error "Please install them and try again"
+    return 1
+  fi
+
+  log_success "All prerequisites satisfied"
 }
 
 clone_or_update_dotfiles() {
-  if [ -d "$DOTFILES_DIR" ]; then
-    echo "Dotfiles directory exists. Checking if it's a valid git repository..."
-
-    if [ ! -d "$DOTFILES_DIR/.git" ]; then
-      error_exit $LINENO "$DOTFILES_DIR exists but is not a git repository. Please remove it or set DOTFILES_DIR to a different location."
-    fi
-
-    cd "$DOTFILES_DIR" || error_exit $LINENO "Failed to change directory to $DOTFILES_DIR"
-
-    # Check if the remote origin matches our expected repository
-    local current_remote
-    current_remote=$(git remote get-url origin 2>/dev/null) || error_exit $LINENO "Failed to get remote origin URL"
-
-    # Normalize URLs for comparison (handle both HTTPS and SSH formats)
-    normalize_git_url() {
-      local url="$1"
-      # Remove .git suffix
-      url="${url%.git}"
-      # Convert SSH format to HTTPS-like format for comparison
-      if [[ "$url" =~ ^git@github\.com: ]]; then
-        url="${url#git@github.com:}"
-        url="github.com/$url"
-      elif [[ "$url" =~ ^https://github\.com/ ]]; then
-        url="${url#https://}"
-      fi
-      echo "$url"
-    }
-
-    local normalized_current
-    local normalized_expected
-    normalized_current=$(normalize_git_url "$current_remote")
-    normalized_expected=$(normalize_git_url "$DOTFILES_REPO")
-
-    if [ "$normalized_current" != "$normalized_expected" ]; then
-      error_exit $LINENO "Existing repository points to '$current_remote' but expected '$DOTFILES_REPO'. Please remove the directory or set DOTFILES_DIR to a different location."
-    fi
-
-    echo "Valid dotfiles repository found. Pulling latest changes..."
-
-    # Fetch latest changes and checkout the correct branch
-    git fetch origin || error_exit $LINENO "Failed to fetch latest changes"
-
-    # Check if we're on the correct branch, if not switch to it
-    local current_branch
-    current_branch=$(git branch --show-current)
-    if [ "$current_branch" != "$DOTFILES_BRANCH" ]; then
-      echo "Switching to branch '$DOTFILES_BRANCH'..."
-      git checkout "$DOTFILES_BRANCH" || error_exit $LINENO "Failed to checkout branch '$DOTFILES_BRANCH'"
-    fi
-
-    # Pull latest changes
-    git pull origin "$DOTFILES_BRANCH" || error_exit $LINENO "Failed to pull latest changes"
-
-    echo "Dotfiles updated successfully."
+  if [[ -d "$DOTFILES_DIR" ]]; then
+    update_existing_dotfiles
   else
-    echo "Cloning dotfiles repository..."
-    git clone --branch "$DOTFILES_BRANCH" "$DOTFILES_REPO" "$DOTFILES_DIR" || error_exit $LINENO "Failed to clone dotfiles repository"
-
-    cd "$DOTFILES_DIR" || error_exit $LINENO "Failed to change directory to $DOTFILES_DIR"
-
-    echo "Dotfiles cloned successfully."
+    clone_fresh_dotfiles
   fi
 }
 
-# Check if we're on macOS and install Homebrew if needed
-if [[ "$(uname)" == "Darwin" ]]; then
-  echo "Checking for Homebrew..."
-  if ! command -v brew >/dev/null 2>&1; then
-    echo "Homebrew not found. Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || error_exit $LINENO "Failed to install Homebrew"
+update_existing_dotfiles() {
+  log_info "Dotfiles directory exists. Validating..."
 
-    # Add Homebrew to PATH for the current session
-    if [[ -f "/opt/homebrew/bin/brew" ]]; then
-      # Apple Silicon Mac
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
-
-    echo "Homebrew installed successfully."
-  else
-    echo "Homebrew is already installed."
+  if [[ ! -d "$DOTFILES_DIR/.git" ]]; then
+    log_error "$DOTFILES_DIR exists but is not a git repository"
+    log_error "Please remove it or set DOTFILES_DIR to a different location"
+    return 1
   fi
-fi
 
-echo "Checking prerequisites..."
-for util in "${REQUIRED_UTILS[@]}"; do
-  command -v "$util" >/dev/null 2>&1 || error_exit $LINENO "$util is not installed. Please install it and try again."
-done
+  cd "$DOTFILES_DIR"
 
-# Clone or update dotfiles repository
-clone_or_update_dotfiles
+  # Validate remote repository
+  local current_remote normalized_current normalized_expected
+  current_remote="$(git remote get-url origin 2>/dev/null)"
+  normalized_current="$(normalize_git_url "$current_remote")"
+  normalized_expected="$(normalize_git_url "$DOTFILES_REPO")"
 
-echo "Downloading Dotter..."
+  if [[ "$normalized_current" != "$normalized_expected" ]]; then
+    log_error "Repository remote mismatch:"
+    log_error "  Current:  $current_remote"
+    log_error "  Expected: $DOTFILES_REPO"
+    log_error "Please remove the directory or set DOTFILES_DIR to a different location"
+    return 1
+  fi
 
-OS="$(uname | tr '[:upper:]' '[:lower:]')"
-ARCH="$(uname -m)"
+  log_info "Valid repository found. Updating..."
 
-# Map the architecture to Dotter binary name
-case "$OS" in
-linux)
-  cp ".dotter/server.toml" ".dotter/local.toml" || error_exit $LINENO "Failed to copy local.toml"
+  # Update repository
+  git fetch origin
 
-  case "$ARCH" in
-  x86_64)
-    DOTTER_URL="$DOTTER_DOWNLOAD_URL/dotter-linux-x64-musl"
+  local current_branch
+  current_branch="$(git branch --show-current)"
+  if [[ "$current_branch" != "$DOTFILES_BRANCH" ]]; then
+    log_info "Switching to branch '$DOTFILES_BRANCH'..."
+    git checkout "$DOTFILES_BRANCH"
+  fi
+
+  git pull origin "$DOTFILES_BRANCH"
+  log_success "Dotfiles updated successfully"
+}
+
+clone_fresh_dotfiles() {
+  log_info "Cloning dotfiles repository..."
+  git clone --branch "$DOTFILES_BRANCH" "$DOTFILES_REPO" "$DOTFILES_DIR"
+  cd "$DOTFILES_DIR"
+  log_success "Dotfiles cloned successfully"
+}
+
+download_dotter() {
+  log_info "Setting up Dotter..."
+
+  local os_arch dotter_url
+  os_arch="$(get_os_arch)"
+
+  case "$os_arch" in
+  linux-x64)
+    dotter_url="$DOTTER_DOWNLOAD_URL/dotter-linux-x64-musl"
+    cp ".dotter/server.toml" ".dotter/local.toml"
     ;;
-  arm64 | aarch64)
-    DOTTER_URL="$DOTTER_DOWNLOAD_URL/dotter-linux-arm64-musl"
+  linux-arm64)
+    dotter_url="$DOTTER_DOWNLOAD_URL/dotter-linux-arm64-musl"
+    cp ".dotter/server.toml" ".dotter/local.toml"
+    ;;
+  darwin-arm64)
+    dotter_url="$DOTTER_DOWNLOAD_URL/dotter-macos-arm64.arm"
+    cp ".dotter/macos.toml" ".dotter/local.toml"
     ;;
   *)
-    error_exit $LINENO "Unsupported architecture: $ARCH"
+    log_error "Unsupported platform: $os_arch"
+    return 1
     ;;
   esac
-  ;;
-darwin)
-  cp ".dotter/macos.toml" ".dotter/local.toml" || error_exit $LINENO "Failed to copy local.toml"
 
-  case "$ARCH" in
-  arm64)
-    DOTTER_URL="$DOTTER_DOWNLOAD_URL/dotter-macos-arm64.arm"
-    ;;
-  *)
-    error_exit $LINENO "Unsupported architecture: $ARCH"
-    ;;
-  esac
-  ;;
-*)
-  error_exit $LINENO "Unsupported OS: $OS"
-  ;;
-esac
+  curl -fsSL "$dotter_url" -o "$DOTTER_BIN"
+  chmod +x "$DOTTER_BIN"
 
-curl -fsSL "$DOTTER_URL" -o "$DOTTER_BIN" || error_exit $LINENO "Failed to download Dotter"
-chmod +x "$DOTTER_BIN" || error_exit $LINENO "Failed to make Dotter executable"
+  log_success "Dotter ready"
+}
 
-echo "Deploying dotfiles..."
-"$DOTTER_BIN" deploy -v || error_exit $LINENO "Dotter deploy failed"
+deploy_dotfiles() {
+  log_info "Deploying dotfiles..."
+  "$DOTTER_BIN" deploy -v
+  log_success "Dotfiles deployed successfully"
+}
 
-# Run macOS-specific configuration if on macOS
-if [[ "$(uname)" == "Darwin" ]]; then
+configure_macos() {
+  if ! is_macos; then
+    return 0
+  fi
+
   if [[ -f "macos.sh" ]]; then
-    echo "Running macOS configuration..."
-    bash macos.sh || error_exit $LINENO "macOS configuration script failed"
-    echo "macOS configuration completed."
+    log_info "Running macOS configuration..."
+    bash macos.sh
+    log_success "macOS configuration completed"
   else
-    echo "Warning: macos.sh not found, skipping macOS configuration."
+    log_warning "macos.sh not found, skipping macOS configuration"
+  fi
+}
+
+install_packages() {
+  if ! is_macos; then
+    return 0
   fi
 
-  # Install packages from Brewfile
   if [[ -f "pkgs/Brewfile" ]]; then
-    echo "Installing packages from Brewfile..."
-    brew bundle install --file="pkgs/Brewfile" || error_exit $LINENO "Homebrew bundle installation failed"
-    echo "Package installation completed."
+    log_info "Installing packages from Brewfile..."
+    brew bundle install --file="pkgs/Brewfile"
+    log_success "Package installation completed"
   else
-    echo "Warning: pkgs/Brewfile not found, skipping package installation."
+    log_warning "pkgs/Brewfile not found, skipping package installation"
   fi
-fi
+}
 
-echo "Dotfiles bootstrapped successfully."
+# ================================== MAIN SCRIPT ================================ #
+
+main() {
+  show_banner
+  get_user_consent
+
+  install_homebrew
+  check_prerequisites
+  clone_or_update_dotfiles
+  download_dotter
+  deploy_dotfiles
+  configure_macos
+  install_packages
+
+  log_success "Dotfiles setup completed successfully!"
+  log_info "You may need to restart your terminal or source your shell configuration"
+}
+
+# Only run main if script is executed directly (not sourced)
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  main "$@"
+fi
