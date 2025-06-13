@@ -340,18 +340,63 @@ configure_touchid_sudo() {
   fi
 
   # Check if TouchID is already configured
-  if [[ -f "$target_file" ]] && grep -q "^auth.*pam_tid.so" "$target_file" 2>/dev/null; then
+  local pam_reattach_path="/opt/homebrew/lib/pam/pam_reattach.so"
+  local touchid_configured=false
+  local pam_reattach_configured=false
+
+  if [[ -f "$target_file" ]]; then
+    if grep -q "^auth.*pam_tid.so" "$target_file" 2>/dev/null; then
+      touchid_configured=true
+    fi
+    if grep -q "^auth.*pam_reattach.so" "$target_file" 2>/dev/null; then
+      pam_reattach_configured=true
+    fi
+  fi
+
+  # Check if configuration is complete
+  local needs_pam_reattach=false
+  if [[ -f "$pam_reattach_path" ]]; then
+    needs_pam_reattach=true
+  fi
+
+  # If TouchID is configured and pam_reattach is either not needed or already configured, we're done
+  if [[ "$touchid_configured" == true ]] && [[ "$needs_pam_reattach" == false || "$pam_reattach_configured" == true ]]; then
     log_success "TouchID for sudo is already configured"
+    if [[ "$pam_reattach_configured" == true ]]; then
+      log_success "TouchID in tmux is also already configured"
+    fi
     return 0
   fi
 
-  # Configure TouchID by uncommenting the auth line
-  if sed -e 's/^#auth/auth/' "$template_file" | sudo tee "$target_file" >/dev/null; then
+  # Configure TouchID and optionally pam_reattach for tmux support
+  local temp_file
+  temp_file=$(mktemp)
+
+  # Start with the template
+  sed -e 's/^#auth/auth/' "$template_file" >"$temp_file"
+
+  # If pam_reattach is available, add it above the TouchID line for tmux support
+  if [[ -f "$pam_reattach_path" ]]; then
+    log_info "Adding pam_reattach for TouchID support in tmux..."
+    # Insert pam_reattach line before the pam_tid.so line
+    sed -i '' '/auth.*sufficient.*pam_tid\.so/i\
+auth       optional       /opt/homebrew/lib/pam/pam_reattach.so
+' "$temp_file"
+  fi
+
+  # Deploy the configuration
+  if sudo cp "$temp_file" "$target_file"; then
     log_success "TouchID for sudo configured successfully"
+    if [[ -f "$pam_reattach_path" ]]; then
+      log_success "TouchID in tmux is also supported via pam_reattach"
+    fi
   else
     log_error "Failed to configure TouchID for sudo"
+    rm -f "$temp_file"
     return 1
   fi
+
+  rm -f "$temp_file"
 }
 
 set_default_shell() {
