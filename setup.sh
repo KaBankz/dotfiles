@@ -446,6 +446,21 @@ set_default_shell() {
   log_info "You'll need to restart your terminal or log out and back in for the change to take effect"
 }
 
+configure_rust() {
+  log_info "Configuring Rust..."
+
+  # Check if rustup is installed
+  if ! command_exists rustup; then
+    log_warning "rustup is not installed, skipping Rust configuration"
+    return 0
+  fi
+
+  log_info "Installing latest stable Rust toolchain..."
+  rustup default stable >/dev/null 2>&1
+
+  log_success "Rust configured successfully"
+}
+
 mise_install() {
   if ! command_exists mise; then
     log_warning "mise is not installed, skipping tool installation"
@@ -524,6 +539,7 @@ main() {
   configure_gpg
   configure_touchid_sudo
   set_default_shell
+  configure_rust
   mise_install
   check_system_updates
 
