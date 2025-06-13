@@ -3,7 +3,7 @@ function fish_greeting
     if test "$COLORTERM" = truecolor
         # pokemon shell colorscripts cargo package
         # --info flag prints the pokemon's pokedex entry
-        runx mise x -q krabby -- krabby random --info || runx krabby random --info
+        runx mise x -q cargo:krabby -- krabby random --info || runx krabby random --info
     else
         runx fastfetch -c neofetch
     end
