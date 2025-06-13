@@ -7,7 +7,7 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 # ================================ CONFIGURATION ================================ #
 
-readonly SCRIPT_VERSION="1.0.0"
+readonly SCRIPT_VERSION="1.0.1"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 readonly DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
@@ -315,17 +315,35 @@ update_existing_dotfiles() {
     git switch "$DOTFILES_BRANCH" >/dev/null 2>&1
   fi
 
-  # Check if local branch is behind remote
-  local local_commit remote_commit
+  # Check the relationship between local and remote branches
+  local local_commit remote_commit merge_base
   local_commit="$(git rev-parse HEAD)"
   remote_commit="$(git rev-parse "origin/$DOTFILES_BRANCH")"
 
-  if [[ "$local_commit" != "$remote_commit" ]]; then
+  if [[ "$local_commit" == "$remote_commit" ]]; then
+    log_success "Dotfiles are already up to date"
+    return 0
+  fi
+
+  # Find the merge base to determine the relationship
+  merge_base="$(git merge-base HEAD "origin/$DOTFILES_BRANCH" 2>/dev/null || echo "")"
+
+  if [[ "$merge_base" == "$local_commit" ]]; then
+    # Local is behind remote - safe to pull
     log_info "Updates found, pulling changes..."
     git pull >/dev/null 2>&1
     log_success "Dotfiles updated successfully"
+  elif [[ "$merge_base" == "$remote_commit" ]]; then
+    # Local is ahead of remote
+    log_warning "Local repository is ahead of remote"
+    log_warning "You have local commits that aren't on the remote branch"
+    log_info "Skipping update to preserve local changes"
   else
-    log_success "Dotfiles are already up to date"
+    # Branches have diverged
+    log_warning "Local and remote branches have diverged"
+    log_warning "Both have unique commits that could cause merge conflicts"
+    log_info "Skipping update to avoid potential conflicts"
+    log_info "You may need to manually resolve this using git commands"
   fi
 }
 
