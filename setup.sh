@@ -7,7 +7,7 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 # ================================ CONFIGURATION ================================ #
 
-readonly SCRIPT_VERSION="1.0.1"
+readonly SCRIPT_VERSION="1.0.2"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 readonly DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
@@ -312,7 +312,7 @@ update_existing_dotfiles() {
   current_branch="$(git branch --show-current)"
   if [[ "$current_branch" != "$DOTFILES_BRANCH" ]]; then
     log_info "Switching to branch '$DOTFILES_BRANCH'..."
-    git switch "$DOTFILES_BRANCH" >/dev/null 2>&1
+    git switch "$DOTFILES_BRANCH" >/dev/null
   fi
 
   # Check the relationship between local and remote branches
@@ -331,7 +331,7 @@ update_existing_dotfiles() {
   if [[ "$merge_base" == "$local_commit" ]]; then
     # Local is behind remote - safe to pull
     log_info "Updates found, pulling changes..."
-    git pull >/dev/null 2>&1
+    git pull >/dev/null
     log_success "Dotfiles updated successfully"
   elif [[ "$merge_base" == "$remote_commit" ]]; then
     # Local is ahead of remote
@@ -349,7 +349,7 @@ update_existing_dotfiles() {
 
 clone_fresh_dotfiles() {
   log_info "Cloning dotfiles repository..."
-  git clone --branch "$DOTFILES_BRANCH" "$DOTFILES_REPO" "$DOTFILES_DIR" >/dev/null 2>&1
+  git clone --branch "$DOTFILES_BRANCH" "$DOTFILES_REPO" "$DOTFILES_DIR" >/dev/null
   cd "$DOTFILES_DIR"
   log_success "Dotfiles cloned successfully"
 }
@@ -426,7 +426,7 @@ configure_gpg() {
   chmod 700 "$HOME/.local/share/gnupg"
 
   # Initialize GPG keyring (creates default keyring on new devices)
-  gpg --list-keys >/dev/null 2>&1
+  gpg --list-keys >/dev/null
 
   log_success "GPG configured successfully"
 }
@@ -553,7 +553,7 @@ configure_rust() {
   fi
 
   log_info "Installing latest stable Rust toolchain..."
-  rustup default stable >/dev/null 2>&1
+  rustup default stable >/dev/null
 
   log_success "Rust configured successfully"
 }
