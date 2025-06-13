@@ -8,6 +8,11 @@
 bash -c "$(curl -fsSL https://krabby.dev/setup)"
 ```
 
+> [!TIP]
+> You can use the `-y` flag to auto-confirm all prompts.
+
+<!--  -->
+
 > Script Source Code: [setup.sh](./setup.sh)
 
 ## Key Features :key:
