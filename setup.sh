@@ -7,6 +7,7 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 # ================================ CONFIGURATION ================================ #
 
+readonly SCRIPT_VERSION="1.0.0"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 readonly DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
@@ -15,6 +16,9 @@ readonly DOTTER_DOWNLOAD_URL="$DOTTER_REPO/releases/latest/download"
 readonly DOTTER_BIN="$DOTFILES_DIR/dotter"
 
 readonly -a REQUIRED_UTILS=("curl" "git")
+
+# Global flag for auto-confirmation
+AUTO_CONFIRM=false
 
 # ================================== LOGGING =================================== #
 
@@ -94,6 +98,44 @@ normalize_git_url() {
   printf "%s" "$url"
 }
 
+# ================================ ARGUMENT PARSING ============================= #
+
+show_usage() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
+
+KaBankz' Dotfiles Bootstrapper v${SCRIPT_VERSION}
+
+OPTIONS:
+  -y, --yes    Automatically answer yes to all prompts (uses default options)
+  -h, --help   Show this help message and exit
+
+ENVIRONMENT VARIABLES:
+  DOTFILES_DIR    Custom directory for dotfiles (default: \$HOME/.dotfiles)
+
+EOF
+}
+
+parse_arguments() {
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+    -y | --yes)
+      AUTO_CONFIRM=true
+      shift
+      ;;
+    -h | --help)
+      show_usage
+      exit 0
+      ;;
+    *)
+      log_error "Unknown option: $1"
+      show_usage
+      exit 1
+      ;;
+    esac
+  done
+}
+
 # ================================= MAIN FUNCTIONS ============================== #
 
 show_banner() {
@@ -108,16 +150,20 @@ show_banner() {
 
  https://github.com/KaBankz/dotfiles
 
- KaBankz' Dotfiles Bootstrapper
+EOF
+  printf " KaBankz' Dotfiles Bootstrapper v%s\n" "$SCRIPT_VERSION"
+  cat <<'EOF'
 
  KABANKZ IS NOT RESPONSIBLE FOR ANY DAMAGE
  CAUSED BY THIS SCRIPT. USE AT YOUR OWN RISK.
 
  Configuration:
  Set DOTFILES_DIR to use a custom directory
+ Use -y flag to auto-confirm all prompts
 
 EOF
   printf " DOTFILES_DIR=%s\n" "$DOTFILES_DIR"
+  printf " AUTO_CONFIRM=%s\n" "$AUTO_CONFIRM"
   cat <<'EOF'
 
  ============================================
@@ -125,23 +171,56 @@ EOF
 EOF
 }
 
-# Generic function for asking user consent with Y/n pattern
-ask_user_consent() {
+# Generic function for prompting user with configurable default
+# Usage: prompt_user "Question text" "Y" (for Y/n) or "N" (for y/N)
+prompt_user() {
   local prompt="$1"
+  local default="${2:-Y}" # Default to "Y" if not specified
+
+  # Build the prompt string based on default
+  local prompt_string
+  if [[ "$default" == "Y" ]]; then
+    prompt_string="$prompt (Y/n)"
+  else
+    prompt_string="$prompt (y/N)"
+  fi
+
+  # Auto-confirm if flag is set
+  if [[ "$AUTO_CONFIRM" == true ]]; then
+    log_info "$prompt_string: $default [auto-confirmed]"
+    [[ "$default" == "Y" ]] && return 0 || return 1
+  fi
+
+  # Get user input
   local choice
-  read -rp "$prompt (Y/n): " choice
-  case "$choice" in
-  [Nn] | [Nn][Oo])
-    return 1 # User said no
-    ;;
-  *)
-    return 0 # User said yes (default)
-    ;;
-  esac
+  read -rp "$prompt_string: " choice
+
+  # Process response based on default
+  if [[ "$default" == "Y" ]]; then
+    # Default is Yes - only No responses return 1
+    case "$choice" in
+    [Nn] | [Nn][Oo])
+      return 1
+      ;;
+    *)
+      return 0
+      ;;
+    esac
+  else
+    # Default is No - only Yes responses return 0
+    case "$choice" in
+    [Yy] | [Yy][Ee][Ss])
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+    esac
+  fi
 }
 
 get_user_consent() {
-  if ask_user_consent "Do you agree and wish to continue?"; then
+  if prompt_user "Do you agree and wish to continue?" "Y"; then
     return 0
   else
     log_info "Setup cancelled by user"
@@ -467,7 +546,7 @@ mise_install() {
     return 0
   fi
 
-  if ask_user_consent "Do you want to install mise tools now?"; then
+  if prompt_user "Do you want to install mise tools now?" "Y"; then
     log_info "Installing mise tools..."
     mise trust "$DOTFILES_DIR"
     mise install --cd "$HOME"
@@ -482,18 +561,10 @@ check_system_updates() {
     return 0
   fi
 
-  # Custom consent function for system updates (defaults to No)
-  local choice
-  read -rp "Do you want to check for and install macOS system updates? (y/N): " choice
-  case "$choice" in
-  [Yy] | [Yy][Ee][Ss])
-    # User said yes, proceed
-    ;;
-  *)
+  if ! prompt_user "Do you want to check for and install macOS system updates?" "N"; then
     log_info "Skipping system updates"
     return 0
-    ;;
-  esac
+  fi
 
   log_info "Checking for macOS system updates..."
 
@@ -526,6 +597,8 @@ check_system_updates() {
 # ================================== MAIN SCRIPT ================================ #
 
 main() {
+  parse_arguments "$@"
+
   show_banner
   get_user_consent
 
