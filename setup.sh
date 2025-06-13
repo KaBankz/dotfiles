@@ -128,16 +128,28 @@ EOF
 EOF
 }
 
-get_user_consent() {
+# Generic function for asking user consent with Y/n pattern
+ask_user_consent() {
+  local prompt="$1"
   local choice
-  read -rp "Do you agree and wish to continue? (Y/n): " choice
+  read -rp "$prompt (Y/n): " choice
   case "$choice" in
   [Nn] | [Nn][Oo])
+    return 1 # User said no
+    ;;
+  *)
+    return 0 # User said yes (default)
+    ;;
+  esac
+}
+
+get_user_consent() {
+  if ask_user_consent "Do you agree and wish to continue?"; then
+    return 0
+  else
     log_info "Setup cancelled by user"
     exit 0
-    ;;
-  *) return 0 ;;
-  esac
+  fi
 }
 
 install_homebrew() {
@@ -350,6 +362,21 @@ set_default_shell() {
   log_info "You'll need to restart your terminal or log out and back in for the change to take effect"
 }
 
+mise_install() {
+  if ! command_exists mise; then
+    log_warning "mise is not installed, skipping tool installation"
+    return 0
+  fi
+
+  if ask_user_consent "Do you want to install mise tools now?"; then
+    log_info "Installing mise tools..."
+    mise install --cd "$HOME"
+    log_success "mise tools installed successfully"
+  else
+    log_info "Skipping mise tool installation"
+  fi
+}
+
 # ================================== MAIN SCRIPT ================================ #
 
 main() {
@@ -365,6 +392,7 @@ main() {
   install_packages
   configure_gpg
   set_default_shell
+  mise_install
 
   log_success "Dotfiles setup completed successfully!"
   log_info "You may need to restart your terminal or source your shell configuration"
