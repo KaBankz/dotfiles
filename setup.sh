@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-#TODO:
-- Setup touchid for sudo
-
 # KaBankz' Dotfiles Bootstrapper
 
 set -euo pipefail # Exit on error, undefined vars, pipe failures
@@ -326,6 +323,37 @@ configure_gpg() {
   log_success "GPG configured successfully"
 }
 
+configure_touchid_sudo() {
+  if ! is_macos; then
+    return 0
+  fi
+
+  log_info "Configuring TouchID for sudo..."
+
+  local template_file="/etc/pam.d/sudo_local.template"
+  local target_file="/etc/pam.d/sudo_local"
+
+  # Check if template file exists
+  if [[ ! -f "$template_file" ]]; then
+    log_warning "Local sudo config template not found at $template_file, skipping TouchID configuration"
+    return 0
+  fi
+
+  # Check if TouchID is already configured
+  if [[ -f "$target_file" ]] && grep -q "^auth.*pam_tid.so" "$target_file" 2>/dev/null; then
+    log_success "TouchID for sudo is already configured"
+    return 0
+  fi
+
+  # Configure TouchID by uncommenting the auth line
+  if sed -e 's/^#auth/auth/' "$template_file" | sudo tee "$target_file" >/dev/null; then
+    log_success "TouchID for sudo configured successfully"
+  else
+    log_error "Failed to configure TouchID for sudo"
+    return 1
+  fi
+}
+
 set_default_shell() {
   log_info "Setting fish as the default shell..."
 
@@ -391,6 +419,7 @@ main() {
   configure_macos
   install_packages
   configure_gpg
+  configure_touchid_sudo
   set_default_shell
   mise_install
 
