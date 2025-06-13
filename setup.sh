@@ -227,13 +227,13 @@ update_existing_dotfiles() {
   log_info "Valid repository found. Checking for updates..."
 
   # Update repository
-  git fetch origin
+  git fetch origin >/dev/null 2>&1
 
   local current_branch
   current_branch="$(git branch --show-current)"
   if [[ "$current_branch" != "$DOTFILES_BRANCH" ]]; then
     log_info "Switching to branch '$DOTFILES_BRANCH'..."
-    git switch "$DOTFILES_BRANCH"
+    git switch "$DOTFILES_BRANCH" >/dev/null 2>&1
   fi
 
   # Check if local branch is behind remote
@@ -243,7 +243,7 @@ update_existing_dotfiles() {
 
   if [[ "$local_commit" != "$remote_commit" ]]; then
     log_info "Updates found, pulling changes..."
-    git pull
+    git pull >/dev/null 2>&1
     log_success "Dotfiles updated successfully"
   else
     log_success "Dotfiles are already up to date"
@@ -252,7 +252,7 @@ update_existing_dotfiles() {
 
 clone_fresh_dotfiles() {
   log_info "Cloning dotfiles repository..."
-  git clone --branch "$DOTFILES_BRANCH" "$DOTFILES_REPO" "$DOTFILES_DIR"
+  git clone --branch "$DOTFILES_BRANCH" "$DOTFILES_REPO" "$DOTFILES_DIR" >/dev/null 2>&1
   cd "$DOTFILES_DIR"
   log_success "Dotfiles cloned successfully"
 }
