@@ -16,6 +16,8 @@
     renames = true
 [push]
     autoSetupRemote = true
+[pull]
+    rebase = true
 [user]
     email = 20971850+KaBankz@users.noreply.github.com
     name = KaBankz
