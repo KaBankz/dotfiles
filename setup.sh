@@ -451,6 +451,52 @@ mise_install() {
   fi
 }
 
+check_system_updates() {
+  if ! is_macos; then
+    return 0
+  fi
+
+  # Custom consent function for system updates (defaults to No)
+  local choice
+  read -rp "Do you want to check for and install macOS system updates? (y/N): " choice
+  case "$choice" in
+  [Yy] | [Yy][Ee][Ss])
+    # User said yes, proceed
+    ;;
+  *)
+    log_info "Skipping system updates"
+    return 0
+    ;;
+  esac
+
+  log_info "Checking for macOS system updates..."
+
+  # Check for available updates
+  local updates_available
+  if updates_available=$(softwareupdate -l 2>&1); then
+    if echo "$updates_available" | grep -q "No new software available"; then
+      log_success "Your system is up to date!"
+      return 0
+    fi
+
+    log_info "Available updates found:"
+    echo "$updates_available"
+
+    log_info "Installing system updates... This may take a while and require a restart."
+    log_warning "DO NOT interrupt this process!"
+
+    # Install all recommended updates with automatic restart and license agreement
+    sudo softwareupdate -iaR --agree-to-license
+
+    log_success "System updates installed successfully!"
+    log_info "Your system will restart automatically if required"
+  else
+    log_error "Failed to check for system updates"
+    log_error "You may need to check manually via System Preferences"
+    return 1
+  fi
+}
+
 # ================================== MAIN SCRIPT ================================ #
 
 main() {
@@ -468,6 +514,7 @@ main() {
   configure_touchid_sudo
   set_default_shell
   mise_install
+  check_system_updates
 
   log_success "Dotfiles setup completed successfully!"
   log_info "You may need to restart your terminal or source your shell configuration"
