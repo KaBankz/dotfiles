@@ -544,7 +544,7 @@ main() {
   check_system_updates
 
   log_success "Dotfiles setup completed successfully!"
-  log_info "You may need to restart your terminal or source your shell configuration"
+  log_info "You may need to restart your terminal or restart your computer"
 }
 
 main "$@"
