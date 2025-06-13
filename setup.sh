@@ -444,6 +444,7 @@ mise_install() {
 
   if ask_user_consent "Do you want to install mise tools now?"; then
     log_info "Installing mise tools..."
+    mise trust "$DOTFILES_DIR"
     mise install --cd "$HOME"
     log_success "mise tools installed successfully"
   else
