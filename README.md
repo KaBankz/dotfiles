@@ -5,7 +5,7 @@
 ## Get Started :rocket:
 
 ```sh
-bash -c "$(curl -fsSL https://github.com/KaBankz/dotfiles/raw/dotter/setup.sh)"
+bash -c "$(curl -fsSL https://krabby.dev/setup)"
 ```
 
 > Script Source Code: [setup.sh](./setup.sh)
