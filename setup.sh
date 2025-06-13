@@ -318,7 +318,8 @@ configure_gpg() {
   mkdir -p "$HOME/.local/share/gnupg"
   chmod 700 "$HOME/.local/share/gnupg"
 
-  gpg --list-keys
+  # Initialize GPG keyring (creates default keyring on new devices)
+  gpg --list-keys >/dev/null 2>&1
 
   log_success "GPG configured successfully"
 }
