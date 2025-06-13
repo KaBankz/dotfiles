@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#TODO:
+- Setup touchid for sudo
+
 # KaBankz' Dotfiles Bootstrapper
 
 set -euo pipefail # Exit on error, undefined vars, pipe failures
@@ -300,6 +303,17 @@ install_packages() {
   fi
 }
 
+configure_gpg() {
+  log_info "Configuring GPG..."
+
+  mkdir -p "$HOME/.local/share/gnupg"
+  chmod 700 "$HOME/.local/share/gnupg"
+
+  gpg --list-keys
+
+  log_success "GPG configured successfully"
+}
+
 set_default_shell() {
   log_info "Setting fish as the default shell..."
 
@@ -349,6 +363,7 @@ main() {
   deploy_dotfiles
   configure_macos
   install_packages
+  configure_gpg
   set_default_shell
 
   log_success "Dotfiles setup completed successfully!"
