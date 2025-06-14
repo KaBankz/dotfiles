@@ -34,58 +34,6 @@ bash -c "$(curl -fsSL https://krabby.dev/setup)"
 
 - I have tried _MANY_ dotfile managers, and Dotter is the one that I like the most.
 
-## Manual Installation :hammer_and_wrench:
-
-<details>
-
-<summary>Click to expand</summary>
-
-1. Clone this repo
-
-    ```sh
-   git clone https://github.com/KaBankz/dotfiles.git ~/.dotfiles
-    ```
-
-2. Go to the repo and stay there until the end
-
-    ```sh
-    cd ~/.dotfiles
-    ```
-
-    > **IMPORTANT:**
-    > You must create a `local.toml` file inside the `.dotter` directory.
-    >
-    > This file is used to store your local configurations.
-    >
-    > You can copy the `local.toml.example` or any host config file from `.dotter` and modify it to your needs.
-
-    ```sh
-    cp .dotter/local.toml.example .dotter/local.toml
-    ```
-
-3. Download the `dotter` binary inside the repo
-
-    > **WARNING:**
-    > Be sure to download the appropriate binary for your os and arch from [Dotter Releases](https://github.com/SuperCuber/dotter/releases/latest#:~:text=Assets).
-
-    ```sh
-    curl -fsSL -o dotter https://github.com/SuperCuber/dotter/releases/latest/download/dotter-macos-arm64.arm
-    chmod +x dotter
-    ```
-
-4. Run `dotter deploy` inside the repo
-
-    The `-v` flag is optional, it enables verbose output to see what is happening.
-
-    > **CAUTION:**
-    > If you have any existing dotfiles that conflict with the ones in this repo, you will receive an error. You can either remove the conflicting dotfiles or overwrite them using `--force`.
-
-    ```sh
-    ./dotter deploy -v
-    ```
-
-</details>
-
 ## License :scroll:
 
 [MIT](LICENSE)
