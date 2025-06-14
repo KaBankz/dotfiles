@@ -10,6 +10,7 @@ packages = [
   "bin",
   "bun",
   "nvim",
+  "zed",
   "fastfetch",
   "ghostty",
 ]
