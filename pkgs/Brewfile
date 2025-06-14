@@ -52,7 +52,6 @@ brew "rustup", link: true
 brew "shellcheck"
 brew "sshs"
 brew "starship"
-brew "swiftlint"
 brew "tldx"
 brew "tlrc"
 brew "tmux"
