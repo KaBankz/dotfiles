@@ -7,7 +7,7 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 # ================================ CONFIGURATION ================================ #
 
-readonly SCRIPT_VERSION="1.0.2"
+readonly SCRIPT_VERSION="1.0.3"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 readonly DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
@@ -355,23 +355,22 @@ clone_fresh_dotfiles() {
 }
 
 download_dotter() {
-  log_info "Downloading Dotter..."
-
-  local os_arch dotter_url
+  local os_arch dotter_url config_source
   os_arch="$(get_os_arch)"
 
+  # Determine download URL and config source based on platform
   case "$os_arch" in
   linux-x64)
     dotter_url="$DOTTER_DOWNLOAD_URL/dotter-linux-x64-musl"
-    cp ".dotter/server.toml" ".dotter/local.toml"
+    config_source=".dotter/server.toml"
     ;;
   linux-arm64)
     dotter_url="$DOTTER_DOWNLOAD_URL/dotter-linux-arm64-musl"
-    cp ".dotter/server.toml" ".dotter/local.toml"
+    config_source=".dotter/server.toml"
     ;;
   darwin-arm64)
     dotter_url="$DOTTER_DOWNLOAD_URL/dotter-macos-arm64.arm"
-    cp ".dotter/macos.toml" ".dotter/local.toml"
+    config_source=".dotter/macos.toml"
     ;;
   *)
     log_error "Unsupported platform: $os_arch"
@@ -379,10 +378,47 @@ download_dotter() {
     ;;
   esac
 
-  curl -fsSL "$dotter_url" -o "$DOTTER_BIN"
-  chmod +x "$DOTTER_BIN"
+  local needs_download=true
 
-  log_success "Dotter downloaded successfully"
+  if [[ -f "$DOTTER_BIN" ]]; then
+    log_info "Existing Dotter binary found, checking age..."
+
+    local current_time file_time age_seconds
+    current_time=$(date +%s)
+
+    if is_macos; then
+      file_time=$(stat -f %m "$DOTTER_BIN" 2>/dev/null)
+    else
+      file_time=$(stat -c %Y "$DOTTER_BIN" 2>/dev/null)
+    fi
+
+    # Check if the binary is older than 7 days (604800 seconds)
+    if [[ -n "$file_time" ]]; then
+      age_seconds=$((current_time - file_time))
+      local age_days=$((age_seconds / 86400))
+
+      if [[ $age_seconds -lt 604800 ]]; then
+        log_success "Dotter binary is recent (${age_days} days old), skipping download"
+        needs_download=false
+      else
+        log_info "Dotter binary is old (${age_days} days old), will re-download"
+      fi
+    else
+      log_warning "Could not determine file age, will re-download"
+    fi
+  else
+    log_info "Dotter binary not found, will download"
+  fi
+
+  if [[ "$needs_download" == true ]]; then
+    log_info "Downloading Dotter..."
+    curl -fsSL "$dotter_url" -o "$DOTTER_BIN"
+    chmod +x "$DOTTER_BIN"
+    log_success "Dotter downloaded successfully"
+  fi
+
+  # Always ensure the local config file is set up
+  cp "$config_source" ".dotter/local.toml"
 }
 
 deploy_dotfiles() {
