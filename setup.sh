@@ -7,7 +7,7 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 # ================================ CONFIGURATION ================================ #
 
-readonly SCRIPT_VERSION="1.0.3"
+readonly SCRIPT_VERSION="1.0.4"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 readonly DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
@@ -448,7 +448,7 @@ install_packages() {
 
   if [[ -f "pkgs/Brewfile" ]]; then
     log_info "Installing packages from Brewfile..."
-    brew bundle install --file="pkgs/Brewfile"
+    brew bundle install --file="pkgs/Brewfile" --quiet
     log_success "Package installation completed"
   else
     log_warning "pkgs/Brewfile not found, skipping package installation"
