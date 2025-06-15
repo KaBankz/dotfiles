@@ -49,7 +49,6 @@ brew "pam-reattach"
 brew "pandoc"
 brew "pinentry-mac"
 brew "ripgrep"
-brew "rustup", link: true
 brew "shellcheck"
 brew "sshs"
 brew "starship"
