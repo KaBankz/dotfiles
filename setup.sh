@@ -9,7 +9,7 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 readonly SCRIPT_VERSION="1.0.5"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
-readonly DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
+readonly DOTFILES_REPO="git@github.com:KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
 readonly DOTTER_VERSION="0.13.3"
 readonly DOTTER_REPO="https://github.com/SuperCuber/dotter"
