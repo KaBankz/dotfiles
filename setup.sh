@@ -7,12 +7,13 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 # ================================ CONFIGURATION ================================ #
 
-readonly SCRIPT_VERSION="1.0.4"
+readonly SCRIPT_VERSION="1.0.5"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 readonly DOTFILES_REPO="https://github.com/KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
+readonly DOTTER_VERSION="0.13.3"
 readonly DOTTER_REPO="https://github.com/SuperCuber/dotter"
-readonly DOTTER_DOWNLOAD_URL="$DOTTER_REPO/releases/latest/download"
+readonly DOTTER_DOWNLOAD_URL="$DOTTER_REPO/releases/download/v$DOTTER_VERSION"
 readonly DOTTER_BIN="$DOTFILES_DIR/dotter"
 
 readonly -a REQUIRED_UTILS=("curl" "git")
@@ -105,6 +106,7 @@ show_usage() {
 Usage: $(basename "$0") [OPTIONS]
 
 KaBankz' Dotfiles Bootstrapper v${SCRIPT_VERSION}
+Dotter v${DOTTER_VERSION}
 
 OPTIONS:
   -y, --yes    Automatically answer yes to all prompts (uses default options)
@@ -152,6 +154,7 @@ show_banner() {
 
 EOF
   printf " KaBankz' Dotfiles Bootstrapper v%s\n" "$SCRIPT_VERSION"
+  printf " Dotter v%s\n" "$DOTTER_VERSION"
   cat <<'EOF'
 
  KABANKZ IS NOT RESPONSIBLE FOR ANY DAMAGE
@@ -380,41 +383,34 @@ download_dotter() {
 
   local needs_download=true
 
-  if [[ -f "$DOTTER_BIN" ]]; then
-    log_info "Existing Dotter binary found, checking age..."
+  if [[ -f "$DOTTER_BIN" && -x "$DOTTER_BIN" ]]; then
+    log_info "Existing Dotter binary found, checking version..."
 
-    local current_time file_time age_seconds
-    current_time=$(date +%s)
+    # Get the current version of the dotter binary
+    local current_version
+    if current_version=$("$DOTTER_BIN" --version 2>/dev/null); then
+      # Extract version number from "dotter 0.13.3" format
+      current_version=$(echo "$current_version" | awk '{print $2}')
 
-    if is_macos; then
-      file_time=$(stat -f %m "$DOTTER_BIN" 2>/dev/null)
-    else
-      file_time=$(stat -c %Y "$DOTTER_BIN" 2>/dev/null)
-    fi
-
-    # Check if the binary is older than 7 days (604800 seconds)
-    if [[ -n "$file_time" ]]; then
-      age_seconds=$((current_time - file_time))
-      local age_days=$((age_seconds / 86400))
-
-      if [[ $age_seconds -lt 604800 ]]; then
-        log_success "Dotter binary is recent (${age_days} days old), skipping download"
+      if [[ "$current_version" == "$DOTTER_VERSION" ]]; then
+        log_success "Dotter is up to date (v$current_version)"
         needs_download=false
       else
-        log_info "Dotter binary is old (${age_days} days old), will re-download"
+        log_info "Dotter version mismatch: current v$current_version, expected v$DOTTER_VERSION"
+        log_info "Will download updated version"
       fi
     else
-      log_warning "Could not determine file age, will re-download"
+      log_warning "Could not determine Dotter version, will re-download"
     fi
   else
-    log_info "Dotter binary not found, will download"
+    log_info "Dotter binary not found or not executable, will download"
   fi
 
   if [[ "$needs_download" == true ]]; then
-    log_info "Downloading Dotter..."
+    log_info "Downloading Dotter v$DOTTER_VERSION..."
     curl -fsSL "$dotter_url" -o "$DOTTER_BIN"
     chmod +x "$DOTTER_BIN"
-    log_success "Dotter downloaded successfully"
+    log_success "Dotter v$DOTTER_VERSION downloaded successfully"
   fi
 
   # Always ensure the local config file is set up
