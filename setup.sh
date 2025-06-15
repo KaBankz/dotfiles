@@ -7,7 +7,7 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 # ================================ CONFIGURATION ================================ #
 
-readonly SCRIPT_VERSION="1.0.5"
+readonly SCRIPT_VERSION="1.0.6"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 readonly DOTFILES_REPO="git@github.com:KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
@@ -231,29 +231,6 @@ get_user_consent() {
   fi
 }
 
-install_homebrew() {
-  if ! is_macos; then
-    return 0
-  fi
-
-  log_info "Checking for Homebrew..."
-
-  if command_exists brew; then
-    log_success "Homebrew is already installed"
-    return 0
-  fi
-
-  log_info "Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  # Add Homebrew to PATH for the current session (Apple Silicon Mac)
-  if [[ -f "/opt/homebrew/bin/brew" ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  fi
-
-  log_success "Homebrew installed successfully"
-}
-
 check_prerequisites() {
   log_info "Checking prerequisites..."
 
@@ -421,6 +398,29 @@ deploy_dotfiles() {
   log_info "Deploying dotfiles..."
   "$DOTTER_BIN" deploy -v
   log_success "Dotfiles deployed successfully"
+}
+
+install_homebrew() {
+  if ! is_macos; then
+    return 0
+  fi
+
+  log_info "Checking for Homebrew..."
+
+  if command_exists brew; then
+    log_success "Homebrew is already installed"
+    return 0
+  fi
+
+  log_info "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # Add Homebrew to PATH for the current session (Apple Silicon Mac)
+  if [[ -f "/opt/homebrew/bin/brew" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+
+  log_success "Homebrew installed successfully"
 }
 
 configure_macos() {
@@ -637,17 +637,17 @@ main() {
   show_banner
   get_user_consent
 
-  install_homebrew
   check_prerequisites
   clone_or_update_dotfiles
   download_dotter
   deploy_dotfiles
+  install_homebrew
   configure_macos
   install_packages
   configure_gpg
   configure_touchid_sudo
-  set_default_shell
   mise_install
+  set_default_shell
   check_system_updates
 
   log_success "Dotfiles setup completed successfully!"
