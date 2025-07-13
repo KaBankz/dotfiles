@@ -21,19 +21,18 @@
     "button": false
   },
   "redact_private_values": true,
-  "assistant": {
+  "agent": {
+    "inline_assistant_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-latest"
+    },
+    "play_sound_when_agent_done": true,
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-3-5-sonnet"
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-latest"
     },
     "enabled": true,
-    "button": true,
-    "version": "2"
-  },
-  "language_models": {
-    "ollama": {
-      "low_speed_timeout_in_seconds": 10
-    }
+    "button": true
   },
   "notification_panel": {
     "button": false
