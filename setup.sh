@@ -289,7 +289,7 @@ update_existing_dotfiles() {
   git fetch origin >/dev/null 2>&1
 
   local current_branch
-  current_branch="$(git branch --show-current)"
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
   if [[ "$current_branch" != "$DOTFILES_BRANCH" ]]; then
     log_info "Switching to branch '$DOTFILES_BRANCH'..."
     git switch "$DOTFILES_BRANCH" >/dev/null
@@ -326,7 +326,7 @@ update_existing_dotfiles() {
           log_success "Updates pulled successfully"
 
           # Check if there's anything to pop from the stash
-          if git stash list | grep -q "Bootstrapper stash $current_date"; then
+          if git stash list --format="%s" | grep -q "Bootstrapper stash $current_date"; then
             log_info "Restoring stashed changes..."
             if git stash pop >/dev/null 2>&1; then
               log_success "Stashed changes restored successfully"
