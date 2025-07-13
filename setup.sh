@@ -309,10 +309,52 @@ update_existing_dotfiles() {
   merge_base="$(git merge-base HEAD "origin/$DOTFILES_BRANCH" 2>/dev/null || echo "")"
 
   if [[ "$merge_base" == "$local_commit" ]]; then
-    # Local is behind remote - safe to pull
-    log_info "Updates found, pulling changes..."
-    git pull >/dev/null
-    log_success "Dotfiles updated successfully"
+    # Local is behind remote - check for uncommitted changes before pulling
+    log_info "Updates found, checking for uncommitted changes..."
+
+    # Check if there are uncommitted changes in the working directory
+    if [[ -n $(git status --porcelain) ]]; then
+      log_warning "Uncommitted changes detected in the dotfiles repository"
+
+      if prompt_user "Do you want to stash your changes to pull updates?" "Y"; then
+        log_info "Stashing uncommitted changes..."
+        local current_date=$(date +%Y-%m-%d)
+        git stash push -m "Bootstrapper stash $current_date" >/dev/null 2>&1
+
+        log_info "Pulling updates..."
+        if git pull >/dev/null 2>&1; then
+          log_success "Updates pulled successfully"
+
+          # Check if there's anything to pop from the stash
+          if git stash list | grep -q "Bootstrapper stash $current_date"; then
+            log_info "Restoring stashed changes..."
+            if git stash pop >/dev/null 2>&1; then
+              log_success "Stashed changes restored successfully"
+            else
+              log_error "Failed to restore stashed changes"
+              log_error "Your changes are still in the stash. Use 'git stash pop' to restore them manually"
+              return 1
+            fi
+          fi
+
+          log_success "Dotfiles updated successfully"
+        else
+          log_error "Failed to pull updates"
+          log_info "Restoring stashed changes..."
+          git stash pop >/dev/null 2>&1
+          return 1
+        fi
+      else
+        log_info "Setup cancelled due to uncommitted changes"
+        log_info "Please commit or stash your changes manually and run the setup again"
+        exit 0
+      fi
+    else
+      # No uncommitted changes, safe to pull
+      log_info "Pulling updates..."
+      git pull >/dev/null
+      log_success "Dotfiles updated successfully"
+    fi
   elif [[ "$merge_base" == "$remote_commit" ]]; then
     # Local is ahead of remote
     log_warning "Local repository is ahead of remote"
