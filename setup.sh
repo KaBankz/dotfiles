@@ -7,7 +7,7 @@ IFS=$'\n\t'       # Secure Internal Field Separator
 
 # ================================ CONFIGURATION ================================ #
 
-readonly SCRIPT_VERSION="1.0.6"
+readonly SCRIPT_VERSION="1.0.7"
 readonly DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 readonly DOTFILES_REPO="git@github.com:KaBankz/dotfiles.git"
 readonly DOTFILES_BRANCH="dotter"
@@ -318,15 +318,15 @@ update_existing_dotfiles() {
 
       if prompt_user "Do you want to stash your changes to pull updates?" "Y"; then
         log_info "Stashing uncommitted changes..."
-        local current_date=$(date +%Y-%m-%d)
-        git stash push -m "Bootstrapper stash $current_date" >/dev/null 2>&1
+        local current_date=$(date +%Y-%m-%d-%H-%M-%S)
 
-        log_info "Pulling updates..."
-        if git pull >/dev/null 2>&1; then
-          log_success "Updates pulled successfully"
+        if git stash push -m "Bootstrapper stash $current_date"; then
+          log_success "Changes stashed successfully"
+          log_info "Pulling updates..."
 
-          # Check if there's anything to pop from the stash
-          if git stash list --format="%s" | grep -q "Bootstrapper stash $current_date"; then
+          if git pull >/dev/null 2>&1; then
+            log_success "Updates pulled successfully"
+
             log_info "Restoring stashed changes..."
             if git stash pop >/dev/null 2>&1; then
               log_success "Stashed changes restored successfully"
@@ -335,13 +335,17 @@ update_existing_dotfiles() {
               log_error "Your changes are still in the stash. Use 'git stash pop' to restore them manually"
               return 1
             fi
-          fi
 
-          log_success "Dotfiles updated successfully"
+            log_success "Dotfiles updated successfully"
+          else
+            log_error "Failed to pull updates"
+            log_info "Restoring stashed changes..."
+            git stash pop >/dev/null 2>&1
+            return 1
+          fi
         else
-          log_error "Failed to pull updates"
-          log_info "Restoring stashed changes..."
-          git stash pop >/dev/null 2>&1
+          log_error "Failed to stash changes"
+          log_error "Cannot proceed with update due to uncommitted changes"
           return 1
         fi
       else
