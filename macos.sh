@@ -33,6 +33,8 @@ defaults write -g NSWindowShouldDragOnGesture -bool "true"
 defaults write NSGlobalDomain com.apple.mouse.scaling -float "1.5"
 # Enable 3 finger drag
 defaults write com.apple.AppleMultitouchTrackpad "TrackpadThreeFingerDrag" -bool "true"
+defaults write com.apple.AppleMultitouchTrackpad "TrackpadThreeFingerHorizSwipeGesture" -int "0"
+defaults write com.apple.AppleMultitouchTrackpad "TrackpadThreeFingerVertSwipeGesture" -int "0"
 
 # ---------------------------------- FINDER ---------------------------------- #
 # Show all file extensions in Finder
