@@ -81,6 +81,7 @@ dockutil --add "/Applications/Linear.app"
 dockutil --add "~/Downloads" --view grid --display stack
 
 # -------------------------------- SCREENSHOTS ------------------------------- #
+mkdir -p ~/Pictures/Screenshots
 defaults write com.apple.screencapture "location" -string "~/Pictures/Screenshots"
 
 killall SystemUIServer
