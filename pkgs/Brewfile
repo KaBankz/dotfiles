@@ -74,6 +74,7 @@ cask "alcove"
 cask "alt-tab"
 cask "arc"
 cask "betterdisplay"
+cask "bitwarden"
 cask "brave-browser"
 cask "cap"
 cask "cleanshot"
@@ -82,7 +83,6 @@ cask "cursor"
 cask "cyberduck"
 cask "daisydisk"
 cask "devcleaner"
-cask "discord"
 cask "firefox@developer-edition"
 cask "font-cascadia-code"
 cask "font-fontawesome"
@@ -140,14 +140,12 @@ cask "zed@preview"
 cask "zen@twilight"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
-mas "Bitwarden", id: 1352778147
 mas "Dato", id: 1470584107
 mas "Dropover", id: 1355679052
 mas "Keynote", id: 409183694
 mas "Klack", id: 6446206067
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "SubscriptionDay", id: 6743316600
 mas "Subscriptions", id: 1577082754
 mas "TestFlight", id: 899247664
 mas "uBlock Origin Lite", id: 6745342698
