@@ -1,8 +1,8 @@
 font-size = 16
 
 theme = GitHub Dark ++
-cursor-invert-fg-bg = true
-bold-is-bright = true
+cursor-color = cell-foreground
+bold-color = bright
 
 macos-titlebar-style = tabs
 window-step-resize = true
@@ -10,7 +10,7 @@ window-height = 37
 window-width = 135
 
 copy-on-select = clipboard
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor, ssh-env
 
 auto-update = download
 auto-update-channel = tip
