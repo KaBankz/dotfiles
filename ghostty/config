@@ -10,6 +10,7 @@ window-height = 37
 window-width = 135
 
 copy-on-select = clipboard
+confirm-close-surface = false
 shell-integration-features = no-cursor, ssh-env
 
 auto-update = download
