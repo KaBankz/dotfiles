@@ -73,6 +73,9 @@ set -gx CP_HOME_DIR $XDG_DATA_HOME/cocoapods
 
 set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 
+set -gx AWS_CONFIG_FILE $XDG_CONFIG_HOME/aws/config
+set -gx AWS_SHARED_CREDENTIALS_FILE $XDG_CONFIG_HOME/aws/credentials
+
 fish_add_path -P $ANDROID_HOME/cmdline-tools/latest/bin $ANDROID_HOME/platform-tools
 fish_add_path -P $XDG_DATA_HOME/yarn/bin $PNPM_HOME $BUN_INSTALL/bin
 fish_add_path -P $CARGO_HOME/bin
