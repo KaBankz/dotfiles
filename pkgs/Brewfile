@@ -84,6 +84,7 @@ cask "cap"
 cask "chatgpt-atlas"
 cask "cleanshot"
 cask "clop"
+cask "crystalfetch"
 cask "cursor"
 cask "cyberduck"
 cask "daisydisk"
@@ -147,9 +148,9 @@ cask "zed@preview"
 cask "zen@twilight"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
-mas "CrystalFetch", id: 6454431289
 mas "Dato", id: 1470584107
 mas "Dropover", id: 1355679052
+mas "Final Cut Pro", id: 424389933
 mas "Keynote", id: 409183694
 mas "Klack", id: 6446206067
 mas "Numbers", id: 409203825
