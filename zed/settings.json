@@ -7,8 +7,30 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "outline_panel": {
+    "dock": "right"
+  },
+  "title_bar": {
+    "show_sign_in": false,
+    "show_branch_icon": true
+  },
+  "search": {
+    "button": true
+  },
+  "prettier": {
+    "allowed": true
+  },
+  "soft_wrap": "editor_width",
+  "tab_size": 2,
+  "minimap": {
+    "show": "always"
+  },
+  "buffer_line_height": "comfortable",
   "icon_theme": "Material Icon Theme",
   "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true
+  },
   "inlay_hints": {
     "show_other_hints": true,
     "show_parameter_hints": true,
@@ -22,6 +44,8 @@
   },
   "redact_private_values": true,
   "agent": {
+    "dock": "left",
+    "enable_feedback": false,
     "inline_assistant_model": {
       "provider": "anthropic",
       "model": "claude-sonnet-4-latest"
@@ -29,7 +53,7 @@
     "play_sound_when_agent_done": true,
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-opus-4-thinking-latest"
+      "model": "claude-sonnet-4-5-latest"
     },
     "enabled": true,
     "button": true
@@ -38,30 +62,31 @@
     "button": false
   },
   "git_panel": {
-    "dock": "right"
-  },
-  "chat_panel": {
-    "button": "never",
+    "status_style": "icon",
     "dock": "right"
   },
   "project_panel": {
+    "hide_root": true,
+    "button": true,
     "auto_fold_dirs": true,
     "dock": "right"
   },
   "tab_bar": {
-    "show_nav_history_buttons": false
+    "show_nav_history_buttons": true
   },
   "tabs": {
+    "show_diagnostics": "all",
     "file_icons": true,
     "git_status": true
   },
   "indent_guides": {
+    // "background_coloring": "indent_aware"
     "active_line_width": 2,
     "line_width": 2,
     "coloring": "indent_aware"
-    // "background_coloring": "indent_aware"
   },
   "diagnostics": {
+    "button": true,
     "include_warnings": true,
     "inline": {
       "enabled": true
@@ -69,35 +94,39 @@
   },
   "auto_signature_help": true,
   "wrap_guides": [80],
-  "soft_wrap": "editor_width",
-  "theme": "Github Dark",
-  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "Github Light",
+    "dark": "Github Dark"
+  },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_fallbacks": ["Symbols Nerd Font"],
-  "show_whitespaces": "selection",
   "terminal": {
+    "button": true,
     "toolbar": { "breadcrumbs": false },
     "option_as_meta": true,
     "cursor_shape": "block",
-    "blinking": "on",
     "line_height": "standard"
   },
   "telemetry": {
-    "diagnostics": true,
-    "metrics": true
+    "diagnostics": false,
+    "metrics": false
+  },
+  "features": {
+    "edit_prediction_provider": "copilot"
   },
   "experimental.theme_overrides": {
     "predictive": "#7d8590",
     "syntax": {
-      // "hint": {
-      //   "color": "#79c0ffff"
-      // },
-      // "type": {
-      //   "color": "#79c0ffff"
-      // },
-      // "variable": {
-      //   "color": "#e1e4e8ff"
-      // }
+      "hint": {
+        "color": "#79c0ffff"
+      },
+      "type": {
+        "color": "#79c0ffff"
+      },
+      "variable": {
+        "color": "#e1e4e8ff"
+      }
     }
   }
 }
