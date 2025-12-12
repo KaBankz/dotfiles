@@ -62,7 +62,6 @@ abbr -ag gca git commit --amend
 abbr -ag gp git push
 abbr -ag gpf git push --force-with-lease
 abbr -ag gpl git pull
-abbr -ag gplr git pull --rebase
 abbr -ag gf git fetch
 abbr -ag gd git diff
 abbr -ag gb git branch
@@ -70,6 +69,8 @@ abbr -ag gc git checkout
 abbr -ag gs git switch
 abbr -ag gsc git switch -c
 abbr -ag grb git rebase
+abbr -ag gsh git stash
+abbr -ag gshp git stash pop
 abbr -ag gw git worktree
 abbr -ag gwa git worktree add
 abbr -ag gwl git worktree list
