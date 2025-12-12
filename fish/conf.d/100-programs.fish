@@ -8,6 +8,11 @@ runx zoxide init fish --cmd cd | source
 # start atuin without up arrow history
 runx atuin init fish --disable-up-arrow | source
 
+# source 1Password plugins
+if test -f $HOME/.config/op/plugins.sh
+    source $HOME/.config/op/plugins.sh
+end
+
 #! must be executed last to avoid conflicts with other prompt customizations
 # start starship
 runx starship init fish | source
