@@ -52,6 +52,9 @@ abbr -ag dcd docker compose down
 abbr -ag dcp docker compose pull
 abbr -ag dcl docker compose logs -f
 
+# opencode
+abbr -ag oc opencode
+
 # git
 abbr -ag gss git status -s
 abbr -ag ga git add

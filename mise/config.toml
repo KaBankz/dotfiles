@@ -15,6 +15,7 @@ rust = "stable"
 "npm:typescript-language-server" = "latest"
 "npm:@antfu/ni" = "latest"
 "ubi:itzg/rcon-cli" = "latest"
+opencode = "latest"
 
 [settings]
 experimental = true
