@@ -22,10 +22,10 @@ set -gx SHELL_SESSION_FILE $SHELL_SESSION_DIR/$TERM_SESSION_ID
 # dir must exist else bash will not save history
 set -gx HISTFILE $XDG_STATE_HOME/bash/history
 
-# set 1Password ssh-agent socket
-if uname -a | grep -q Darwin
-    set -gx SSH_AUTH_SOCK $HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-end
+# # set 1Password ssh-agent socket
+# if uname -a | grep -q Darwin
+#     set -gx SSH_AUTH_SOCK $HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+# end
 
 if type -q nvim
     set -gx EDITOR nvim
