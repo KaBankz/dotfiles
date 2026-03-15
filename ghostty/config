@@ -13,5 +13,7 @@ copy-on-select = clipboard
 confirm-close-surface = false
 shell-integration-features = no-cursor, ssh-env
 
+config-file = keybinds
+
 auto-update = download
 auto-update-channel = tip

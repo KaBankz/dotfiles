@@ -1,0 +1,42 @@
+keybind = ctrl+opt+h=previous_tab
+keybind = ctrl+opt+l=next_tab
+
+keybind = opt+h=goto_split:left
+keybind = opt+j=goto_split:down
+keybind = opt+k=goto_split:up
+keybind = opt+l=goto_split:right
+
+keybind = ctrl+a=activate_key_table_once:tmux
+
+keybind = tmux/
+
+keybind = tmux/h=new_split:left
+keybind = tmux/j=new_split:down
+keybind = tmux/k=new_split:up
+keybind = tmux/l=new_split:right
+
+keybind = tmux/x=close_surface
+keybind = tmux/c=new_tab
+
+keybind = tmux/[=activate_key_table:vim
+
+keybind = tmux/escape=deactivate_key_table
+keybind = tmux/catch_all=ignore
+
+keybind = vim/
+
+keybind = vim/j=scroll_page_lines:1
+keybind = vim/k=scroll_page_lines:-1
+keybind = vim/g>g=scroll_to_top
+keybind = vim/shift+g=scroll_to_bottom
+
+keybind = vim/slash=start_search
+keybind = vim/n=navigate_search:next
+keybind = vim/shift+n=navigate_search:previous
+keybind = vim/shift+semicolon=toggle_command_palette
+
+keybind = vim/y=copy_to_clipboard
+keybind = vim/p=paste_from_clipboard
+
+keybind = vim/escape=deactivate_key_table
+keybind = vim/catch_all=ignore

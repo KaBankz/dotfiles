@@ -31,3 +31,5 @@ foreground = #e7ecf2
 
 selection-background = #304e74
 selection-foreground = #e7ecf2
+
+split-divider-color = #304e74
