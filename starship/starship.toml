@@ -8,7 +8,7 @@ $sudo$character\
 #  [2] home on  master [?⇡] via 🥟 v1.1.36 via  v20.18.1
 # $UDO❯❯❯
 
-add_newline = true
+add_newline = false
 command_timeout = 5000
 
 [os]
