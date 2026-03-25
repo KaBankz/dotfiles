@@ -17,6 +17,7 @@ keybind = tmux/l=new_split:right
 
 keybind = tmux/x=close_surface
 keybind = tmux/c=new_tab
+keybind = tmux/z=toggle_split_zoom
 
 keybind = tmux/[=activate_key_table:vim
 
