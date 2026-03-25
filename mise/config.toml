@@ -9,11 +9,8 @@ zig = "latest"
 go = "latest"
 rust = "stable"
 "cargo:krabby" = "latest"
-"aqua:dotenvx/dotenvx" = "latest"
-"ubi:aidoku/aidoku-cli" = { version = "latest", exe = "aidoku" }
 "npm:eas-cli" = "latest"
 "npm:typescript-language-server" = "latest"
-"npm:@antfu/ni" = "latest"
 "ubi:itzg/rcon-cli" = "latest"
 opencode = "latest"
 
