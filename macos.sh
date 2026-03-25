@@ -69,16 +69,19 @@ defaults write com.apple.dock "scroll-to-open" -bool "true"
 killall Dock
 
 dockutil --remove all
-dockutil --add "/Applications/Arc.app"
+dockutil --add "/Applications/Dia.app"
 dockutil --add "/Applications/Messages.app"
 dockutil --add "/Applications/Legcord.app"
 dockutil --add "/Applications/Music.app"
 dockutil --add "/Applications/Cursor.app"
+dockutil --add "/Applications/Claude.app"
 dockutil --add "/Applications/Ghostty.app"
+dockutil --add "/Applications/cmux.app"
 dockutil --add "/Applications/Slack.app"
 dockutil --add "/Applications/Linear.app"
-dockutil --add "/Applications/WhatsApp.app"
-dockutil --add "/Applications/Mail.app"
+dockutil --add "/Applications/Notion Mail.app"
+dockutil --add "/Applications/Notion Calendar.app"
+dockutil --add "/Applications/Notion.app"
 dockutil --add "~/Downloads" --view grid --display stack
 
 # -------------------------------- SCREENSHOTS ------------------------------- #
