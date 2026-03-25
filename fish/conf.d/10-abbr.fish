@@ -55,6 +55,9 @@ abbr -ag dcl docker compose logs -f
 # opencode
 abbr -ag oc opencode
 
+# claude code
+abbr -ag cc claude --dangerously-skip-permissions
+
 # git
 abbr -ag gss git status -s
 abbr -ag ga git add
