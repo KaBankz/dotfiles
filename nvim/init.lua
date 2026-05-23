@@ -55,6 +55,9 @@ vim.pack.add({
 
 -- Oil (file explorer sidebar)
 require('oil').setup({
+  view_options = {
+    show_hidden = true,
+  },
   float = {
     padding = 0,
     max_width = 40,
