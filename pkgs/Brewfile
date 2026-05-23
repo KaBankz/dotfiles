@@ -1,4 +1,3 @@
-tap "typewhisper/tap"
 brew "act"
 brew "aria2"
 brew "atuin"
