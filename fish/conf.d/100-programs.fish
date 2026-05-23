@@ -5,8 +5,8 @@ runx fzf --fish | source
 # --cmd cd replaces the cd command with zoxide
 runx zoxide init fish --cmd cd | source
 
-# start atuin without up arrow history
-runx atuin init fish --disable-up-arrow | source
+# start atuin
+runx atuin init fish | source
 
 # source 1Password plugins
 if test -f $HOME/.config/op/plugins.sh

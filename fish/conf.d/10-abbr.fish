@@ -11,6 +11,7 @@ abbr -ag fedit $EDITOR $XDG_CONFIG_HOME/fish
 # homebrew
 abbr -ag brw brew
 abbr -ag rbew brew
+abbr -ag brwe brew
 
 # cursor easy
 abbr -ag c cursor
@@ -77,6 +78,7 @@ abbr -ag gsc git switch -c
 abbr -ag grb git rebase
 abbr -ag gsh git stash
 abbr -ag gshp git stash pop
+abbr -ag grs git reset
 abbr -ag gw git worktree
 abbr -ag gwa git worktree add
 abbr -ag gwl git worktree list
