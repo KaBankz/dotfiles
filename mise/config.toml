@@ -11,7 +11,7 @@ rust = "stable"
 "cargo:krabby" = "latest"
 "npm:eas-cli" = "latest"
 "npm:typescript-language-server" = "latest"
-"ubi:itzg/rcon-cli" = "latest"
+"github:itzg/rcon-cli" = "latest"
 opencode = "latest"
 
 [settings]
