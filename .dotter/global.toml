@@ -83,4 +83,7 @@ depends = ["mise"]
 [ghostty.files]
 "ghostty" = "~/.config/ghostty"
 
+[atuin.files]
+"atuin" = "~/.config/atuin"
+
 [default.variables]

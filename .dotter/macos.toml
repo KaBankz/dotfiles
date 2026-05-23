@@ -13,6 +13,7 @@ packages = [
   "zed",
   "fastfetch",
   "ghostty",
+  "atuin",
 ]
 
 [files]

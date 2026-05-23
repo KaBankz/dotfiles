@@ -69,12 +69,18 @@ set -gx PNPM_HOME $XDG_DATA_HOME/pnpm
 set -gx RUSTUP_HOME $XDG_DATA_HOME/rustup
 set -gx CARGO_HOME $XDG_DATA_HOME/cargo
 
+set -gx GOPATH $XDG_DATA_HOME/go
+
 set -gx CP_HOME_DIR $XDG_DATA_HOME/cocoapods
 
 set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 
 set -gx AWS_CONFIG_FILE $XDG_CONFIG_HOME/aws/config
 set -gx AWS_SHARED_CREDENTIALS_FILE $XDG_CONFIG_HOME/aws/credentials
+
+set -gx CODEX_HOME $XDG_CONFIG_HOME/codex
+set -gx PI_CODING_AGENT_DIR $XDG_CONFIG_HOME/pi/agent
+set -gx CLAUDE_CONFIG_DIR $XDG_CONFIG_HOME/claude
 
 fish_add_path -P $ANDROID_HOME/cmdline-tools/latest/bin $ANDROID_HOME/platform-tools
 fish_add_path -P $XDG_DATA_HOME/yarn/bin $PNPM_HOME $BUN_INSTALL/bin
