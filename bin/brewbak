@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
 
-# Make a Brewfile backup of all installed packages
-brew bundle dump --force --formula --casks --taps --mas --file ~/.dotfiles/pkgs/Brewfile "$@"
+# Parse our own flags, forward the rest to `brew bundle dump`
+commit=1
+dump_args=()
+for arg in "$@"; do
+  case "$arg" in
+    --no-commit) commit=0 ;;
+    *) dump_args+=("$arg") ;;
+  esac
+done
 
-# Add and commit the changes to dotfiles repo
-git -C ~/.dotfiles add ~/.dotfiles/pkgs/Brewfile
-git -C ~/.dotfiles commit -m "chore(pkgs): update Brewfile"
+# Make a Brewfile backup of all installed packages
+brew bundle dump --force --formula --casks --taps --mas --file ~/.dotfiles/pkgs/Brewfile "${dump_args[@]}"
+
+if (( commit )); then
+  # Commit only the Brewfile, ignoring any other staged changes in the repo
+  git -C ~/.dotfiles commit -m "chore(pkgs): update Brewfile" -- pkgs/Brewfile
+fi
