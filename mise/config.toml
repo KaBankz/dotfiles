@@ -28,3 +28,102 @@ uvx = true
 
 [settings.python]
 uv_venv_auto = true
+
+# ============================================================================ #
+# mise bootstrap — [experimental] machine setup, coexisting with dotter.
+# Run: mise bootstrap [--dry-run]   ·   https://mise.jdx.dev/bootstrap.html
+# Incrementally replacing setup.sh + macos.sh. dotter still owns all symlinks;
+# [dotfiles] entries below mirror dotter 1:1 and only cut over on explicit apply.
+# ============================================================================ #
+
+# --- Homebrew + packages ---------------------------------------------------- #
+# Keep the Brewfile (and the `brewbak` dump workflow) as the source of truth:
+# install brew if missing (pre), then `brew bundle` (post) rather than listing
+# every package in [bootstrap.packages].
+[bootstrap.hooks.pre-packages]
+run = '''
+if ! command -v brew >/dev/null 2>&1; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+'''
+
+[bootstrap.hooks.post-packages]
+run = "brew bundle install --file ~/.dotfiles/pkgs/Brewfile"
+
+# --- Default shell ---------------------------------------------------------- #
+[bootstrap.user]
+login_shell = "/opt/homebrew/bin/fish"
+
+# --- macOS defaults (translated 1:1 from macos.sh) -------------------------- #
+[bootstrap.macos.defaults]
+"com.apple.desktopservices" = { DSDontWriteNetworkStores = true, DSDontWriteUSBStores = true }
+"com.apple.TextEdit" = { RichText = false }
+"NSGlobalDomain" = { AppleShowAllExtensions = true, ApplePressAndHoldEnabled = false, InitialKeyRepeat = 15, KeyRepeat = 2, NSWindowShouldDragOnGesture = true, "com.apple.mouse.scaling" = 1.5 }
+"com.apple.AppleMultitouchTrackpad" = { TrackpadThreeFingerDrag = true, TrackpadThreeFingerHorizSwipeGesture = 0, TrackpadThreeFingerVertSwipeGesture = 0 }
+"com.apple.finder" = { AppleShowAllFiles = true, ShowPathbar = true, _FXSortFoldersFirst = true, FXDefaultSearchScope = "SCcf" }
+"com.apple.dock" = { mineffect = "scale", tilesize = 47, "show-recents" = false, autohide = true, "autohide-time-modifier" = 0.15, "autohide-delay" = 0.0, "scroll-to-open" = true }
+"com.apple.screencapture" = { location = "~/Pictures/Screenshots" }
+
+# Imperative bits macos.sh did that aren't plain `defaults` (dock pinning, restarts)
+[bootstrap.hooks.post-defaults]
+run = '''
+mkdir -p ~/Pictures/Screenshots
+if command -v dockutil >/dev/null 2>&1; then
+  dockutil --remove all --no-restart
+  for app in Dia Messages Legcord Music Cursor Claude Ghostty cmux Slack Linear "Notion Mail" "Notion Calendar" Notion; do
+    dockutil --add "/Applications/$app.app" --no-restart
+  done
+  dockutil --add ~/Downloads --view grid --display stack --no-restart
+fi
+killall Dock Finder SystemUIServer TextEdit || true
+'''
+
+# --- Final: GPG keyring init ------------------------------------------------ #
+[bootstrap.hooks.final]
+run = '''
+mkdir -p ~/.local/share/gnupg && chmod 700 ~/.local/share/gnupg
+gpg --list-keys >/dev/null 2>&1 || true
+'''
+
+# --- Dotfiles ---------------------------------------------------------------- #
+# String form `"target" = "source"` == symlink (dir string form = one whole-dir
+# symlink, identical to dotter's `recurse = false`). These ACTIVE entries already
+# match dotter's existing symlinks 1:1, so `mise bootstrap dotfiles status`
+# reports them "applied" -- safe to coexist; no cutover needed.
+[dotfiles]
+# whole-dir symlinks (dotter recurse=false)
+"~/.config/fish/conf.d" = "~/.dotfiles/fish/conf.d"
+"~/.config/fish/functions" = "~/.dotfiles/fish/functions"
+"~/.config/nvim" = "~/.dotfiles/nvim"
+# single files
+"~/.hushlogin" = "~/.dotfiles/.hushlogin"
+"~/.zshenv" = "~/.dotfiles/zsh/.zshenv"
+"~/.config/zsh/.zshrc" = "~/.dotfiles/zsh/.zshrc"
+"~/.bashrc" = "~/.dotfiles/bash/.bashrc"
+"~/.bash_profile" = "~/.dotfiles/bash/.bash_profile"
+"~/.yarnrc" = "~/.dotfiles/yarn/.yarnrc"
+"~/.config/.bunfig.toml" = "~/.dotfiles/bun/.bunfig.toml"
+"~/.config/starship.toml" = "~/.dotfiles/starship/starship.toml"
+"~/.config/mise/config.toml" = "~/.dotfiles/mise/config.toml"  # self-managed (file, keeps ~/.config/mise a real dir)
+# ~/.local/bin stays a REAL dir (holds non-repo bins: codex, cursor-agent, ...) -> link files individually
+"~/.local/bin/bak" = "~/.dotfiles/bin/bak"
+"~/.local/bin/brewbak" = "~/.dotfiles/bin/brewbak"
+"~/.local/bin/hello" = "~/.dotfiles/bin/hello"
+"~/.local/bin/runx" = "~/.dotfiles/bin/runx"
+"~/.local/bin/tmux-autostart" = "~/.dotfiles/bin/tmux-autostart"
+"~/.local/bin/bootstrap" = "~/.dotfiles/setup.sh"
+
+# CUTOVER entries -- dotter deployed these with its DEFAULT (recurse) mode, so the
+# target is a REAL dir full of per-file symlinks. mise wants ONE whole-dir symlink
+# (status = "differs"); it refuses to clobber a real dir without --force. Cut over
+# one at a time: remove the entry from .dotter/global.toml + local.toml, run
+# `dotter deploy` (drops the old links), uncomment here, then
+# `mise bootstrap dotfiles apply <target>`.
+# "~/.config/git" = "~/.dotfiles/git"
+# "~/.config/tmux" = "~/.dotfiles/tmux"
+# "~/.config/zed" = "~/.dotfiles/zed"
+# "~/.config/ghostty" = "~/.dotfiles/ghostty"
+# "~/.config/atuin" = "~/.dotfiles/atuin"
+# "~/.config/shell" = "~/.dotfiles/shell"
+# "~/.config/npm" = "~/.dotfiles/npm"
+# "~/.local/share/fastfetch/presets" = "~/.dotfiles/fastfetch/presets"
