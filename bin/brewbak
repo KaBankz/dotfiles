@@ -11,7 +11,7 @@ for arg in "$@"; do
 done
 
 # Make a Brewfile backup of all installed packages
-brew bundle dump --force --formula --casks --taps --mas --file ~/.dotfiles/pkgs/Brewfile "${dump_args[@]}"
+brew bundle dump --force --formula --casks --taps --mas --no-describe --file ~/.dotfiles/pkgs/Brewfile "${dump_args[@]}"
 
 if (( commit )); then
   # Commit only the Brewfile, ignoring any other staged changes in the repo
