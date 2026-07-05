@@ -13,6 +13,7 @@ rust = "stable"
 "npm:typescript-language-server" = "latest"
 "github:itzg/rcon-cli" = "latest"
 opencode = "latest"
+viteplus = "latest"
 
 [settings]
 experimental = true
