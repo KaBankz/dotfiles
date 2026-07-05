@@ -12,6 +12,7 @@ abbr -ag fedit $EDITOR $XDG_CONFIG_HOME/fish
 abbr -ag brw brew
 abbr -ag rbew brew
 abbr -ag brwe brew
+abbr -ag brewup brew upgrade
 
 # cursor easy
 abbr -ag c cursor
