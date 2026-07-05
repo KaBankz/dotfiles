@@ -6,7 +6,7 @@ runx fzf --fish | source
 runx zoxide init fish --cmd cd | source
 
 # start atuin
-runx atuin init fish | source
+runx atuin init fish --disable-up-arrow | source
 
 # source 1Password plugins
 if test -f $HOME/.config/op/plugins.sh
