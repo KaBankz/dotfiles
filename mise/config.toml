@@ -9,10 +9,8 @@ zig = "latest"
 go = "latest"
 rust = "stable"
 "cargo:krabby" = "latest"
-"npm:eas-cli" = "latest"
 "npm:typescript-language-server" = "latest"
 "github:itzg/rcon-cli" = "latest"
-opencode = "latest"
 viteplus = "latest"
 
 [settings]
