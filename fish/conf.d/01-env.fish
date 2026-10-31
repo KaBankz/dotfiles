@@ -75,9 +75,6 @@ set -gx CP_HOME_DIR $XDG_DATA_HOME/cocoapods
 
 set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 
-set -gx AWS_CONFIG_FILE $XDG_CONFIG_HOME/aws/config
-set -gx AWS_SHARED_CREDENTIALS_FILE $XDG_CONFIG_HOME/aws/credentials
-
 set -gx CODEX_HOME $XDG_CONFIG_HOME/codex
 set -gx PI_CODING_AGENT_DIR $XDG_CONFIG_HOME/pi/agent
 set -gx CLAUDE_CONFIG_DIR $XDG_CONFIG_HOME/claude
