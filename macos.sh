@@ -75,14 +75,11 @@ dockutil --add "/Applications/Legcord.app"
 dockutil --add "/Applications/Music.app"
 dockutil --add "/Applications/T3 Code (Nightly).app"
 dockutil --add "/Applications/Conductor.app"
-dockutil --add "/Applications/Claude.app"
-dockutil --add "/Applications/ChatGPT.app"
 dockutil --add "/Applications/Rex Beta.app"
 dockutil --add "/Applications/Grok Bot.app"
 dockutil --add "/Applications/Slack.app"
 dockutil --add "/Applications/Linear.app"
 dockutil --add "/Applications/Notion Calendar.app"
-dockutil --add "/Applications/Notion.app"
 dockutil --add "~/Downloads" --view grid --display stack
 
 # -------------------------------- SCREENSHOTS ------------------------------- #
