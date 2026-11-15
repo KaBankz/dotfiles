@@ -80,6 +80,7 @@ dockutil --add "/Applications/Grok Bot.app"
 dockutil --add "/Applications/Slack.app"
 dockutil --add "/Applications/Linear.app"
 dockutil --add "/Applications/Notion Calendar.app"
+dockutil --add "/Applications/Notion.app"
 dockutil --add "~/Downloads" --view grid --display stack
 
 # -------------------------------- SCREENSHOTS ------------------------------- #
