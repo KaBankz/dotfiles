@@ -69,12 +69,11 @@ defaults write com.apple.dock "scroll-to-open" -bool "true"
 killall Dock
 
 dockutil --remove all
-dockutil --add "/Applications/Dia.app"
+dockutil --add "/Applications/Ardia.app"
 dockutil --add "/Applications/Messages.app"
 dockutil --add "/Applications/Legcord.app"
 dockutil --add "/Applications/Music.app"
 dockutil --add "/Applications/T3 Code (Nightly).app"
-dockutil --add "/Applications/Conductor.app"
 dockutil --add "/Applications/Rex Beta.app"
 dockutil --add "/Applications/Grok Bot.app"
 dockutil --add "/Applications/Slack.app"
