@@ -12,6 +12,7 @@ rust = "stable"
 "npm:typescript-language-server" = "latest"
 "github:itzg/rcon-cli" = "latest"
 viteplus = "latest"
+"github:kabankz/slopmax" = "latest"
 
 [settings]
 experimental = true
